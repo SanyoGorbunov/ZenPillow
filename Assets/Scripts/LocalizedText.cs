@@ -8,16 +8,27 @@ public class LocalizedText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var textObject = gameObject.GetComponent<Text>();
-        if (textObject != null)
-        {
-            textObject.text = Mgl.I18n.Instance.__(Key);
-        }
+        SetText();
+        Mgl.I18n.LocaleSet += SetText;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        Mgl.I18n.LocaleSet -= SetText;
+    }
+
+    void SetText()
+    {
+        var textObject = gameObject.GetComponent<Text>();
+        if (textObject != null)
+        {
+            textObject.text = Mgl.I18n.Instance.__(Key);
+        }
     }
 }
