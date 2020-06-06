@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/RabbitJump.unity
+    guid: 021fe73de6a84ee42a92b5b8b7c81183
+  - enabled: 1
     path: Assets/Scenes/IntroScene.unity
     guid: 1a79477928e5db444b2aaf059aae395d
   - enabled: 1
