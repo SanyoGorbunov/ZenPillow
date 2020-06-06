@@ -13,7 +13,7 @@
 
     public Practice GetPractice()
     {
-        return Practice.Breathing;
+        return _gamePractice;
     }
 
     public void SelectTime(int minutes)

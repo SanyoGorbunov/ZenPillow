@@ -1,4 +1,6 @@
 ﻿public enum Practice
 {
-    Breathing
+    Breathing,
+    Collecting,
+    Counting
 }

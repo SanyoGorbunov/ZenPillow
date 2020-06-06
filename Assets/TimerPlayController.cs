@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerPlayController : MonoBehaviour
@@ -27,5 +28,15 @@ public class TimerPlayController : MonoBehaviour
     public void OnClick()
     {
         var selectedPractice = GameStateManager.Instance.GetPractice();
+        switch (selectedPractice)
+        {
+            case Practice.Breathing:
+                break;
+            case Practice.Collecting:
+                SceneManager.LoadScene("RabbitJump");
+                break;
+            case Practice.Counting:
+                break;
+        }
     }
 }
