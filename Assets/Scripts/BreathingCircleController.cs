@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using Input = InputWrapper.Input;
 
 public class BreathingCircleController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BreathingCircleController : MonoBehaviour
     private GameObject _innerCircle;
 
     private Vector3 previousScale, previousPosition;
+    private bool _canMove;
+    private Vector2 touchStartPos;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +24,33 @@ public class BreathingCircleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _canMove)
+        {
+            var touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    touchStartPos = touch.position;
+                    break;
+                case TouchPhase.Moved:
+                    var currentPosition = touch.position;
+                    var delta = currentPosition - touchStartPos;
+                    var xToSet = delta.x;
+                    if (xToSet > 46) { xToSet = 46; }
+                    else if (xToSet < -46) { xToSet = -46; }
+
+                    transform.localPosition = new Vector3(xToSet, -70f, 0f);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void SetMove(bool canMove)
+    {
+        _canMove = canMove;
     }
 
     public void Scale(bool isUpscaling, Action callback)

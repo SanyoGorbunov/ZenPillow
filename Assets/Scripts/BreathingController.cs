@@ -39,11 +39,13 @@ public class BreathingController : MonoBehaviour
 
     void PauseGame()
     {
+        breathingCircleController.SetMove(true);
         StartCoroutine("Wait");
     }
 
     void PauseEnd()
     {
+        breathingCircleController.SetMove(false);
         Action action = Inhale;
         if (isInhale)
         {
@@ -60,6 +62,5 @@ public class BreathingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
