@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class BreathingController : MonoBehaviour
 {
     public BreathingCircleController breathingCircleController;
+
+    private bool isInhale;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +22,39 @@ public class BreathingController : MonoBehaviour
 
     void Inhale()
     {
-        breathingCircleController.Scale(true, isUpscaling => Exhale());
+        isInhale = true;
+        breathingCircleController.Scale(true, PauseStart);
     }
 
     void Exhale()
     {
-        breathingCircleController.Scale(false, isUpscaling => Inhale());
+        isInhale = false;
+        breathingCircleController.Scale(false, PauseStart);
+    }
+
+    void PauseStart()
+    {
+        breathingCircleController.Minify(PauseGame);
+    }
+
+    void PauseGame()
+    {
+        StartCoroutine("Wait");
+    }
+
+    void PauseEnd()
+    {
+        Action action = Inhale;
+        if (isInhale)
+        {
+            action = Exhale;
+        }
+        breathingCircleController.Maxify(action);
+    }
+
+    IEnumerator Wait() {
+        yield return new WaitForSeconds(6);
+        PauseEnd();
     }
 
     // Update is called once per frame
