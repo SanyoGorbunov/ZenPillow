@@ -5,6 +5,7 @@ using UnityEngine;
 public class BreathingController : MonoBehaviour
 {
     public BreathingCircleController breathingCircleController;
+    public DropletsController dropletsController;
 
     private bool isInhale;
 
@@ -40,6 +41,7 @@ public class BreathingController : MonoBehaviour
     void PauseGame()
     {
         breathingCircleController.SetMove(true);
+        dropletsController.Create();
         StartCoroutine("Wait");
     }
 
