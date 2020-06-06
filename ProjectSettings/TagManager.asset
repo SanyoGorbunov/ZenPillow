@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Back
   - Sound
+  - InnerCircle
   layers:
   - Default
   - TransparentFX
