@@ -51,6 +51,11 @@ public class AudioManager : MonoBehaviour
         SetMute(isMute);
     }
 
+    public static void StaticToggleMute()
+    {
+        instance.ToggleMute();
+    }
+
     public void SetMute(bool isMute)
     {
         if (isMute)
