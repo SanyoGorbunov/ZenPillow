@@ -8,8 +8,10 @@ public class LocalizedText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetText();
-        Mgl.I18n.LocaleSet += SetText;
+        if (Key != null)
+        {
+            SetupKey(Key);
+        }
     }
 
     // Update is called once per frame
@@ -21,6 +23,13 @@ public class LocalizedText : MonoBehaviour
     private void OnDestroy()
     {
         Mgl.I18n.LocaleSet -= SetText;
+    }
+
+    public void SetupKey(string key)
+    {
+        Key = key;
+        SetText();
+        Mgl.I18n.LocaleSet += SetText;
     }
 
     void SetText()
