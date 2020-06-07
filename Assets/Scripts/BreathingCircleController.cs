@@ -9,7 +9,8 @@ public class BreathingCircleController : MonoBehaviour
     private const float TimeBreathingInSecs = 6.0f;
     private const float TimePauseInSecs = 1.0f;
 
-    private GameObject _innerCircle;
+    public GameObject _innerCircle;
+    public GameObject _outerCircle;
 
     private Vector3 previousScale, previousPosition;
     private bool _canMove;
@@ -18,7 +19,6 @@ public class BreathingCircleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _innerCircle = GameObject.FindGameObjectWithTag("InnerCircle");
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class BreathingCircleController : MonoBehaviour
                     if (xToSet > 46) { xToSet = 46; }
                     else if (xToSet < -46) { xToSet = -46; }
 
-                    transform.localPosition = new Vector3(xToSet, -70f, 0f);
+                    transform.localPosition = new Vector3(xToSet, -65f, 0f);
                     break;
                 default:
                     break;
@@ -97,7 +97,7 @@ public class BreathingCircleController : MonoBehaviour
 
         Vector3 originalPosition = transform.localPosition;
         previousPosition = originalPosition;
-        Vector3 destinationPosition = new Vector3(0.0f, -70.0f, 0.0f);
+        Vector3 destinationPosition = new Vector3(0.0f, -65.0f, 0.0f);
 
         float currentTime = 0.0f;
 
@@ -131,5 +131,10 @@ public class BreathingCircleController : MonoBehaviour
         } while (currentTime <= TimePauseInSecs);
 
         callback.Invoke();
+    }
+
+    public void SetCircleVisibility(bool isVisible)
+    {
+        _outerCircle.SetActive(isVisible);
     }
 }
