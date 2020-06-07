@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.9
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
@@ -196,12 +196,12 @@ PrefabInstance:
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8e8d65fa57d8ed04e862de00c7225798, type: 3}
+    m_Font: {fileID: 12800000, guid: 2ed2b83273eb6f546aae02b12f1da6f0, type: 3}
     m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
@@ -1503,12 +1503,12 @@ PrefabInstance:
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 95
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
@@ -1620,7 +1620,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8e8d65fa57d8ed04e862de00c7225798, type: 3}
+    m_Font: {fileID: 12800000, guid: 2ed2b83273eb6f546aae02b12f1da6f0, type: 3}
     m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
@@ -1914,7 +1914,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8e8d65fa57d8ed04e862de00c7225798, type: 3}
+    m_Font: {fileID: 12800000, guid: 2ed2b83273eb6f546aae02b12f1da6f0, type: 3}
     m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
@@ -2005,7 +2005,7 @@ PrefabInstance:
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.6
+      value: -32.4
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
@@ -2160,7 +2160,7 @@ PrefabInstance:
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -45.4
+      value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 1068656474269135995, guid: 0a958e78d94a16b49b3442b8ca9d9d1e,
         type: 3}
