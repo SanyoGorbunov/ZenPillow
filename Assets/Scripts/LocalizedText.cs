@@ -34,10 +34,13 @@ public class LocalizedText : MonoBehaviour
 
     void SetText()
     {
-        var textObject = gameObject.GetComponent<Text>();
-        if (textObject != null)
+        if (gameObject != null)
         {
-            textObject.text = Mgl.I18n.Instance.__(Key);
+            var textObject = gameObject.GetComponent<Text>();
+            if (textObject != null)
+            {
+                textObject.text = Mgl.I18n.Instance.__(Key);
+            }
         }
     }
 }

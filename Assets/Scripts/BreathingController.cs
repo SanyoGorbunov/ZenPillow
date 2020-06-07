@@ -18,7 +18,7 @@ public class BreathingController : MonoBehaviour
     {
         instructionsController.Reset();
 
-        var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
+        var isGamePlayed = false; // GameStateManager.Instance.HasPlayedSelectedGame();
 
         StartCoroutine(nameof(Timer));
         if (!isGamePlayed)
