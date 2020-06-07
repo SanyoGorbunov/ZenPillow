@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DotsSpawner : MonoBehaviour
+public class SheepsSpawner : MonoBehaviour
 {
-    public GameObject DotPrefab;
+    public GameObject SheepPrefab;
     public GameObject RabbitPawn;
     public GameObject CarrotPrefab;
 
@@ -14,7 +14,7 @@ public class DotsSpawner : MonoBehaviour
 
     private Color[] colors = { new Color(237 / 255.0f, 94 / 255.0f, 121 / 255.0f), new Color(132 / 255.0f, 126 / 255.0f, 160 / 255.0f), new Color(150 / 255.0f, 176 / 255.0f, 186 / 255.0f) };
 
-    private List<ColorDotController> DotList = new List<ColorDotController>();
+    private List<SheepController> SheepList = new List<SheepController>();
     // Start is called before the first frame update
     void Start()
     {
@@ -26,81 +26,19 @@ public class DotsSpawner : MonoBehaviour
 
     public void GenerateLevel(int carrotCount)
     {
-        removeAllDots();
-        GenerateDots();
-        GenerateColor();
+        //removeAllSheeps();
+        GenerateSheeps();
+        //GenerateColor();
 
-        GenerateCarrots(carrotCount);
+        //GenerateCarrots(carrotCount);
     }
 
-    void GenerateCarrots(int count)
+    void GenerateRandomNumberList()
     {
-        float offset = 0.1f;
 
-        List<int> temp = new List<int>();
-
-        for (int i = 0; i < DotList.Count; i++)
-        {
-            temp.Add(i);
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            int id = Random.Range(0, temp.Count);
-
-            int number = temp[id];
-
-            temp.Remove(temp[id]);
-
-            //GameObject obj = Instantiate(CarrotPrefab);
-            DotList[number].showCarrot();
-
-
-            var renderer = DotList[number].gameObject.GetComponent<Renderer>();
-            //Random.Range(0, 3);
-            renderer.material.SetColor("_Color", selected);
-
-            //tempPos.y += offset;
-            //obj.transform.position = tempPos;
-        }
-
-        int idLast = Random.Range(0, temp.Count);
-
-        int numberLast = temp[idLast];
-
-        var rendererLast = DotList[numberLast].gameObject.GetComponent<Renderer>();
-        //Random.Range(0, 3);
-        rendererLast.material.SetColor("_Color", selected);
-
-        PlaceRabbit(DotList[numberLast].gameObject.transform.position);
     }
 
-    void PlaceRabbit(Vector3 pos)
-    {
-        RabbitPawn.transform.position = pos;
-    }
-
-    void GenerateColor()
-    {
-        //List<Color> availableColors = new List<Color>(colors);
-        
-        //int selectedColor = Random.Range(0, colors.Length);
-
-        //availableColors.Remove(colors[selectedColor]);
-
-        foreach(ColorDotController controller in DotList)
-        {
-            var renderer = controller.gameObject.GetComponent<Renderer>();
-            //Random.Range(0, 3);
-            int id = Random.Range(0, colors.Length);
-
-            Color temp = colors[id];
-
-            renderer.material.SetColor("_Color", temp);
-        }
-    }
-
-    void GenerateDots()
+    void GenerateSheeps()
     {
         int rowCount = 7;
         float offset = 1.3f;
@@ -117,20 +55,24 @@ public class DotsSpawner : MonoBehaviour
         float maxX = float.MinValue;
         float maxY = float.MinValue;
 
+        int number = 1;
+
         for (int i = 0; i < rowCount; i++)
         {
             if (i % 2 != 0)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    GameObject dot = Instantiate(DotPrefab);
+                    GameObject dot = Instantiate(SheepPrefab);
                     float randX = Random.Range(0.0f, 0.10f) - 0.05f;
                     float randY = Random.Range(0.0f, 0.10f) - 0.05f;
                     dot.transform.position = new Vector3(startX + j * offset + randX, 0, startY + i * yRowOffset + randY);
-                    ColorDotController controller = dot.GetComponent<ColorDotController>();
+                    SheepController controller = dot.GetComponent<SheepController>();
                     float randomSize = Random.Range(0.8f, 1.2f);
                     controller.setSize(randomSize);
-                    DotList.Add(controller);
+                    controller.setNumber(number);
+                    number++;
+                    SheepList.Add(controller);
 
                     if (dot.transform.position.x - dot.transform.localScale.x < minX)
                     {
@@ -157,14 +99,16 @@ public class DotsSpawner : MonoBehaviour
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    GameObject dot = Instantiate(DotPrefab);
+                    GameObject dot = Instantiate(SheepPrefab);
                     float randX = Random.Range(0.0f, 0.10f) - 0.05f;
                     float randY = Random.Range(0.0f, 0.10f) - 0.05f;
                     dot.transform.position = new Vector3(startX + j * offset + rowXoffset + randX, 0, startY + i * yRowOffset + randY);
-                    ColorDotController controller = dot.GetComponent<ColorDotController>();
+                    SheepController controller = dot.GetComponent<SheepController>();
                     float randomSize = Random.Range(0.8f, 1.2f);
-                    //controller.setSize(randomSize);
-                    DotList.Add(controller);
+                    controller.setSize(randomSize);
+                    controller.setNumber(number);
+                    number++;
+                    SheepList.Add(controller);
 
                     if (dot.transform.position.x - dot.transform.localScale.x < minX)
                     {
@@ -198,23 +142,23 @@ public class DotsSpawner : MonoBehaviour
         oldPos.z = y;
         FindObjectOfType<Camera>().gameObject.transform.position = oldPos;
 
-        RabbitPawn.transform.position = DotList[DotList.Count - 1].transform.position;
+        /*RabbitPawn.transform.position = SheepList[SheepList.Count - 1].transform.position;
 
         oldPos.y = 0.0f;
 
-        RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
+        RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;*/
     }
 
-    void removeAllDots()
+    void removeAllSheeps()
     {
-        //ColorDotController[] array = FindObjectsOfType<ColorDotController>();
+        //SheepController[] array = FindObjectsOfType<SheepController>();
 
-        foreach (ColorDotController controller in DotList)
+        foreach (SheepController controller in SheepList)
         {
             controller.Destroy();
         }
 
-        DotList.Clear();
+        SheepList.Clear();
     }
 
     // Update is called once per frame
