@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectPracticeScene.unity
     guid: aa4e4032655c6b14fb597d11744ba3fc
+  - enabled: 1
+    path: Assets/Scenes/TimerScene.unity
+    guid: 044c521d2df853c45b715c97abd20007
   m_configObjects: {}
