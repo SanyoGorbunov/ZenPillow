@@ -8,7 +8,7 @@ public class BreathingController : MonoBehaviour
     public BreathingCircleController breathingCircleController;
     public DropletsController dropletsController;
 
-    private bool isInhale, _isOver;
+    private bool _isInhale, _isOver;
 
     // Start is called before the first frame update
     void Start()
@@ -54,13 +54,13 @@ public class BreathingController : MonoBehaviour
 
     void Inhale()
     {
-        isInhale = true;
+        _isInhale = true;
         breathingCircleController.Scale(true, PauseStart);
     }
 
     void Exhale()
     {
-        isInhale = false;
+        _isInhale = false;
         breathingCircleController.Scale(false, PauseStart);
     }
 
@@ -81,11 +81,11 @@ public class BreathingController : MonoBehaviour
         breathingCircleController.SetMove(false);
         dropletsController.DestroyDroplets();
         Action action = Inhale;
-        if (isInhale)
+        if (_isInhale)
         {
             action = Exhale;
         }
-        if (!isInhale && _isOver)
+        if (!_isInhale && _isOver)
         {
             GameOver();
             return;

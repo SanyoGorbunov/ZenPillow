@@ -11,6 +11,8 @@ public class QuickLinksController : MonoBehaviour
     private GameObject settings;
     private GameObject sound;
 
+    private Sprite soundOn, soundOff;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +35,22 @@ public class QuickLinksController : MonoBehaviour
             settings.SetActive(true);
         }
 
+        soundOn = Resources.Load<Sprite>("Icons/sound_on");
+        soundOff = Resources.Load<Sprite>("Icons/sound_off");
+
         sound = GameObject.FindGameObjectWithTag("Sound");
         var soundButton = sound.GetComponent<Button>();
         soundButton.onClick.AddListener(() =>
         {
             AudioManager.StaticToggleMute();
+            var isMute = AudioManager.instance.GetMute();
+            if (isMute)
+            {
+                soundButton.GetComponent<Image>().sprite = soundOn;
+            } else
+            {
+                soundButton.GetComponent<Image>().sprite = soundOff;
+            }
         });
     }
 

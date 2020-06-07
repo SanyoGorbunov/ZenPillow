@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -373,7 +373,6 @@ GameObject:
   - component: {fileID: 374482507}
   - component: {fileID: 374482511}
   - component: {fileID: 374482510}
-  - component: {fileID: 374482509}
   - component: {fileID: 374482508}
   m_Layer: 0
   m_Name: Text
@@ -414,19 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Key: Play
---- !u!114 &374482509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374482506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Key: Play
 --- !u!114 &374482510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,8 +433,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 2ed2b83273eb6f546aae02b12f1da6f0, type: 3}
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -714,6 +700,7 @@ GameObject:
   - component: {fileID: 1095313200}
   - component: {fileID: 1095313199}
   - component: {fileID: 1095313202}
+  - component: {fileID: 1095313203}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -761,10 +748,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.7411765, g: 0.85882354, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.8160377, g: 0.89965695, b: 1, a: 1}
+    m_PressedColor: {r: 0.2947668, g: 0.57244575, b: 0.9056604, a: 1}
+    m_SelectedColor: {r: 0.7411765, g: 0.8588236, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -844,6 +831,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3783502b0424c83469f3b64538b43946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1095313203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095313197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1403799739
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -67,6 +67,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public bool GetMute()
+    {
+        return isMute;
+    }
+
 
     public void Mute()
     {
