@@ -14,7 +14,7 @@ namespace Mgl
 
         private static string[] locales = new string[] { "en-US", "ru-RU", "uk-UA" };
 
-        private static string _currentLocale = "uk-UA";
+        private static string _currentLocale = "ru-RU";
 
         private static string _localePath = "Locales/";
 
