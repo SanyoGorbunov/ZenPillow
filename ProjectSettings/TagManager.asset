@@ -9,6 +9,7 @@ TagManager:
   - InnerCircle
   - DestroyDroplet
   - Rate
+  - Settings
   layers:
   - Default
   - TransparentFX
