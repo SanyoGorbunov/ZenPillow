@@ -11,6 +11,7 @@ public class RabbitController : MonoBehaviour
     private const int Dead = 2;
     private bool canJump = true;
 
+    private int CarrotCountLeft = 0;
 
     Vector2 TouchStartPos;
 
@@ -25,7 +26,7 @@ public class RabbitController : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_animator.SetInteger("AnimIndex", Idle);
-        Debug.Log("touch");
+        //Debug.Log("touch");
         m_animator.SetTrigger("Next");
         canJump = true;
     }
@@ -48,7 +49,20 @@ public class RabbitController : MonoBehaviour
 
         canJump = false;
 
-        StartCoroutine(MoveRabbit(transform.position, nextColorDot.transform.position, 0.7f));
+        Vector3 currentPos = transform.position;
+
+        StartCoroutine(MoveRabbit(currentPos, nextColorDot.transform.position, 0.7f));
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.name == "Capsule")
+        {
+            Destroy(collider.transform.parent.gameObject);
+            CarrotCountLeft -= 1;
+        }
+
+        Debug.Log(collider.gameObject.name);
     }
 
     private IEnumerator MoveRabbit(Vector3 startPos, Vector3 endPos, float duration)
@@ -74,56 +88,6 @@ public class RabbitController : MonoBehaviour
 
     void Update()
     {
-        // Handle screen touches.
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                TouchStartPos = touch.position;
-            }
-
-            // Move the cube if the screen has the finger moving.
-            if (touch.phase == TouchPhase.Moved)
-            {
-                Vector2 pos = touch.position;
-                pos.x = pos.x / width;
-
-
-
-                //pos.y = (pos.y - height) / height;
-                //position = new Vector3((pos.x * maxWidth) - maxWidth / 2, transform.position.y, transform.position.z);
-
-                // Position the cube.
-                transform.position = position;
-            }
-
-            if (touch.phase == TouchPhase.Ended)
-            {
-                if (TouchStartPos == touch.position)
-                {
-                    // Tap event
-                    //isJumping = true;
-                }
-            }
-            /*
-            if (Input.touchCount == 2)
-            {
-                touch = Input.GetTouch(1);
-
-                if (touch.phase == TouchPhase.Began)
-                {
-                    // Halve the size of the cube.
-                    transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                }
-
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    // Restore the regular size of the cube.
-                    transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                }
-            }*/
-        }
+        
     }
 }
