@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorDotController : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class ColorDotController : MonoBehaviour
     }
     public void OnClick()
     {
-        Debug.Log("touch");
         RabbitController rabbit = FindObjectOfType<RabbitController>();
         rabbit.JumpTo(this);
     }
