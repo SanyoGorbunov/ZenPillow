@@ -69,6 +69,25 @@ public class GameStateManager
         return (Practice)argMax;
     }
 
+    public bool HasPlayedSelectedGame()
+    {
+        var data = SaveSystem.Load();
+        if (data.records == null)
+        {
+            return false;
+        }
+
+        foreach (var record in data.records)
+        {
+            if (record.practice == (int)_gamePractice)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public Practice GetQuestionnairePractice(Dictionary<QuestionnaireQuestion, bool> answers)
     {
         // LOGIC HERE !!!

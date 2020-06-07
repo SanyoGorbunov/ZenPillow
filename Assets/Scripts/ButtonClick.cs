@@ -42,6 +42,6 @@ public class ButtonClick : MonoBehaviour
 
     public void RemovePlayerData()
     {
-        SaveSystem.Remove(playerName);
+        SaveSystem.Remove();
     }
 }

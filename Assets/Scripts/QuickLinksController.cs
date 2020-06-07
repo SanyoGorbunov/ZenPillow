@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class QuickLinksController : MonoBehaviour
 {
     private const string MainMenuScene = "IntroScene";
+    private const string SettingsScene = "SettingsScene";
 
     private GameObject back;
+    private GameObject settings;
     private GameObject sound;
 
     // Start is called before the first frame update
@@ -21,6 +23,16 @@ public class QuickLinksController : MonoBehaviour
             back.SetActive(true);
         }
 
+        settings = GameObject.FindGameObjectWithTag("Settings");
+        if (SceneManager.GetActiveScene().name == SettingsScene)
+        {
+            settings.SetActive(false);
+        }
+        else
+        {
+            settings.SetActive(true);
+        }
+
         sound = GameObject.FindGameObjectWithTag("Sound");
         var soundButton = sound.GetComponent<Button>();
         soundButton.onClick.AddListener(() =>
@@ -32,6 +44,11 @@ public class QuickLinksController : MonoBehaviour
     public void Back()
     {
         SceneManager.LoadScene(MainMenuScene);
+    }
+
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene(SettingsScene);
     }
 
     // Update is called once per frame

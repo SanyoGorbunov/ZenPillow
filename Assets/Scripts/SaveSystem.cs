@@ -58,9 +58,9 @@ public static class SaveSystem
         }
     }
 
-    public static void Remove(string userName)
+    public static void Remove()
     {
-        string path = Application.persistentDataPath + saveFolder + userName + saveFormat;
+        string path = Application.persistentDataPath + saveFolder + saveFormat;
 
         if (File.Exists(path))
         {
