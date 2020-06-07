@@ -1577,6 +1577,7 @@ GameObject:
   - component: {fileID: 2127632867}
   - component: {fileID: 2127632869}
   - component: {fileID: 2127632870}
+  - component: {fileID: 2127632871}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: DestroyDroplet
@@ -1693,3 +1694,22 @@ PolygonCollider2D:
       - {x: -24.426905, y: -42.130272}
       - {x: 52.221905, y: -41.101204}
       - {x: 62.046333, y: 8.34235}
+--- !u!95 &2127632871
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127632865}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e9ae226c99ac0141aea49a51797bdb8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
