@@ -37,6 +37,7 @@ public class TimerPlayController : MonoBehaviour
                 SceneManager.LoadScene("RabbitJump");
                 break;
             case Practice.Counting:
+                SceneManager.LoadScene("CountSheeps");
                 break;
         }
     }

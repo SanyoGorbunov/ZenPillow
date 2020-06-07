@@ -36,7 +36,7 @@ public class ColorDotController : MonoBehaviour
     {
         this.transform.localScale = new Vector3(scale, 0.1f, scale);
 
-        carrot.transform.localScale = new Vector3(0.1f/ scale, 0.1f / scale, 0.1f / scale);
+        carrot.transform.localScale = new Vector3(0.2f/ scale, 0.2f / scale, 0.2f / scale);
     }
     public void OnClick()
     {
