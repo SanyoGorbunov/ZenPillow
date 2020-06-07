@@ -9,6 +9,7 @@ public class CountSheepsController : MonoBehaviour
 
     public SheepsSpawner sheepsSpawner;
     public GameObject transitionOverlay;
+    public GameObject tutorial;
 
     private Material overlayMat = null;
 
@@ -21,6 +22,7 @@ public class CountSheepsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SheepCountLeft = 24;
 
         sheepsSpawner.GenerateLevel(SheepCountLeft);
 
@@ -28,11 +30,19 @@ public class CountSheepsController : MonoBehaviour
 
         overlayMat = renderer.material;
 
+        if (GameStateManager.Instance.HasPlayedSelectedGame())
+        {
+            skipTutorial();
+        }
+    }
+
+    public void skipTutorial()
+    {
+        tutorial.SetActive(false);
+
         StartCoroutine(AnimateAlpha(1.0f, 0.0f, 0.5f));
 
         StartCoroutine(Finish());
-
-        SheepCountLeft = 24;
     }
 
     private IEnumerator AnimateAlpha(float startValue, float endValue, float duration)

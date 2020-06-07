@@ -11,6 +11,8 @@ public class RabbitJumpController : MonoBehaviour
     public RabbitController rabbitController;
     public GameObject transitionOverlay;
 
+    public GameObject tutorial;
+
     private Material overlayMat = null;
 
     private int CarrotCountLeft = 0;
@@ -28,8 +30,17 @@ public class RabbitJumpController : MonoBehaviour
 
         overlayMat = renderer.material;
 
-        StartCoroutine(AnimateAlpha(1.0f, 0.0f, 0.5f));
+        if (GameStateManager.Instance.HasPlayedSelectedGame())
+        {
+            skipTutorial();
+        }
 
+    }
+
+    public void skipTutorial()
+    {
+        tutorial.SetActive(false);
+        StartCoroutine(AnimateAlpha(1.0f, 0.0f, 0.5f));
         StartCoroutine(Finish());
     }
 
