@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Xythe");
+        Play("Ambient");
     }
 
     public void Play(string name)
