@@ -9,7 +9,8 @@ public class BreathingCircleController : MonoBehaviour
     private const float TimeBreathingInSecs = 6.0f;
     private const float TimePauseInSecs = 1.0f;
 
-    private GameObject _innerCircle;
+    public GameObject _innerCircle;
+    public GameObject _outerCircle;
 
     private Vector3 previousScale, previousPosition;
     private bool _canMove;
@@ -18,7 +19,6 @@ public class BreathingCircleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _innerCircle = GameObject.FindGameObjectWithTag("InnerCircle");
     }
 
     // Update is called once per frame
@@ -131,5 +131,10 @@ public class BreathingCircleController : MonoBehaviour
         } while (currentTime <= TimePauseInSecs);
 
         callback.Invoke();
+    }
+
+    public void SetCircleVisibility(bool isVisible)
+    {
+        _outerCircle.SetActive(isVisible);
     }
 }
