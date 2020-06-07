@@ -59,7 +59,8 @@ public class RabbitController : MonoBehaviour
         if (collider.gameObject.name == "Capsule")
         {
             Destroy(collider.transform.parent.gameObject);
-            CarrotCountLeft -= 1;
+
+            FindObjectOfType<RabbitJumpController>().PickUpCarrot();
         }
 
         Debug.Log(collider.gameObject.name);
@@ -79,6 +80,11 @@ public class RabbitController : MonoBehaviour
         m_animator.SetInteger("AnimIndex", Idle);
         m_animator.SetTrigger("Next");
         canJump = true;
+        if (activeColorDot.hasCarrot)
+        {
+            activeColorDot.hideCarrot();
+            FindObjectOfType<RabbitJumpController>().PickUpCarrot();
+        }
     }
 
     public void JumpTo()
