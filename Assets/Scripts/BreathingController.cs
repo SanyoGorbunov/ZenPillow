@@ -48,6 +48,7 @@ public class BreathingController : MonoBehaviour
     void PauseEnd()
     {
         breathingCircleController.SetMove(false);
+        dropletsController.DestroyDroplets();
         Action action = Inhale;
         if (isInhale)
         {
