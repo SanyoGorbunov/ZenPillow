@@ -14,6 +14,11 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("SelectPracticeScene");
     }
 
+    public void OpenQuestionnaire()
+    {
+        SceneManager.LoadScene("Questionnaire");
+    }
+
     public void OpenFavoriteRoom()
     {
         var practice = GameStateManager.Instance.GetFavoritePractice();

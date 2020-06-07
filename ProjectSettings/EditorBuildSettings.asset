@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RateScene.unity
     guid: c286d0d2258e5c34ea9e4308bfac2c94
+  - enabled: 1
+    path: Assets/Scenes/Questionnaire.unity
+    guid: 1f62c639cd9b77945822851fb8e1692a
   m_configObjects: {}

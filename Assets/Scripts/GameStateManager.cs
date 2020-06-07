@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class GameStateManager
 {
@@ -66,5 +67,12 @@ public class GameStateManager
             }
         }
         return (Practice)argMax;
+    }
+
+    public Practice GetQuestionnairePractice(Dictionary<QuestionnaireQuestion, bool> answers)
+    {
+        // LOGIC HERE !!!
+
+        return Practice.Breathing;
     }
 }
