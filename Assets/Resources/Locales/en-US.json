@@ -15,5 +15,13 @@
 	"Follow the hints: inhale - pause - exhale - pause. Collect all the droplets on your way": "Follow the prompts: inhale-hold-exhale-hold. Collect droplets along the way",
 	"Hi, slowly inhaling": "Hey, slowly inhaling",
 	"Hi, slowly exhaling": "Exhaling slooooowly",
-	"Count all the sheep": "Count all the sheep"
+	"Count all the sheep": "Count all the sheep",
+	"How do you feel?": "How do you feel?",
+	"HardToBreath": "It's hard to breath",
+    "QuickHeartRate": "High heart rate",
+    "FearOfDeath": "I'm afraid of\r\n death",
+    "GettingCrazy": "Going crazy",
+    "BlackOut": "I'm about to faint",
+    "Fever": "Having a fever",
+    "DontFeelLegsOrHands": "I don't feel my legs or hands"
 }

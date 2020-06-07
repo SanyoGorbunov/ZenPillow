@@ -15,5 +15,13 @@
 	"Follow the hints: inhale - pause - exhale - pause. Collect all the droplets on your way": "Стеж за підказками: вдих-затримка-видих-затримка. Збери по дорозі крапельки",
 	"Hi, slowly inhaling": "Друже, вдихаємо повiльно!",
 	"Hi, slowly exhaling": "А зараз повільно видихаємо!",
-	"Count all the sheep": "Порахуй всіх овець"
+	"Count all the sheep": "Порахуй всіх овець",
+	"How do you feel?": "Як ти себе почуваєш?",
+	"HardToBreath": "Тяжко дихати",
+    "QuickHeartRate": "Швидке серцебиття",
+    "FearOfDeath": "Страшно померти",
+    "GettingCrazy": "Божеволію",
+    "BlackOut": "Втрачаю свідомість",
+    "Fever": "В мене жар",
+    "DontFeelLegsOrHands": "Не відчуваю рук чи ніг"
 }
