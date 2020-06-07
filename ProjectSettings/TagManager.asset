@@ -10,6 +10,8 @@ TagManager:
   - DestroyDroplet
   - Rate
   - Settings
+  - OuterCircle
+  - Bubble
   layers:
   - Default
   - TransparentFX

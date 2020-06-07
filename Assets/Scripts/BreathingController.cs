@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Input = InputWrapper.Input;
 
 public class BreathingController : MonoBehaviour
 {
     public BreathingCircleController breathingCircleController;
     public DropletsController dropletsController;
+    public InstructionsController instructionsController;
 
-    private bool _isInhale, _isOver;
+    private bool _isInhale, _isOver, _isInstruction;
 
     // Start is called before the first frame update
     void Start()
     {
-        var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
+        instructionsController.Reset();
+
+        var isGamePlayed = false; // GameStateManager.Instance.HasPlayedSelectedGame();
 
         StartCoroutine(nameof(Timer));
         if (!isGamePlayed)
         {
-            ShowInstructions();
+            StartCoroutine(nameof(Instructions));
         }
         else
         {
@@ -29,8 +34,19 @@ public class BreathingController : MonoBehaviour
     IEnumerator Play()
     {
         _isOver = false;
+        instructionsController.SetInstructionsVisibility(false);
+        breathingCircleController.SetCircleVisibility(true);
         yield return new WaitForSeconds(1.0f);
         Inhale();
+    }
+
+    IEnumerator Instructions()
+    {
+        _isOver = false;
+        _isInstruction = true;
+        instructionsController.SetInstructionsVisibility(true);
+        breathingCircleController.SetCircleVisibility(false);
+        yield return new WaitForSeconds(0.1f);
     }
 
     IEnumerator Wait()
@@ -46,21 +62,17 @@ public class BreathingController : MonoBehaviour
         _isOver = true;
     }
 
-    void ShowInstructions()
-    {
-        Debug.LogWarning(DateTime.UtcNow);
-        StartCoroutine(nameof(Play));
-    }
-
     void Inhale()
     {
         _isInhale = true;
+        instructionsController.ShowInhale();
         breathingCircleController.Scale(true, PauseStart);
     }
 
     void Exhale()
     {
         _isInhale = false;
+        instructionsController.ShowExhale();
         breathingCircleController.Scale(false, PauseStart);
     }
 
@@ -73,6 +85,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(true);
         dropletsController.Create();
+        instructionsController.ShowHold();
         StartCoroutine("Wait");
     }
 
@@ -80,6 +93,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(false);
         dropletsController.DestroyDroplets();
+        instructionsController.Reset();
         Action action = Inhale;
         if (_isInhale)
         {
@@ -101,5 +115,12 @@ public class BreathingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _isInstruction)
+        {
+            _isInstruction = false;
+            instructionsController.SetInstructionsVisibility(false);
+            breathingCircleController.SetCircleVisibility(true);
+            Inhale();
+        }
     }
 }
