@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 465236174}
   - component: {fileID: 465236177}
   - component: {fileID: 465236176}
+  - component: {fileID: 465236175}
   m_Layer: 0
   m_Name: Instructions
   m_TagString: Untagged
@@ -394,6 +395,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 7.8}
   m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &465236175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465236173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: Help me to collect all the carrots
 --- !u!114 &465236176
 MonoBehaviour:
   m_ObjectHideFlags: 0
