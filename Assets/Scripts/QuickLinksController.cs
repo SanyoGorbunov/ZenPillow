@@ -35,8 +35,8 @@ public class QuickLinksController : MonoBehaviour
             settings.SetActive(true);
         }
 
-        soundOn = Resources.Load<Sprite>("Icons/sound on");
-        soundOff = Resources.Load<Sprite>("Icons/sound off");
+        soundOn = Resources.Load<Sprite>("Icons/sound_on");
+        soundOff = Resources.Load<Sprite>("Icons/sound_off");
 
         sound = GameObject.FindGameObjectWithTag("Sound");
         var soundButton = sound.GetComponent<Button>();
