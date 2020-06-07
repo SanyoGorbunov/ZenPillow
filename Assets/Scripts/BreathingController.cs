@@ -1,24 +1,40 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BreathingController : MonoBehaviour
 {
     public BreathingCircleController breathingCircleController;
     public DropletsController dropletsController;
 
-    private bool isInhale;
+    private bool isInhale, _isOver;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(nameof(Play));
+        StartCoroutine(nameof(Finish));
     }
 
     IEnumerator Play()
     {
+        _isOver = false;
         yield return new WaitForSeconds(1.0f);
         Inhale();
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(6);
+        PauseEnd();
+    }
+
+    IEnumerator Finish()
+    {
+        var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
+        yield return new WaitForSeconds(gameLength * 60);
+        _isOver = true;
     }
 
     void Inhale()
@@ -54,12 +70,17 @@ public class BreathingController : MonoBehaviour
         {
             action = Exhale;
         }
+        if (!isInhale && _isOver)
+        {
+            GameOver();
+            return;
+        }
         breathingCircleController.Maxify(action);
     }
 
-    IEnumerator Wait() {
-        yield return new WaitForSeconds(6);
-        PauseEnd();
+    void GameOver()
+    {
+        SceneManager.LoadScene("RateScene");
     }
 
     // Update is called once per frame

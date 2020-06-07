@@ -21,7 +21,12 @@
         _gameMinutes = minutes;
     }
 
-    public void StartGame()
+    public int GetTimeLengthInMins()
+    {
+        return _gameMinutes;
+    }
+
+    public void SaveGame(int rate)
     {
     }
 }
