@@ -35,16 +35,24 @@ public class QuickLinksController : MonoBehaviour
             settings.SetActive(true);
         }
 
-        soundOn = Resources.Load<Sprite>("Icons/sound_on");
-        soundOff = Resources.Load<Sprite>("Icons/sound_off");
-
         sound = GameObject.FindGameObjectWithTag("Sound");
         var soundButton = sound.GetComponent<Button>();
+        soundOn = Resources.Load<Sprite>("Icons/sound_on");
+        soundOff = Resources.Load<Sprite>("Icons/sound_off");
+        var isMute = AudioManager.instance.GetMute();
+        if (isMute)
+        {
+            soundButton.GetComponent<Image>().sprite = soundOn;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = soundOff;
+        }
         soundButton.onClick.AddListener(() =>
         {
             AudioManager.StaticToggleMute();
-            var isMute = AudioManager.instance.GetMute();
-            if (isMute)
+            var isMute2 = AudioManager.instance.GetMute();
+            if (isMute2)
             {
                 soundButton.GetComponent<Image>().sprite = soundOn;
             } else

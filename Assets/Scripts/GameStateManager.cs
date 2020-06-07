@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 public class GameStateManager
@@ -90,8 +90,19 @@ public class GameStateManager
 
     public Practice GetQuestionnairePractice(Dictionary<QuestionnaireQuestion, bool> answers)
     {
-        // LOGIC HERE !!!
+        if (answers[QuestionnaireQuestion.HardToBreath] ||
+            answers[QuestionnaireQuestion.QuickHeartRate] ||
+            answers[QuestionnaireQuestion.GettingCrazy] ||
+            answers[QuestionnaireQuestion.FearOfDeath])
+        {
+            return Practice.Breathing;
+        }
 
-        return Practice.Breathing;
+        if (answers[QuestionnaireQuestion.DontFeelLegsOrHands])
+        {
+            return Practice.Collecting;
+        }
+
+        return Practice.Counting;
     }
 }

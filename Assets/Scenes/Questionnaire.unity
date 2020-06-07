@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1021,6 +1021,7 @@ GameObject:
   - component: {fileID: 899268027}
   - component: {fileID: 899268029}
   - component: {fileID: 899268028}
+  - component: {fileID: 899268030}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -1088,6 +1089,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899268026}
   m_CullTransparentMesh: 0
+--- !u!114 &899268030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899268026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: How do you feel?
 --- !u!1001 &899603100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1558,6 +1572,7 @@ GameObject:
   - component: {fileID: 1875274030}
   - component: {fileID: 1875274032}
   - component: {fileID: 1875274031}
+  - component: {fileID: 1875274033}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1625,6 +1640,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875274029}
   m_CullTransparentMesh: 0
+--- !u!114 &1875274033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875274029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: Play
 --- !u!1001 &1911129508
 PrefabInstance:
   m_ObjectHideFlags: 0
