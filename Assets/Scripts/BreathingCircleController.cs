@@ -40,7 +40,7 @@ public class BreathingCircleController : MonoBehaviour
                     if (xToSet > 46) { xToSet = 46; }
                     else if (xToSet < -46) { xToSet = -46; }
 
-                    transform.localPosition = new Vector3(xToSet, -70f, 0f);
+                    transform.localPosition = new Vector3(xToSet, -65f, 0f);
                     break;
                 default:
                     break;
@@ -97,7 +97,7 @@ public class BreathingCircleController : MonoBehaviour
 
         Vector3 originalPosition = transform.localPosition;
         previousPosition = originalPosition;
-        Vector3 destinationPosition = new Vector3(0.0f, -70.0f, 0.0f);
+        Vector3 destinationPosition = new Vector3(0.0f, -65.0f, 0.0f);
 
         float currentTime = 0.0f;
 

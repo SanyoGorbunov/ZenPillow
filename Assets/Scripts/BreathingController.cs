@@ -16,6 +16,8 @@ public class BreathingController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instructionsController.Reset();
+
         var isGamePlayed = false; // GameStateManager.Instance.HasPlayedSelectedGame();
 
         StartCoroutine(nameof(Timer));
@@ -63,12 +65,14 @@ public class BreathingController : MonoBehaviour
     void Inhale()
     {
         _isInhale = true;
+        instructionsController.ShowInhale();
         breathingCircleController.Scale(true, PauseStart);
     }
 
     void Exhale()
     {
         _isInhale = false;
+        instructionsController.ShowExhale();
         breathingCircleController.Scale(false, PauseStart);
     }
 
@@ -81,6 +85,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(true);
         dropletsController.Create();
+        instructionsController.ShowHold();
         StartCoroutine("Wait");
     }
 
@@ -88,6 +93,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(false);
         dropletsController.DestroyDroplets();
+        instructionsController.Reset();
         Action action = Inhale;
         if (_isInhale)
         {

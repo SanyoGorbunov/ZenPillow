@@ -29,7 +29,7 @@ public class DropletsController : MonoBehaviour
             do
             {
                 isFree = true;
-                var x = UnityEngine.Random.Range(-80f, 80f);
+                var x = UnityEngine.Random.Range(-70f, 70f);
                 var y = UnityEngine.Random.Range(50f, 130f);
                 droplets[i].transform.localPosition = new Vector3(x, y, 0f);
 
