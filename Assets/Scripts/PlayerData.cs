@@ -1,19 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+
 [System.Serializable]
 public class PlayerData
 {
-    public int stressLevel;
-    public  int zenLevel;
-    public int epicLevel;
-    public string lastMessage;
+    public PlayerRecord[] records;
+}
 
-    public PlayerData()
-    {
-        stressLevel = 0;
-        zenLevel = 100;
-        epicLevel = 69;
-        lastMessage = "I am epic!";
-    }
+[System.Serializable]
+public class PlayerRecord
+{
+    public DateTime timestamp;
+    public int length;
+    public int practice;
+    public int rate;
 }

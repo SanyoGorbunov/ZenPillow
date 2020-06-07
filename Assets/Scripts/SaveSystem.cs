@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -17,22 +16,30 @@ public static class SaveSystem
         }
     }
 
-    public static void Save(PlayerData data, string userName)
+    public static void Save(PlayerRecord record)
     {
-        string path = Application.persistentDataPath + saveFolder + userName + saveFormat;
+        string path = Application.persistentDataPath + saveFolder + saveFormat;
         BinaryFormatter formatter = new BinaryFormatter();
 
         CreateIfNotExist(Application.persistentDataPath + saveFolder);
 
-        FileStream stream = new FileStream(path, FileMode.Create);
+        var playerData = Load();
+        var records = new List<PlayerRecord>();
+        if (playerData.records != null)
+        {
+            records.AddRange(playerData.records);
+        }
+        records.Add(record);
+        playerData.records = records.ToArray();
 
-        formatter.Serialize(stream, data);
+        FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+        formatter.Serialize(stream, playerData);
         stream.Close();
     }
 
-    public static PlayerData Load(string userName)
+    public static PlayerData Load()
     {
-        string path = Application.persistentDataPath + saveFolder + userName + saveFormat;
+        string path = Application.persistentDataPath + saveFolder + saveFormat;
 
         if (File.Exists(path))
         {
@@ -49,8 +56,6 @@ public static class SaveSystem
             Debug.LogWarning("Player data not found!!");
             return new PlayerData();
         }
-
-        
     }
 
     public static void Remove(string userName)

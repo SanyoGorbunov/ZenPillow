@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class ButtonClick : MonoBehaviour
@@ -20,24 +19,24 @@ public class ButtonClick : MonoBehaviour
 
     public void SavePlayerData(string text)
     {
-        PlayerData data = new PlayerData();
-        data.stressLevel = 24;
-        data.lastMessage = text;
+        PlayerRecord record = new PlayerRecord();
+        record.practice = 0;
+        record.timestamp = DateTime.UtcNow;
 
-        SaveSystem.Save(data, playerName);
+        SaveSystem.Save(record);
     }
 
     public void LoadPlayerData()
     {
-        PlayerData data = SaveSystem.Load(playerName);
+        PlayerData data = SaveSystem.Load();
 
         //Debug.Log("Stress level = "+data.stressLevel);
         //Debug.Log("Last message = " + data.lastMessage);
 
         Text log = GameObject.Find("Log_Text").GetComponent<Text>();
 
-        log.text += "Stress level = " + data.stressLevel;
-        log.text += "Last message = " + data.lastMessage;
+        log.text += "Stress level = " + data.records[0].practice;
+        log.text += "Last message = " + data.records[0].timestamp;
 
     }
 
