@@ -13,8 +13,17 @@ public class BreathingController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(nameof(Play));
-        StartCoroutine(nameof(Finish));
+        var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
+
+        StartCoroutine(nameof(Timer));
+        if (!isGamePlayed)
+        {
+            ShowInstructions();
+        }
+        else
+        {
+            StartCoroutine(nameof(Play));
+        }
     }
 
     IEnumerator Play()
@@ -30,11 +39,17 @@ public class BreathingController : MonoBehaviour
         PauseEnd();
     }
 
-    IEnumerator Finish()
+    IEnumerator Timer()
     {
         var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
         yield return new WaitForSeconds(gameLength * 60);
         _isOver = true;
+    }
+
+    void ShowInstructions()
+    {
+        Debug.LogWarning(DateTime.UtcNow);
+        StartCoroutine(nameof(Play));
     }
 
     void Inhale()
