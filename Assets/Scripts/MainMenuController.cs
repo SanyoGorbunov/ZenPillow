@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
@@ -14,6 +12,18 @@ public class MainMenuController : MonoBehaviour
     public void SelectPractice()
     {
         SceneManager.LoadScene("SelectPracticeScene");
+    }
+
+    public void OpenQuestionnaire()
+    {
+        SceneManager.LoadScene("Questionnaire");
+    }
+
+    public void OpenFavoriteRoom()
+    {
+        var practice = GameStateManager.Instance.GetFavoritePractice();
+        GameStateManager.Instance.SelectPractice(practice);
+        SceneManager.LoadScene("TimerScene");
     }
 
     // Update is called once per frame

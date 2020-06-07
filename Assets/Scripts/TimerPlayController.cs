@@ -31,6 +31,7 @@ public class TimerPlayController : MonoBehaviour
         switch (selectedPractice)
         {
             case Practice.Breathing:
+                SceneManager.LoadScene("BreathingScene");
                 break;
             case Practice.Collecting:
                 SceneManager.LoadScene("RabbitJump");

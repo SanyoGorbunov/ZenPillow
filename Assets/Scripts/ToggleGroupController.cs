@@ -1,29 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ToggleGroupController : MonoBehaviour
 {
-    Dictionary<int, bool> answers = new Dictionary<int, bool>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void SetSelected(int id, bool isSelected)
+    public void OnPlay()
     {
-        answers.Add(id, isSelected);
-    }
+        var answers = new Dictionary<QuestionnaireQuestion, bool>();
+        foreach (var question in GetComponentsInChildren<QuestionController>())
+        {
+            var toggle = question.GetComponent<Toggle>();
+            answers.Add(question.question, toggle.isOn);
+        }
 
-    public void checkResult()
-    {
+        var practice = GameStateManager.Instance.GetQuestionnairePractice(answers);
+        GameStateManager.Instance.SelectPractice(practice);
+        SceneManager.LoadScene("TimerScene");
     }
 }
