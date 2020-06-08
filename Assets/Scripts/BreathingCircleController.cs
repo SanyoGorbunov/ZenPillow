@@ -15,10 +15,16 @@ public class BreathingCircleController : MonoBehaviour
     private Vector3 previousScale, previousPosition;
     private bool _canMove;
     private Vector2 touchStartPos;
+    private float touchStartXPos;
 
+
+    private int width;
+    private int height;
     // Start is called before the first frame update
     void Start()
     {
+        width = Screen.width;
+        height = Screen.height;
     }
 
     // Update is called once per frame
@@ -32,11 +38,19 @@ public class BreathingCircleController : MonoBehaviour
             {
                 case TouchPhase.Began:
                     touchStartPos = touch.position;
+
+                    touchStartXPos = transform.localPosition.x;
+
                     break;
                 case TouchPhase.Moved:
                     var currentPosition = touch.position;
                     var delta = currentPosition - touchStartPos;
-                    var xToSet = delta.x;
+                    const float xref = 180.0f;
+                    float scale = width / xref;
+
+                    //delta
+
+                    var xToSet = touchStartXPos + delta.x/ scale;
                     if (xToSet > 46) { xToSet = 46; }
                     else if (xToSet < -46) { xToSet = -46; }
 

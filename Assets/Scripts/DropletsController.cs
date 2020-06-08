@@ -7,9 +7,16 @@ public class DropletsController : MonoBehaviour
 
     private GameObject[] droplets;
 
+    private float gravityScale = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
+        const int yRef = 320;
+        float height = Screen.height;
+
+        gravityScale = height / yRef;
+
         droplets = new GameObject[5];
     }
 
@@ -24,6 +31,9 @@ public class DropletsController : MonoBehaviour
         for (int i = 0; i < droplets.Length; i++)
         {
             droplets[i] = Instantiate(dropletPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, transform);
+
+            Rigidbody2D body = droplets[i].GetComponent<Rigidbody2D>();
+            body.gravityScale *= gravityScale;
 
             bool isFree;
             do
