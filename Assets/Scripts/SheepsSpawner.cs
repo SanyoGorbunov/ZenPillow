@@ -33,9 +33,29 @@ public class SheepsSpawner : MonoBehaviour
         //GenerateCarrots(carrotCount);
     }
 
-    void GenerateRandomNumberList()
+    List<int> GenerateRandomNumberList()
     {
+        List<int> list = new List<int>();
 
+        List<int> tempList = new List<int>();
+
+        for (int i = 1; i < 25; i++)
+        {
+            tempList.Add(i);
+        }
+
+        for (int i = 0; i < 24; i++)
+        {
+            int RandomIndex = Random.Range(0, tempList.Count-1);
+
+            int actualNumber = tempList[RandomIndex];
+
+            tempList.Remove(tempList[RandomIndex]);
+
+            list.Add(actualNumber);
+        }
+
+        return list;
     }
 
     void GenerateSheeps()
@@ -55,7 +75,9 @@ public class SheepsSpawner : MonoBehaviour
         float maxX = float.MinValue;
         float maxY = float.MinValue;
 
-        int number = 1;
+        int number = 0;
+
+        List<int> indices = GenerateRandomNumberList();
 
         for (int i = 0; i < rowCount; i++)
         {
@@ -70,7 +92,7 @@ public class SheepsSpawner : MonoBehaviour
                     SheepController controller = dot.GetComponent<SheepController>();
                     float randomSize = Random.Range(0.8f, 1.2f);
                     controller.setSize(randomSize);
-                    controller.setNumber(number);
+                    controller.setNumber(indices[number]);
                     number++;
                     SheepList.Add(controller);
 
@@ -106,7 +128,7 @@ public class SheepsSpawner : MonoBehaviour
                     SheepController controller = dot.GetComponent<SheepController>();
                     float randomSize = Random.Range(0.8f, 1.2f);
                     controller.setSize(randomSize);
-                    controller.setNumber(number);
+                    controller.setNumber(indices[number]);
                     number++;
                     SheepList.Add(controller);
 
