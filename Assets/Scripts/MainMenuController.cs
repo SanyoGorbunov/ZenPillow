@@ -15,16 +15,20 @@ public class MainMenuController : MonoBehaviour
         StartCoroutine(AnimateAlpha(1, 0, 0.5f, new del(() => { overlay.SetActive(false); })));
     }
 
-    public void SelectPractice()
+    private void LoadScene(string SceneName)
     {
         overlay.SetActive(true);
-        StartCoroutine(AnimateAlpha(0, 1, 0.5f, new del(() => {  SceneManager.LoadScene("SelectPracticeScene"); })));
+        StartCoroutine(AnimateAlpha(0, 1, 0.5f, new del(() => { SceneManager.LoadScene(SceneName); })));
+    }
+
+    public void SelectPractice()
+    {
+        LoadScene("SelectPracticeScene");
     }
 
     public void OpenQuestionnaire()
     {
-        overlay.SetActive(true);
-        StartCoroutine(AnimateAlpha(0, 1, 0.5f, new del(() => { SceneManager.LoadScene("Questionnaire"); })));
+        LoadScene("Questionnaire");
     }
 
     public void OpenFavoriteRoom()
@@ -32,8 +36,7 @@ public class MainMenuController : MonoBehaviour
         var practice = GameStateManager.Instance.GetFavoritePractice();
         GameStateManager.Instance.SelectPractice(practice);
 
-        overlay.SetActive(true);
-        StartCoroutine(AnimateAlpha(0, 1, 0.5f, new del(() => { SceneManager.LoadScene("TimerScene"); })));
+        LoadScene("TimerScene");
     }
 
     // Update is called once per frame

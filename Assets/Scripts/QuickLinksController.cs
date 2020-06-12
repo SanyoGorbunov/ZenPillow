@@ -39,7 +39,14 @@ public class QuickLinksController : MonoBehaviour
         var soundButton = sound.GetComponent<Button>();
         soundOn = Resources.Load<Sprite>("Icons/sound_on");
         soundOff = Resources.Load<Sprite>("Icons/sound_off");
-        var isMute = AudioManager.instance.GetMute();
+
+        var isMute = true;
+
+        if (AudioManager.instance)
+        {
+            isMute = AudioManager.instance.GetMute();
+        }
+         
         if (isMute)
         {
             soundButton.GetComponent<Image>().sprite = soundOn;
