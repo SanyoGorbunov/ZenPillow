@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PracticeController : MonoBehaviour
+public class PracticeController : UIMenuController
 {
     public Practice practice;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(AnimateAlpha(1, 0, 0.5f, new del(() => { overlay.SetActive(false); })));
     }
 
     // Update is called once per frame
@@ -17,9 +17,11 @@ public class PracticeController : MonoBehaviour
         
     }
 
-    public void OnClick()
+    public void OnClick(int practice)
     {
-        GameStateManager.Instance.SelectPractice(practice);
-        SceneManager.LoadScene("TimerScene");
+        Practice PracticeEnum = (Practice)practice;
+
+        GameStateManager.Instance.SelectPractice(PracticeEnum);
+        LoadScene("TimerScene");
     }
 }
