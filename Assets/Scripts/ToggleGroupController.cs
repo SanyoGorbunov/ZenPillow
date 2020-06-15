@@ -22,6 +22,6 @@ public class ToggleGroupController : MonoBehaviour
 
         var practice = GameStateManager.Instance.GetQuestionnairePractice(answers);
         GameStateManager.Instance.SelectPractice(practice);
-        SceneManager.LoadScene("TimerScene");
+        UIMenuController.StaticLoadScene("TimerScene");
     }
 }

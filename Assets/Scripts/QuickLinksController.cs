@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class QuickLinksController : MonoBehaviour
+public class QuickLinksController : UIMenuController
 {
     private const string MainMenuScene = "IntroScene";
     private const string SettingsScene = "SettingsScene";
@@ -16,6 +16,7 @@ public class QuickLinksController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CurrentMenu = this;
         back = GameObject.FindGameObjectWithTag("Back");
         if (SceneManager.GetActiveScene().name == MainMenuScene)
         {
@@ -67,16 +68,17 @@ public class QuickLinksController : MonoBehaviour
                 soundButton.GetComponent<Image>().sprite = soundOff;
             }
         });
+        AnimatedStart();
     }
 
     public void Back()
     {
-        SceneManager.LoadScene(MainMenuScene);
+        LoadScene(MainMenuScene);
     }
 
     public void GoToSettings()
     {
-        SceneManager.LoadScene(SettingsScene);
+        LoadScene(SettingsScene);
     }
 
     // Update is called once per frame

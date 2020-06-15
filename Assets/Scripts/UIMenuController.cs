@@ -7,6 +7,26 @@ public class UIMenuController : MonoBehaviour
 {
     public GameObject overlay;
 
+    protected static UIMenuController CurrentMenu;
+
+    private void Awake()
+    {
+        overlay.SetActive(true);
+    }
+
+    public static void StaticLoadScene(string SceneName)
+    {
+        if (CurrentMenu)
+        {
+            CurrentMenu.LoadScene(SceneName);
+        }
+    }
+
+    protected void AnimatedStart()
+    {
+        StartCoroutine(AnimateAlpha(1, 0, 0.5f, new del(() => { overlay.SetActive(false); })));
+    }
+
     public delegate void del();
     protected void LoadScene(string SceneName)
     {

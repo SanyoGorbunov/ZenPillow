@@ -31,13 +31,13 @@ public class TimerPlayController : MonoBehaviour
         switch (selectedPractice)
         {
             case Practice.Breathing:
-                SceneManager.LoadScene("BreathingScene");
+                UIMenuController.StaticLoadScene("BreathingScene");
                 break;
             case Practice.Collecting:
-                SceneManager.LoadScene("RabbitJump");
+                UIMenuController.StaticLoadScene("RabbitJump");
                 break;
             case Practice.Counting:
-                SceneManager.LoadScene("CountSheeps");
+                UIMenuController.StaticLoadScene("CountSheeps");
                 break;
         }
     }

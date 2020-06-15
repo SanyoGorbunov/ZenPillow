@@ -148,7 +148,7 @@ public class RabbitJumpController : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(60 * gameLength);
+            yield return new WaitForSeconds(10 * gameLength);
         }
         
         _isOver = true;
@@ -157,7 +157,7 @@ public class RabbitJumpController : MonoBehaviour
 
     void GameOver()
     {
-        SceneManager.LoadScene("RateScene");
+        UIMenuController.StaticLoadScene("RateScene");
     }
 
     // Update is called once per frame

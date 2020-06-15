@@ -22,7 +22,7 @@ public class SaveRateController : MonoBehaviour
         int value = int.Parse(rate.GetComponent<Text>().text);
 
         GameStateManager.Instance.SaveGame(value);
-        SceneManager.LoadScene("IntroScene");
+        UIMenuController.StaticLoadScene("IntroScene");
     }
 
     public void OnRateChange(float value)

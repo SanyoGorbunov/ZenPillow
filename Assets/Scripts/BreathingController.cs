@@ -109,7 +109,7 @@ public class BreathingController : MonoBehaviour
 
     void GameOver()
     {
-        SceneManager.LoadScene("RateScene");
+        UIMenuController.StaticLoadScene("RateScene");
     }
 
     // Update is called once per frame
