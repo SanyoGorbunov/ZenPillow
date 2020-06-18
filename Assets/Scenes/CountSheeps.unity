@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -270,7 +270,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428293087}
-  - component: {fileID: 428293086}
   - component: {fileID: 428293088}
   m_Layer: 0
   m_Name: SheepsSpawner
@@ -279,23 +278,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &428293086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428293085}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7ac0bab5ebd15b41be9dfc322648fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DotPrefab: {fileID: 2470592956307100700, guid: 00ef91fffc9bd87478c5f954ba4cf82b,
-    type: 3}
-  RabbitPawn: {fileID: 0}
-  CarrotPrefab: {fileID: 4049240767336607464, guid: ce7345fe9b8a1eb4faa2e745c7b00eaa,
-    type: 3}
 --- !u!4 &428293087
 Transform:
   m_ObjectHideFlags: 0
@@ -1023,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6c3560fc52f4f49878be8ab3af1a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotSpawner: {fileID: 428293086}
+  dotSpawner: {fileID: 0}
   rabbitController: {fileID: 0}
   transitionOverlay: {fileID: 481830349}
   tutorial: {fileID: 0}

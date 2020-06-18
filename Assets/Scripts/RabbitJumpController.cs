@@ -148,7 +148,7 @@ public class RabbitJumpController : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(10 * gameLength);
+            yield return new WaitForSeconds(60 * gameLength);
         }
         
         _isOver = true;
