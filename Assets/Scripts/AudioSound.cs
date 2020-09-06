@@ -13,6 +13,8 @@ public class AudioSound
 
     public bool loop;
 
+    public bool isBackground;
+
     [HideInInspector]
     public AudioSource source;
 }

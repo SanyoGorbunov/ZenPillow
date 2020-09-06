@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     private bool isMute = false;
     public AudioSound[] sounds;
     // Start is called before the first frame update
+
+    private string[] _backgroundSounds;
+    private string _currentBackgroundSound;
 
     public static AudioManager instance = null;
     void Awake()
@@ -22,7 +26,7 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-
+        var backgroundSounds = new List<string>();
         foreach (AudioSound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -31,12 +35,48 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.clip = s.clip;
             s.source.loop = s.loop;
+
+            if (s.isBackground)
+            {
+                backgroundSounds.Add(s.name);
+            }
         }
+
+        _backgroundSounds = backgroundSounds.ToArray();
+    }
+
+    public string[] GetBackgroundSounds()
+    {
+        return _backgroundSounds;
+    }
+
+    public string GetCurrentBackgroundSound()
+    {
+        return _currentBackgroundSound;
     }
 
     private void Start()
     {
-        Play("Ambient");
+        var playerData = SaveSystem.Load();
+        if (!string.IsNullOrEmpty(playerData.sound))
+        {
+            _currentBackgroundSound = playerData.sound;
+        }
+        else
+        {
+            _currentBackgroundSound = "Ambient";
+        }
+        Play(_currentBackgroundSound);
+    }
+
+    public void Change(string name)
+    {
+        AudioSound sound = Array.Find(sounds, s => s.name == _currentBackgroundSound);
+        sound.source.Stop();
+
+        _currentBackgroundSound = name;
+        Play(_currentBackgroundSound);
+        SaveSystem.SaveSound(_currentBackgroundSound);
     }
 
     public void Play(string name)
