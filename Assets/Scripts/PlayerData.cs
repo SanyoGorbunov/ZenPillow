@@ -4,6 +4,7 @@
 public class PlayerData
 {
     public PlayerRecord[] records;
+    public string sound;
 }
 
 [System.Serializable]

@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
 
     private string[] _backgroundSounds;
-    private string _currentBackgroundSound = "Ambient";
+    private string _currentBackgroundSound;
 
     public static AudioManager instance = null;
     void Awake()
@@ -57,6 +57,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        var playerData = SaveSystem.Load();
+        if (!string.IsNullOrEmpty(playerData.sound))
+        {
+            _currentBackgroundSound = playerData.sound;
+        }
+        else
+        {
+            _currentBackgroundSound = "Ambient";
+        }
         Play(_currentBackgroundSound);
     }
 
@@ -67,6 +76,7 @@ public class AudioManager : MonoBehaviour
 
         _currentBackgroundSound = name;
         Play(_currentBackgroundSound);
+        SaveSystem.SaveSound(_currentBackgroundSound);
     }
 
     public void Play(string name)
