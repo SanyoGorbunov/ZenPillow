@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using Boo.Lang;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.loop = s.loop;
 
-            if (s.isBack)
+            if (s.isBackground)
             {
                 backgroundSounds.Add(s.name);
             }
