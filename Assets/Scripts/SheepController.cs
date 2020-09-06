@@ -54,14 +54,24 @@ public class SheepController : MonoBehaviour
             contr.ClickSheep();
             Destroy();
         }
-
-        
     }
+
+    public void ActivateHint()
+    {
+        StartCoroutine(AnimateSizeAndRot(transform.localScale, transform.localScale * 1.1f, 0.4f));
+    }
+
+    bool isDestroyed = false;
 
     public void Destroy()
     {
-        //transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        if (isDestroyed)
+        { 
+            return;
+        }
+        StopAllCoroutines();
         Destroy(gameObject);
+        isDestroyed = true;
     }
 
     // Update is called once per frame
@@ -69,4 +79,25 @@ public class SheepController : MonoBehaviour
     {
         
     }
+
+
+    private IEnumerator AnimateSizeAndRot(Vector3 startValue, Vector3 endValue, float duration)
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+
+            Vector3 alpha = startValue + (endValue - startValue) * ratio;
+
+            transform.localScale = alpha;
+
+            yield return null;
+        }
+
+        StartCoroutine(AnimateSizeAndRot(endValue, startValue, duration));
+    }
+
 }

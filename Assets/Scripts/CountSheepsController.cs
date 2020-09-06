@@ -131,6 +131,7 @@ public class CountSheepsController : MonoBehaviour
     {
         SheepCountLeft--;
         NextNumber++;
+        resetHintTimer();
         if (SheepCountLeft == 0)
         {
             SheepCountLeft = 24;
@@ -159,9 +160,26 @@ public class CountSheepsController : MonoBehaviour
         UIMenuController.StaticLoadScene("RateScene");
     }
 
+    public float timerBeforeHint = 5.0f;
+    public bool HintIsActive = false;
+
+    public void resetHintTimer()
+    {
+        timerBeforeHint = 5.0f;
+        HintIsActive = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (!HintIsActive)
+        { 
+            timerBeforeHint -= Time.deltaTime;
+            if (timerBeforeHint <= 0.0f)
+            {
+                sheepsSpawner.getSheepByNumber(NextNumber).ActivateHint();
+                HintIsActive = true;
+            }
+        }
     }
 }

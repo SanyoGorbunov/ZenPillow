@@ -60,6 +60,8 @@ public class SheepsSpawner : MonoBehaviour
 
     void GenerateSheeps()
     {
+        removeAllSheeps();
+
         int rowCount = 7;
         float offset = 1.3f;
 
@@ -181,6 +183,18 @@ public class SheepsSpawner : MonoBehaviour
         }
 
         SheepList.Clear();
+    }
+
+    public SheepController getSheepByNumber(int number)
+    {
+        foreach (SheepController controller in SheepList)
+        {
+            if (controller.number == number)
+            {
+                return controller;
+            }
+        }
+        return null;
     }
 
     // Update is called once per frame
