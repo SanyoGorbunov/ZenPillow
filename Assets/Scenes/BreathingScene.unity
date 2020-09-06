@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -267,6 +267,7 @@ MonoBehaviour:
   breathingCircleController: {fileID: 519538549}
   dropletsController: {fileID: 1070590303}
   instructionsController: {fileID: 1977219327}
+  displayTimerController: {fileID: 7326447936839565583}
 --- !u!4 &419659005
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,3 +1828,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 998f92f008ec2ec448625a08c9bdd099, type: 3}
+--- !u!114 &7326447936839565583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7326447937226999458, guid: 998f92f008ec2ec448625a08c9bdd099,
+    type: 3}
+  m_PrefabInstance: {fileID: 7326447936839565582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5c7cbdcc46f6d4bb480348c2cc0027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

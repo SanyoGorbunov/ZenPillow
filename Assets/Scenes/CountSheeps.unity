@@ -613,6 +613,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 544852068a0379b4288bc44c6974c316, type: 3}
+--- !u!114 &992820653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7326447937226999458, guid: 998f92f008ec2ec448625a08c9bdd099,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401775466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5c7cbdcc46f6d4bb480348c2cc0027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1000029505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1175,7 @@ MonoBehaviour:
   sheepsSpawner: {fileID: 428293088}
   transitionOverlay: {fileID: 481830349}
   tutorial: {fileID: 1695545866}
+  _displayTimerController: {fileID: 992820653}
   NextNumber: 1
 --- !u!1 &1930578199
 GameObject:
