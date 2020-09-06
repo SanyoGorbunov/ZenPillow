@@ -57,7 +57,7 @@ public class BreathingController : MonoBehaviour
 
     IEnumerator Timer()
     {
-        var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
+        var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInMins();
         yield return new WaitForSeconds(gameLength * 60);
         _isOver = true;
     }

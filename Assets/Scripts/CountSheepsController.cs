@@ -144,16 +144,9 @@ public class CountSheepsController : MonoBehaviour
 
     IEnumerator Finish()
     {
-        var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
-        if (gameLength < 1.0f)
-        {
-            yield return new WaitForSeconds(60.0f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(60 * gameLength);
-        }
-        
+        var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInMins();
+        yield return new WaitForSeconds(60 * gameLength);
+
         _isOver = true;
         StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
     }
