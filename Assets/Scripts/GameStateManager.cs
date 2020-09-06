@@ -24,9 +24,14 @@ public class GameStateManager
         _gameMinutes = minutes;
     }
 
-    public int GetTimeLengthInMins()
+    public float GetAdjustedTimeLengthInSecs()
     {
-        return _gameMinutes;
+        if (_gameMinutes < 1.0f)
+        {
+            return 10f;
+        }
+
+        return _gameMinutes * 60f;
     }
 
     public void SaveGame(int rate)
