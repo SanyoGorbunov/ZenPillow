@@ -10,6 +10,7 @@ public class RabbitJumpController : MonoBehaviour
     public DotsSpawner dotSpawner;
     public RabbitController rabbitController;
     public GameObject transitionOverlay;
+    public DisplayTimerController displayTimerController;
 
     public GameObject tutorial;
 
@@ -41,7 +42,7 @@ public class RabbitJumpController : MonoBehaviour
     {
         tutorial.SetActive(false);
         StartCoroutine(AnimateAlpha(1.0f, 0.0f, 0.5f));
-        StartCoroutine(Finish());
+        StartTimer();
     }
 
     private IEnumerator AnimateAlpha(float startValue, float endValue, float duration)
@@ -137,22 +138,14 @@ public class RabbitJumpController : MonoBehaviour
         }
     }
 
-
-
-    IEnumerator Finish()
+    void StartTimer()
     {
-        var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
-        if (gameLength < 1.0f)
+        var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInSecs();
+        displayTimerController.Activate(gameLength, () =>
         {
-            yield return new WaitForSeconds(10.0f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(60 * gameLength);
-        }
-        
-        _isOver = true;
-        StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
+            _isOver = true;
+            StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
+        });
     }
 
     void GameOver()

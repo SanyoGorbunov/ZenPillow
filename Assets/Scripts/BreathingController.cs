@@ -10,6 +10,7 @@ public class BreathingController : MonoBehaviour
     public BreathingCircleController breathingCircleController;
     public DropletsController dropletsController;
     public InstructionsController instructionsController;
+    public DisplayTimerController displayTimerController;
 
     private bool _isInhale, _isOver, _isInstruction;
 
@@ -20,7 +21,7 @@ public class BreathingController : MonoBehaviour
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
 
-        StartCoroutine(nameof(Timer));
+        StartTimer();
         if (!isGamePlayed)
         {
             StartCoroutine(nameof(Instructions));
@@ -55,11 +56,10 @@ public class BreathingController : MonoBehaviour
         PauseEnd();
     }
 
-    IEnumerator Timer()
+    void StartTimer()
     {
-        var gameLength = GameStateManager.Instance.GetTimeLengthInMins();
-        yield return new WaitForSeconds(gameLength * 60);
-        _isOver = true;
+        var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInSecs();
+        displayTimerController.Activate(gameLength, () => { _isOver = true; });
     }
 
     void Inhale()
