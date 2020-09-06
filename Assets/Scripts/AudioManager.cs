@@ -50,6 +50,11 @@ public class AudioManager : MonoBehaviour
         return _backgroundSounds;
     }
 
+    public string GetCurrentBackgroundSound()
+    {
+        return _currentBackgroundSound;
+    }
+
     private void Start()
     {
         Play(_currentBackgroundSound);
