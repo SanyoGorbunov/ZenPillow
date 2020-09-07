@@ -14,4 +14,5 @@ public class PlayerRecord
     public int length;
     public int practice;
     public int rate;
+    public int rateBeforeGame;
 }
