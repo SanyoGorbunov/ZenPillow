@@ -9,6 +9,19 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var playerData = SaveSystem.Load();
+        var savedLocale = playerData.locale;
+
+        if (string.IsNullOrEmpty(savedLocale))
+        {
+            savedLocale = Mgl.I18n.MapSystemLanguage(Application.systemLanguage);
+        }
+
+        if (Mgl.I18n.GetLocale() != savedLocale)
+        {
+            Mgl.I18n.SetLocale(savedLocale);
+            SaveSystem.SaveLocale(savedLocale);
+        }
     }
 
     public void SelectPractice()
@@ -27,11 +40,5 @@ public class MainMenuController : MonoBehaviour
         GameStateManager.Instance.SelectPractice(practice);
 
         UIMenuController.StaticLoadScene("RateScene");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
