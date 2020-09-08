@@ -52,6 +52,21 @@ public static class SaveSystem
         stream.Close();
     }
 
+    public static void SaveLocale(string locale)
+    {
+        string path = Application.persistentDataPath + saveFolder + saveFormat;
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        CreateIfNotExist(Application.persistentDataPath + saveFolder);
+
+        var playerData = Load();
+        playerData.locale = locale;
+
+        FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+        formatter.Serialize(stream, playerData);
+        stream.Close();
+    }
+
     public static PlayerData Load()
     {
         string path = Application.persistentDataPath + saveFolder + saveFormat;

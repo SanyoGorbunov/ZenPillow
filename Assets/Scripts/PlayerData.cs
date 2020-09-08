@@ -5,6 +5,7 @@ public class PlayerData
 {
     public PlayerRecord[] records;
     public string sound;
+    public string locale;
 }
 
 [System.Serializable]

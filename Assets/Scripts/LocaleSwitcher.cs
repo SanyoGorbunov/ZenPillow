@@ -5,7 +5,6 @@ public class LocaleSwitcher : MonoBehaviour
 {
     public string Locale;
 
-    // Start is called before the first frame update
     void Start()
     {
         var button = GetComponent<Button>();
@@ -16,14 +15,9 @@ public class LocaleSwitcher : MonoBehaviour
                 if (Mgl.I18n.GetLocale() != Locale)
                 {
                     Mgl.I18n.SetLocale(Locale);
+                    SaveSystem.SaveLocale(Locale);
                 }
             });
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

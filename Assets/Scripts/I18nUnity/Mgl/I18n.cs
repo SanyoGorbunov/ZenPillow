@@ -72,6 +72,21 @@ namespace Mgl
             }
         }
 
+        public static string MapSystemLanguage(SystemLanguage systemLanguage)
+        {
+            switch (systemLanguage)
+            {
+                case SystemLanguage.Russian:
+                    return "ru-RU";
+                case SystemLanguage.English:
+                    return "en-US";
+                case SystemLanguage.Ukrainian:
+                    return "uk-UA";
+            }
+
+            throw new ArgumentException();
+        }
+
         public static void SetPath(string localePath = null)
         {
             if (localePath != null)
