@@ -26,7 +26,7 @@ public class MainMenuController : MonoBehaviour
         var practice = GameStateManager.Instance.GetFavoritePractice();
         GameStateManager.Instance.SelectPractice(practice);
 
-        UIMenuController.StaticLoadScene("TimerScene");
+        UIMenuController.StaticLoadScene("RateScene");
     }
 
     // Update is called once per frame

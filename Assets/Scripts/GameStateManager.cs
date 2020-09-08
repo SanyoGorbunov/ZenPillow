@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameStateManager
 {
@@ -8,10 +9,14 @@ public class GameStateManager
 
     private int _gameMinutes;
     private Practice _gamePractice;
+    private int _rateBeforeGame;
+
+    public bool IsGameStarted { get; private set; }
 
     public void SelectPractice(Practice practice)
     {
         _gamePractice = practice;
+        IsGameStarted = false;
     }
 
     public Practice GetPractice()
@@ -22,6 +27,7 @@ public class GameStateManager
     public void SelectTime(int minutes)
     {
         _gameMinutes = minutes;
+        IsGameStarted = true;
     }
 
     public float GetAdjustedTimeLengthInSecs()
@@ -41,8 +47,14 @@ public class GameStateManager
             practice = (int)_gamePractice,
             length = _gameMinutes,
             rate = rate,
+            rateBeforeGame = _rateBeforeGame,
             timestamp = DateTime.UtcNow
         });
+    }
+
+    public void RateBeforeGame(int rateBeforeGame)
+    {
+        _rateBeforeGame = rateBeforeGame;
     }
 
     public Practice GetFavoritePractice()

@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PracticeController : MonoBehaviour
 {
-    public Practice practice;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +18,6 @@ public class PracticeController : MonoBehaviour
         Practice PracticeEnum = (Practice)practice;
 
         GameStateManager.Instance.SelectPractice(PracticeEnum);
-        UIMenuController.StaticLoadScene("TimerScene");
+        UIMenuController.StaticLoadScene("RateScene");
     }
 }
