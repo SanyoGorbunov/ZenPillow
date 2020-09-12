@@ -27,7 +27,8 @@ public class SheepsSpawner : MonoBehaviour
     public void GenerateLevel(int carrotCount)
     {
         //removeAllSheeps();
-        GenerateSheeps();
+        bool isHorizontal = Camera.main.aspect >= 1.0f;
+        GenerateSheeps(isHorizontal);
         //GenerateColor();
 
         //GenerateCarrots(carrotCount);
@@ -58,7 +59,7 @@ public class SheepsSpawner : MonoBehaviour
         return list;
     }
 
-    void GenerateSheeps()
+    void GenerateSheeps(bool isHorizontal)
     {
         removeAllSheeps();
 
@@ -160,17 +161,33 @@ public class SheepsSpawner : MonoBehaviour
         float x = (minX + maxX) / 2;
         float y = (minY + maxY) / 2;
 
-        Vector3 oldPos = FindObjectOfType<Camera>().gameObject.transform.position;
+        if (isHorizontal)
+        {
+            foreach (var dot in SheepList)
+            {
+                Vector3 temp = dot.gameObject.transform.position;
+                temp.x = dot.gameObject.transform.position.z;
+                temp.z = dot.gameObject.transform.position.x;
+                dot.gameObject.transform.position = temp;
+            }
+
+            var tempX = x;
+            x = y;
+            y = tempX;
+        }
+
+        Camera camera = FindObjectOfType<Camera>();
+
+        if (isHorizontal)
+        {
+            camera.orthographicSize = 3.5f;
+        }
+
+        Vector3 oldPos = camera.gameObject.transform.position;
 
         oldPos.x = x;
         oldPos.z = y;
-        FindObjectOfType<Camera>().gameObject.transform.position = oldPos;
-
-        /*RabbitPawn.transform.position = SheepList[SheepList.Count - 1].transform.position;
-
-        oldPos.y = 0.0f;
-
-        RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;*/
+        camera.gameObject.transform.position = oldPos;
     }
 
     void removeAllSheeps()
