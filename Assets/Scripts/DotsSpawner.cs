@@ -27,7 +27,10 @@ public class DotsSpawner : MonoBehaviour
     public void GenerateLevel(int carrotCount)
     {
         removeAllDots();
-        GenerateDots();
+
+        bool isHorizontal = Camera.main.aspect >= 1.0f;
+
+        GenerateDots(isHorizontal);
         GenerateColor();
 
         GenerateCarrots(carrotCount);
@@ -100,7 +103,7 @@ public class DotsSpawner : MonoBehaviour
         }
     }
 
-    void GenerateDots()
+    void GenerateDots(bool isHorizontal)
     {
         int rowCount = 7;
         float offset = 1.3f;
@@ -192,13 +195,37 @@ public class DotsSpawner : MonoBehaviour
         float x = (minX + maxX) / 2;
         float y = (minY + maxY) / 2;
 
-        Vector3 oldPos = FindObjectOfType<Camera>().gameObject.transform.position;
+        if (isHorizontal)
+        {
+            foreach (var dot in DotList)
+            {
+                Vector3 temp = dot.gameObject.transform.position;
+                temp.x = dot.gameObject.transform.position.z;
+                temp.z = dot.gameObject.transform.position.x;
+                dot.gameObject.transform.position = temp;
+            }
+
+            var tempX = x;
+            x = y;
+            y = tempX;
+        }
+
+        Camera camera = FindObjectOfType<Camera>();
+
+        if (isHorizontal)
+        {
+            camera.orthographicSize = 3.5f;
+        }
+
+        Vector3 oldPos = camera.gameObject.transform.position;
 
         oldPos.x = x;
         oldPos.z = y;
-        FindObjectOfType<Camera>().gameObject.transform.position = oldPos;
+        camera.gameObject.transform.position = oldPos;
 
         RabbitPawn.transform.position = DotList[DotList.Count - 1].transform.position;
+
+        
 
         oldPos.y = 0.0f;
 
