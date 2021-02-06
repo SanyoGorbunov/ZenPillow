@@ -9,6 +9,8 @@ public class DropletsController : MonoBehaviour
 
     private float gravityScale = 1.0f;
 
+    private bool isVisible;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,27 @@ public class DropletsController : MonoBehaviour
         
     }
 
+    public void SetVisibility(bool isVisible)
+    {
+        this.isVisible = isVisible;
+        if (droplets == null)
+            return;
+        for (int i = 0; i < droplets.Length; i++)
+        {
+            if (droplets[i] != null && droplets[i].active)
+            {
+                droplets[i].GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
+            }
+        }
+    }
+
     public void Create()
     {
         for (int i = 0; i < droplets.Length; i++)
         {
             droplets[i] = Instantiate(dropletPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, transform);
+
+            droplets[i].GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
 
             Rigidbody2D body = droplets[i].GetComponent<Rigidbody2D>();
             body.gravityScale *= gravityScale;
