@@ -23,7 +23,7 @@ public class BreathingController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        checkScreenOrientation();
+        CheckScreenOrientation();
         instructionsController.Reset();
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
@@ -41,15 +41,6 @@ public class BreathingController : MonoBehaviour
             breathingCircleController.SetCircleVisibility(true);
             Inhale();
         }
-    }
-
-    IEnumerator Play()
-    {
-        _isOver = false;
-        instructionsController.SetInstructionsVisibility(false);
-        breathingCircleController.SetCircleVisibility(true);
-        yield return new WaitForSeconds(1.0f);
-        Inhale();
     }
 
     IEnumerator Instructions()
@@ -123,7 +114,7 @@ public class BreathingController : MonoBehaviour
         UIMenuController.StaticLoadScene("RateScene");
     }
 
-    void checkScreenOrientation()
+    void CheckScreenOrientation()
     {
         isHorizontal = (Screen.width > Screen.height);
         breathingCircleController.SetVisibility(!isHorizontal);
@@ -138,11 +129,11 @@ public class BreathingController : MonoBehaviour
     {
         if (isHorizontal && Screen.width < Screen.height)
         {
-            checkScreenOrientation();
+            CheckScreenOrientation();
         }
         else if (!isHorizontal && Screen.width > Screen.height)
         {
-            checkScreenOrientation();
+            CheckScreenOrientation();
         }
 
         if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _isInstruction)
