@@ -7,7 +7,7 @@ using Input = InputWrapper.Input;
 public class BreathingCircleController : MonoBehaviour
 {
     public float TimeBreathingInSecs = 6.0f;
-    private const float TimePauseInSecs = 0.0f;
+    private const float TimePauseInSecs = 0.5f;
 
     public GameObject _innerCircle;
     public GameObject _outerCircle;
@@ -65,8 +65,6 @@ public class BreathingCircleController : MonoBehaviour
 
                     transform.localPosition = new Vector3(xToSet, -65f, 0f);
                     break;
-                default:
-                    break;
             }
         }
     }
@@ -78,12 +76,12 @@ public class BreathingCircleController : MonoBehaviour
 
     public void Scale(bool isUpscaling, Action callback)
     {
-        StartCoroutine(ScaleOverTime(isUpscaling, callback));
+        StartCoroutine(ScaleOnMovement(isUpscaling, callback));
     }
 
     public void Minify(Action callback)
     {
-        StartCoroutine(ToMiddle(callback));
+        StartCoroutine(ToBottom(callback));
     }
 
     public void Maxify(Action callback)
@@ -91,7 +89,7 @@ public class BreathingCircleController : MonoBehaviour
         StartCoroutine(ToTop(callback));
     }
 
-    IEnumerator ScaleOverTime(bool isUpscaling, Action callback)
+    IEnumerator ScaleOnMovement(bool isUpscaling, Action callback)
     {
         Vector3 originalScale = isUpscaling ? new Vector3(0.0f, 0.0f, 1.0f) : new Vector3(1.0f, 1.0f, 1.0f);
         Vector3 destinationScale = !isUpscaling ? new Vector3(0.0f, 0.0f, 1.0f) : new Vector3(1.0f, 1.0f, 1.0f);
@@ -112,7 +110,7 @@ public class BreathingCircleController : MonoBehaviour
         callback.Invoke();
     }
 
-    IEnumerator ToMiddle(Action callback)
+    IEnumerator ToBottom(Action callback)
     {
         Vector3 originalScale = transform.localScale;
         previousScale = originalScale;
@@ -126,8 +124,8 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, 1.0f/*currentTime / TimePauseInSecs*/);
-            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, 1.0f/*currentTime / TimePauseInSecs*/);
+            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
+            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= TimePauseInSecs);
@@ -147,8 +145,8 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, 1.0f/*currentTime / TimePauseInSecs*/);
-            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, 1.0f/*currentTime / TimePauseInSecs*/);
+            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
+            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= TimePauseInSecs);
