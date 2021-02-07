@@ -88,10 +88,13 @@ public class InstructionsController : MonoBehaviour
         StartCoroutine(nameof(Exhale));
     }
 
-    public void ShowHold()
+    public void ShowHold(bool showHoldIcon)
     {
         Reset();
-        holdIcon.SetActive(true);
+        if (showHoldIcon)
+        {
+            holdIcon.SetActive(true);
+        }
     }
 
     IEnumerator Inhale()

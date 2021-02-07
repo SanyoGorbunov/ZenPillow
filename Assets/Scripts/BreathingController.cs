@@ -96,7 +96,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(true);
         dropletsController.Create();
-        instructionsController.ShowHold();
+        instructionsController.ShowHold(!isHorizontal);
         StartCoroutine(nameof(Wait));
     }
 
