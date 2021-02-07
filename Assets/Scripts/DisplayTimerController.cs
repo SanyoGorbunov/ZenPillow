@@ -14,6 +14,10 @@ public class DisplayTimerController : MonoBehaviour
     void Start()
     {
         _timerText = gameObject.GetComponent<Text>();
+        if (!_isActive)
+        {
+            gameObject.GetComponent<CanvasRenderer>().SetAlpha(0);
+        }
     }
 
     public void Activate(float remainingTime, Action onElapsed)
@@ -21,6 +25,7 @@ public class DisplayTimerController : MonoBehaviour
         _remainingTime = remainingTime;
         _onElapsed = onElapsed;
         _isActive = true;
+        gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
     }
 
     // Update is called once per frame

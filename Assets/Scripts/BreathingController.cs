@@ -28,13 +28,13 @@ public class BreathingController : MonoBehaviour
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
 
-        StartTimer();
         if (!isGamePlayed)
         {
             StartCoroutine(nameof(Instructions));
         }
         else
         {
+            StartTimer();
             //StartCoroutine(nameof(Play));
             _isOver = false;
             instructionsController.SetInstructionsVisibility(false);
@@ -147,6 +147,7 @@ public class BreathingController : MonoBehaviour
 
         if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _isInstruction)
         {
+            StartTimer();
             _isInstruction = false;
             instructionsController.SetInstructionsVisibility(false);
             breathingCircleController.SetCircleVisibility(true);
