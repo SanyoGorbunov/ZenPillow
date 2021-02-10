@@ -10,8 +10,7 @@ public class InstructionsController : MonoBehaviour
     public GameObject holdText;
     public GameObject holdIcon;
 
-    public float inhaleTextHorizontalXPos = 0.0f;
-    public float exhaleTextHorizontalXPos = 0.0f;
+    public float textHorizontalXPos = 0.0f;
 
     public float textVerticalXPos = 0.0f;
     public float textVerticalYPos = -140.0f;
@@ -33,14 +32,21 @@ public class InstructionsController : MonoBehaviour
             UnityEngine.UI.Text text = inhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
             Vector3 pos = inhaleText.transform.localPosition;
-            pos.x = inhaleTextHorizontalXPos;
+            pos.x = textHorizontalXPos;
             pos.y = exhaleText.transform.localPosition.y;
             inhaleText.transform.localPosition = pos;
+
             text = exhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
             pos = exhaleText.transform.localPosition;
-            pos.x = exhaleTextHorizontalXPos;
+            pos.x = textHorizontalXPos;
             exhaleText.transform.localPosition = pos;
+
+            text = holdText.GetComponent<UnityEngine.UI.Text>();
+            text.horizontalOverflow = HorizontalWrapMode.Overflow;
+            pos = holdText.transform.localPosition;
+            pos.x = textHorizontalXPos;
+            holdText.transform.localPosition = pos;
         }
         else
         {
