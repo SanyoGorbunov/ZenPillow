@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class LocalizedText : MonoBehaviour
 {
     public string Key;
+    public string KeyHorizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,16 @@ public class LocalizedText : MonoBehaviour
             var textObject = gameObject.GetComponent<Text>();
             if (textObject != null)
             {
-                textObject.text = Mgl.I18n.Instance.__(Key);
+                if (string.IsNullOrEmpty(KeyHorizontal))
+                {
+                    textObject.text = Mgl.I18n.Instance.__(Key);
+                }
+                else
+                {
+                    textObject.text = Screen.width > Screen.height
+                        ? Mgl.I18n.Instance.__(KeyHorizontal)
+                        : Mgl.I18n.Instance.__(Key);
+                }
             }
         }
     }
