@@ -21,16 +21,15 @@ public class LocalizedText : MonoBehaviour
         
     }
 
-    private void OnDestroy()
-    {
-        Mgl.I18n.LocaleSet -= SetText;
-    }
-
     public void SetupKey(string key)
     {
         Key = key;
         SetText();
-        Mgl.I18n.LocaleSet += SetText;
+    }
+
+    public void Reload()
+    {
+        SetText();
     }
 
     void SetText()

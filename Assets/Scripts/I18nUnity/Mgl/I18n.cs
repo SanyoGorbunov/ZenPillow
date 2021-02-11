@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Mgl
 {
@@ -19,8 +20,6 @@ namespace Mgl
         private static string _localePath = "Locales/";
 
         private static bool _isLoggingMissing = true;
-
-        public static UnityAction LocaleSet;
 
         static I18n()
         {
@@ -65,9 +64,19 @@ namespace Mgl
             {
                 _currentLocale = newLocale;
                 InitConfig();
-                if (LocaleSet != null)
+                UpdateActiveScreen();
+            }
+        }
+
+        private static void UpdateActiveScreen()
+        {
+            var scene = SceneManager.GetActiveScene();
+
+            foreach (var rootGameObject in scene.GetRootGameObjects())
+            {
+                foreach (var localizedText in rootGameObject.GetComponentsInChildren<LocalizedText>())
                 {
-                    LocaleSet.Invoke();
+                    localizedText.Reload();
                 }
             }
         }
