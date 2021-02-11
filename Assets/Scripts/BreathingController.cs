@@ -49,6 +49,7 @@ public class BreathingController : MonoBehaviour
         _isInstruction = true;
         instructionsController.SetInstructionsVisibility(true);
         breathingCircleController.SetCircleVisibility(false);
+        smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(0);
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -141,7 +142,16 @@ public class BreathingController : MonoBehaviour
             StartTimer();
             _isInstruction = false;
             instructionsController.SetInstructionsVisibility(false);
-            breathingCircleController.SetCircleVisibility(true);
+            if (isHorizontal)
+            {
+                lineController.Launch();
+                smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
+            }
+            else
+            {
+                breathingCircleController.SetCircleVisibility(true);
+            }
+
             Inhale();
         }
     }

@@ -44,6 +44,8 @@ public class BreathLineController : MonoBehaviour
     float BreathingInWidth = 4f * widthPerSecondUnscaled * canvasScale;
     float BreathingOutWidth = 4f * widthPerSecondUnscaled * canvasScale;
 
+    public bool started = false;
+
     void SetUpIntervals()
     {
         BreathingIntervals = new float[] { breathInTime, breathInHoldTime, breathOutTime, breathOutHoldTime };
@@ -74,6 +76,8 @@ public class BreathLineController : MonoBehaviour
 
     void Start()
     {
+        GetComponent<CanvasRenderer>().SetAlpha(0);
+
         BoundsDistance = UpperBoundPos - LowerBoundPos;
         speed = pointsPerSecond;
         holdingBreathInWidth = breathInHoldTime * pointsPerSecond;
@@ -147,6 +151,11 @@ public class BreathLineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!started)
+        {
+            return;
+        }
+
         float deltaTime = Time.deltaTime;
         float distance = deltaTime * speed;
 
@@ -162,5 +171,11 @@ public class BreathLineController : MonoBehaviour
         distancePassed += distance;
         timePassed += deltaTime;
         UpdateCloudPosition();
+    }
+
+    public void Launch()
+    {
+        started = true;
+        GetComponent<CanvasRenderer>().SetAlpha(1);
     }
 }
