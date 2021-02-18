@@ -4,6 +4,7 @@ using UnityEngine;
 public class InstructionsController : MonoBehaviour
 {
     public GameObject bubble;
+    public GameObject instructionsHorizontal;
 
     public GameObject inhaleText;
     public GameObject exhaleText;
@@ -15,9 +16,13 @@ public class InstructionsController : MonoBehaviour
     public float textVerticalXPos = 0.0f;
     public float textVerticalYPos = -140.0f;
 
+    private bool showHorizontal;
+
     public void SetVisibility(bool isVisible)
     {
-        bubble.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
+        showHorizontal = !isVisible;
+        bubble.SetActive(isVisible);
+        instructionsHorizontal.SetActive(!isVisible);
         //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
         SetTextIsHorizontal(!isVisible);
 
@@ -87,7 +92,16 @@ public class InstructionsController : MonoBehaviour
 
     public void SetInstructionsVisibility(bool isVisible)
     {
-        bubble.SetActive(isVisible);
+        if (isVisible)
+        {
+            bubble.SetActive(!showHorizontal);
+            instructionsHorizontal.SetActive(showHorizontal);
+        }
+        else
+        {
+            bubble.SetActive(false);
+            instructionsHorizontal.SetActive(false);
+        }
     }
 
     public void ShowInhale()

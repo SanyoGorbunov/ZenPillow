@@ -121,8 +121,11 @@ public class BreathingController : MonoBehaviour
         breathingCircleController.SetVisibility(!isHorizontal);
         instructionsController.SetVisibility(!isHorizontal);
         dropletsController.SetVisibility(!isHorizontal);
-        lineController.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
-        smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+        if (!_isInstruction)
+        {
+            lineController.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+            smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+        }
     }
 
     // Update is called once per frame
