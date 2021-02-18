@@ -1482,6 +1482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cloud: {fileID: 971571708}
+  drop: {fileID: 6845922861272483460, guid: c90152a870aef62448448bbbd4cf7f0e, type: 3}
   UpperBoundPos: 75
   LowerBoundPos: -75
   breathInTime: 4
@@ -1805,6 +1806,7 @@ MonoBehaviour:
   holdIcon: {fileID: 634902170}
   inhaleTextVerticalXPos: 20
   inhaleTextHorizontalXPos: 0
+  inhaleTextVerticalYPos: 90.7
   exhaleTextVerticalXPos: -20
   exhaleTextHorizontalXPos: 0
 --- !u!224 &1977219328
