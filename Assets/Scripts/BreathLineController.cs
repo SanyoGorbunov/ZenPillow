@@ -49,7 +49,7 @@ public class BreathLineController : MonoBehaviour
     float BreathingOutWidth = 4f * widthPerSecondUnscaled * canvasScale;
 
     private bool _canTap = false;
-
+    private int _tapDropId = -1;
     public float dropTouchRadius = 1.0f;
 
     int dropsCountPerPhase = 3;
@@ -66,8 +66,10 @@ public class BreathLineController : MonoBehaviour
     }
 
     private int LastNearDrop = 0;
+    private float dropRange = 5.0f;
 
     private Drop[] dropsLinePos;
+    private Interval[] dropsLineInterval;
 
     private struct Interval
     {
@@ -96,11 +98,16 @@ public class BreathLineController : MonoBehaviour
 
     void CreateDropsLine(int count, int startId, float startXPos, float endXPos, float YPos)
     {
-        float interval = (endXPos - startXPos) / (count + 1);
+        float PhaseLength = (endXPos - startXPos);
+
+        float interval = PhaseLength / (count + 1);
 
         for (int i = 0; i < count; i++)
         {
-            CreateNewDrop(startId+i, startXPos + (interval*(i+1)), YPos);
+            float XPos = startXPos + (interval * (i + 1));
+
+            CreateNewDrop(startId+i, XPos, YPos);
+            dropsLineInterval[startId + i] = new Interval(((interval * (i + 1)) - dropRange) / PhaseLength, ((interval * (i + 1)) + dropRange) / PhaseLength, i);
         }
     }
 
@@ -120,6 +127,7 @@ public class BreathLineController : MonoBehaviour
     {
 
         dropsLinePos = new Drop[dropsCountPerPhase*2*50];
+        dropsLineInterval = new Interval[dropsCountPerPhase * 2 * 50];
 
         float newPointX = StartPoint.x;
         var pointlist = new List<Vector2>(LineRenderer.Points);
@@ -204,6 +212,23 @@ public class BreathLineController : MonoBehaviour
                     {
                         LastNearDrop = RoundId * 2 * dropsCountPerPhase + dropsCountPerPhase;
                     }
+
+                    for (int j = LastNearDrop; j < LastNearDrop + dropsCountPerPhase; j++)
+                    {
+                        if (temp_alpha <= dropsLineInterval[j].right)
+                        {
+                            if (temp_alpha >= dropsLineInterval[j].left)
+                            {
+                                _tapDropId = j;
+                            }
+                            else
+                            {
+                                _tapDropId = -1;
+                            }
+                            break;
+                        }
+                    }
+
                     _canTap = true;
                 }
                 else
@@ -264,10 +289,15 @@ public class BreathLineController : MonoBehaviour
             {
                 case TouchPhase.Began:
 
-                    if (Mathf.Abs(dropsLinePos[LastNearDrop].XPositionOnLine - distancePassed) < 5.0f)
+                    if (_tapDropId > -1)
+                    {
+                        dropsLinePos[_tapDropId].DropObject.SetActive(false);
+                    }
+
+                    /*if (Mathf.Abs(dropsLinePos[LastNearDrop].XPositionOnLine - distancePassed) < 5.0f)
                     {
                         dropsLinePos[LastNearDrop].DropObject.SetActive(false);
-                    }
+                    }*/
 
                     break;
                 default:
