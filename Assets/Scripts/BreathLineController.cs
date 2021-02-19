@@ -184,6 +184,9 @@ public class BreathLineController : MonoBehaviour
         RectTransform rect = Cloud.GetComponent<RectTransform>();
         rect.localPosition = new Vector2(rect.localPosition.x, -rect.localPosition.y);
     }
+
+    float PhaseAlpha = 0.0f;
+
     void UpdateCloudPosition()
     {
         float temp = timePassed % RoundTime;
@@ -202,7 +205,7 @@ public class BreathLineController : MonoBehaviour
                 float h = BoundPoses[i];
                 if (BoundsDistances[i] == 0)
                 {
-                    float temp_alpha = (temp - BreathingIntervalsLowerBound[i]) / BreathingIntervals[i];
+                    PhaseAlpha = (temp - BreathingIntervalsLowerBound[i]) / BreathingIntervals[i];
 
                     if (i == 1)
                     {
@@ -211,22 +214,6 @@ public class BreathLineController : MonoBehaviour
                     else if(i==3)
                     {
                         LastNearDrop = RoundId * 2 * dropsCountPerPhase + dropsCountPerPhase;
-                    }
-
-                    for (int j = LastNearDrop; j < LastNearDrop + dropsCountPerPhase; j++)
-                    {
-                        if (temp_alpha <= dropsLineInterval[j].right)
-                        {
-                            if (temp_alpha >= dropsLineInterval[j].left)
-                            {
-                                _tapDropId = j;
-                            }
-                            else
-                            {
-                                _tapDropId = -1;
-                            }
-                            break;
-                        }
                     }
 
                     _canTap = true;
@@ -241,27 +228,6 @@ public class BreathLineController : MonoBehaviour
                 break;
             }
         }
-        /*
-        if (temp > BreathingIntervalsLowerBound[3])
-        {
-            float h = LowerBoundPos + BoundsDistance * (temp - BreathingIntervalsLowerBound[3]) / BreathingIntervals[3];
-
-            SetCloudPosition(h);
-        }
-        else if (temp > BreathingIntervalsLowerBound[2])
-        {
-            SetCloudPosition(LowerBoundPos);
-        }
-        else if (temp > BreathingIntervalsLowerBound[1])
-        {
-            float h = UpperBoundPos + (-BoundsDistance) * (temp - BreathingIntervalsLowerBound[1]) / BreathingIntervals[1];
-
-            SetCloudPosition(h);
-        }
-        else
-        {
-            SetCloudPosition(UpperBoundPos);
-        }*/
     }
     
     // Update is called once per frame
@@ -289,15 +255,26 @@ public class BreathLineController : MonoBehaviour
             {
                 case TouchPhase.Began:
 
+                    for (int j = LastNearDrop; j < LastNearDrop + dropsCountPerPhase; j++)
+                    {
+                        if (PhaseAlpha <= dropsLineInterval[j].right)
+                        {
+                            if (PhaseAlpha >= dropsLineInterval[j].left)
+                            {
+                                _tapDropId = j;
+                            }
+                            else
+                            {
+                                _tapDropId = -1;
+                            }
+                            break;
+                        }
+                    }
+
                     if (_tapDropId > -1)
                     {
                         dropsLinePos[_tapDropId].DropObject.SetActive(false);
                     }
-
-                    /*if (Mathf.Abs(dropsLinePos[LastNearDrop].XPositionOnLine - distancePassed) < 5.0f)
-                    {
-                        dropsLinePos[LastNearDrop].DropObject.SetActive(false);
-                    }*/
 
                     break;
                 default:
