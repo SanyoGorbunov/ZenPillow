@@ -23,7 +23,7 @@ public class BreathingController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        checkScreenOrientation();
+        CheckScreenOrientation();
         instructionsController.Reset();
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
@@ -43,21 +43,13 @@ public class BreathingController : MonoBehaviour
         }
     }
 
-    IEnumerator Play()
-    {
-        _isOver = false;
-        instructionsController.SetInstructionsVisibility(false);
-        breathingCircleController.SetCircleVisibility(true);
-        yield return new WaitForSeconds(1.0f);
-        Inhale();
-    }
-
     IEnumerator Instructions()
     {
         _isOver = false;
         _isInstruction = true;
         instructionsController.SetInstructionsVisibility(true);
         breathingCircleController.SetCircleVisibility(false);
+        smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(0);
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -96,7 +88,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(true);
         dropletsController.Create();
-        instructionsController.ShowHold();
+        instructionsController.ShowHold(!isHorizontal);
         StartCoroutine(nameof(Wait));
     }
 
@@ -123,14 +115,17 @@ public class BreathingController : MonoBehaviour
         UIMenuController.StaticLoadScene("RateScene");
     }
 
-    void checkScreenOrientation()
+    void CheckScreenOrientation()
     {
         isHorizontal = (Screen.width > Screen.height);
         breathingCircleController.SetVisibility(!isHorizontal);
         instructionsController.SetVisibility(!isHorizontal);
         dropletsController.SetVisibility(!isHorizontal);
-        lineController.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
-        smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+        if (!_isInstruction)
+        {
+            lineController.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+            smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+        }
     }
 
     // Update is called once per frame
@@ -138,11 +133,11 @@ public class BreathingController : MonoBehaviour
     {
         if (isHorizontal && Screen.width < Screen.height)
         {
-            checkScreenOrientation();
+            CheckScreenOrientation();
         }
         else if (!isHorizontal && Screen.width > Screen.height)
         {
-            checkScreenOrientation();
+            CheckScreenOrientation();
         }
 
         if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _isInstruction)
@@ -150,7 +145,16 @@ public class BreathingController : MonoBehaviour
             StartTimer();
             _isInstruction = false;
             instructionsController.SetInstructionsVisibility(false);
-            breathingCircleController.SetCircleVisibility(true);
+            if (isHorizontal)
+            {
+                lineController.Launch();
+                smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
+            }
+            else
+            {
+                breathingCircleController.SetCircleVisibility(true);
+            }
+
             Inhale();
         }
     }

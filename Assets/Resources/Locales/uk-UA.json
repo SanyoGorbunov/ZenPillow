@@ -18,12 +18,14 @@
 	"Count all the sheep": "Порахуй всіх овець",
 	"How do you feel?": "Як ти себе почуваєш?",
 	"HardToBreath": "Тяжко дихати",
-    "QuickHeartRate": "Швидке серцебиття",
-    "FearOfDeath": "Страшно померти",
-    "GettingCrazy": "Божеволію",
-    "BlackOut": "Втрачаю свідомість",
-    "Fever": "В мене жар",
-    "DontFeelLegsOrHands": "Не відчуваю рук чи ніг",
+	"QuickHeartRate": "Швидке серцебиття",
+	"FearOfDeath": "Страшно померти",
+	"GettingCrazy": "Божеволію",
+	"BlackOut": "Втрачаю свідомість",
+	"Fever": "В мене жар",
+	"DontFeelLegsOrHands": "Не відчуваю рук чи ніг",
 	"Help me to collect all the carrots": "Допоможи\r\nмені зібрати\r\nвсі морковки",
-	"Pick Sound": "Оберіть музику:"
+	"Pick Sound": "Оберіть музику:",
+	"Hold your breath": "Затримуй подих і лови крапельки",
+	"Hold your breath horizontal": "Затримуй подих і натискай на екран, \r\nколи хмарка проходить через крапельки"
 }

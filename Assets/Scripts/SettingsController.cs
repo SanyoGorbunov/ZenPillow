@@ -17,5 +17,9 @@ public class SettingsController : MonoBehaviour
     public void RemoveHistory()
     {
         SaveSystem.Remove();
+
+        var locale = Mgl.I18n.MapSystemLanguage(Application.systemLanguage);
+        Mgl.I18n.SetLocale(locale);
+        SaveSystem.SaveLocale(locale);
     }
 }

@@ -4,22 +4,25 @@ using UnityEngine;
 public class InstructionsController : MonoBehaviour
 {
     public GameObject bubble;
+    public GameObject instructionsHorizontal;
 
     public GameObject inhaleText;
     public GameObject exhaleText;
+    public GameObject holdText;
     public GameObject holdIcon;
 
-    public float inhaleTextVerticalXPos = 20.0f;
-    public float inhaleTextHorizontalXPos = 0.0f;
+    public float textHorizontalXPos = 0.0f;
 
-    public float inhaleTextVerticalYPos = 90.7f;
+    public float textVerticalXPos = 0.0f;
+    public float textVerticalYPos = -140.0f;
 
-    public float exhaleTextVerticalXPos = -20.0f;
-    public float exhaleTextHorizontalXPos = 00.0f;
+    private bool showHorizontal;
 
     public void SetVisibility(bool isVisible)
     {
-        bubble.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
+        showHorizontal = !isVisible;
+        bubble.SetActive(isVisible);
+        instructionsHorizontal.SetActive(!isVisible);
         //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
         SetTextIsHorizontal(!isVisible);
 
@@ -34,28 +37,44 @@ public class InstructionsController : MonoBehaviour
             UnityEngine.UI.Text text = inhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
             Vector3 pos = inhaleText.transform.localPosition;
-            pos.x = inhaleTextHorizontalXPos;
+            pos.x = textHorizontalXPos;
             pos.y = exhaleText.transform.localPosition.y;
             inhaleText.transform.localPosition = pos;
+
             text = exhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
             pos = exhaleText.transform.localPosition;
-            pos.x = exhaleTextHorizontalXPos;
+            pos.x = textHorizontalXPos;
             exhaleText.transform.localPosition = pos;
+
+            text = holdText.GetComponent<UnityEngine.UI.Text>();
+            text.horizontalOverflow = HorizontalWrapMode.Overflow;
+            pos = holdText.transform.localPosition;
+            pos.x = textHorizontalXPos;
+            holdText.transform.localPosition = pos;
         }
         else
         {
             UnityEngine.UI.Text text = inhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             Vector3 pos = inhaleText.transform.localPosition;
-            pos.x = inhaleTextVerticalXPos;
-            pos.y = inhaleTextVerticalYPos;
+            pos.x = textVerticalXPos;
+            pos.y = textVerticalYPos;
             inhaleText.transform.localPosition = pos;
+
             text = exhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             pos = exhaleText.transform.localPosition;
-            pos.x = exhaleTextVerticalXPos;
+            pos.x = textVerticalXPos;
+            pos.y = textVerticalYPos;
             exhaleText.transform.localPosition = pos;
+
+            text = holdText.GetComponent<UnityEngine.UI.Text>();
+            text.horizontalOverflow = HorizontalWrapMode.Wrap;
+            pos = holdText.transform.localPosition;
+            pos.x = textVerticalXPos;
+            pos.y = textVerticalYPos;
+            holdText.transform.localPosition = pos;
         }
     }
 
@@ -73,7 +92,16 @@ public class InstructionsController : MonoBehaviour
 
     public void SetInstructionsVisibility(bool isVisible)
     {
-        bubble.SetActive(isVisible);
+        if (isVisible)
+        {
+            bubble.SetActive(!showHorizontal);
+            instructionsHorizontal.SetActive(showHorizontal);
+        }
+        else
+        {
+            bubble.SetActive(false);
+            instructionsHorizontal.SetActive(false);
+        }
     }
 
     public void ShowInhale()
@@ -88,10 +116,14 @@ public class InstructionsController : MonoBehaviour
         StartCoroutine(nameof(Exhale));
     }
 
-    public void ShowHold()
+    public void ShowHold(bool showHoldIcon)
     {
         Reset();
-        holdIcon.SetActive(true);
+        if (showHoldIcon)
+        {
+            holdIcon.SetActive(true);
+        }
+        StartCoroutine(nameof(Hold));
     }
 
     IEnumerator Inhale()
@@ -108,10 +140,18 @@ public class InstructionsController : MonoBehaviour
         exhaleText.SetActive(false);
     }
 
+    IEnumerator Hold()
+    {
+        holdText.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        holdText.SetActive(false);
+    }
+
     public void Reset()
     {
         inhaleText.SetActive(false);
         exhaleText.SetActive(false);
         holdIcon.SetActive(false);
+        holdText.SetActive(false);
     }
 }
