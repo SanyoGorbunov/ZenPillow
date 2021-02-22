@@ -123,6 +123,7 @@ public class BreathLineController : MonoBehaviour
         transform.localPosition = new Vector2(XPos, YPos);
 
         dropsLinePos[id] = new Drop(temp_drop, XPos);
+        temp_drop.SetActive(false);
     }
 
     void SpawnPointsAtStart()
@@ -171,7 +172,7 @@ public class BreathLineController : MonoBehaviour
         SetUpIntervals();
         LineRenderer = GetComponent<UILineRenderer>();
         SpawnPointsAtStart();
-        //Cloud.position = new Vector2(StartPoint.x, UpperBoundPos);
+        Cloud.GetComponent<CanvasRenderer>().SetAlpha(0);
     }
 
     float timePassed = 0.0f;
@@ -257,7 +258,24 @@ public class BreathLineController : MonoBehaviour
     public void Launch()
     {
         started = true;
-        GetComponent<CanvasRenderer>().SetAlpha(1);
+    }
+
+    public void SetVisibility(bool isVisible)
+    {
+        GetComponent<CanvasRenderer>().SetAlpha(isVisible? 1: 0);
+        Cloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
+        SetDropsVisibility(isVisible);
+    }
+
+    private void SetDropsVisibility(bool isVisible)
+    {
+        if(dropsLinePos!=null)
+        { 
+            for (int i = 0; i < dropsLinePos.Length; i++)
+            {
+                dropsLinePos[i].DropObject.SetActive(isVisible);
+            }
+        }
     }
 
     void HandleInput()

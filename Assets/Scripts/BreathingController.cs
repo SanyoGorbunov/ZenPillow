@@ -12,7 +12,6 @@ public class BreathingController : MonoBehaviour
     public InstructionsController instructionsController;
     public DisplayTimerController displayTimerController;
     public BreathLineController lineController;
-    public GameObject smallCloud;
 
     public bool isHorizontal = false;
 
@@ -49,7 +48,6 @@ public class BreathingController : MonoBehaviour
         _isInstruction = true;
         instructionsController.SetInstructionsVisibility(true);
         breathingCircleController.SetCircleVisibility(false);
-        smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(0);
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -119,13 +117,19 @@ public class BreathingController : MonoBehaviour
     {
         isHorizontal = (Screen.width > Screen.height);
         breathingCircleController.SetVisibility(!isHorizontal);
-        instructionsController.SetVisibility(!isHorizontal);
+        instructionsController.SetHorizontalMode(isHorizontal);
         dropletsController.SetVisibility(!isHorizontal);
+
         if (!_isInstruction)
         {
-            lineController.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
-            smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+            lineController.SetVisibility(isHorizontal);
         }
+        else
+        {
+            lineController.SetVisibility(false);
+        }
+        //smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
+        
     }
 
     // Update is called once per frame
@@ -145,10 +149,10 @@ public class BreathingController : MonoBehaviour
             StartTimer();
             _isInstruction = false;
             instructionsController.SetInstructionsVisibility(false);
+            lineController.Launch();
             if (isHorizontal)
             {
-                lineController.Launch();
-                smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
+                lineController.SetVisibility(true);
             }
             else
             {
