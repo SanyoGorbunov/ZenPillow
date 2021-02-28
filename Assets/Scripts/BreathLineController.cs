@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
 using UnityEngine.EventSystems;
@@ -247,8 +246,6 @@ public class BreathLineController : MonoBehaviour
         float distance = deltaTime * speed;
         var transform = this.GetComponent<RectTransform>();
         transform.localPosition = new Vector2(transform.localPosition.x - distance, transform.localPosition.y);
-        //Cloud.position = new Vector2(Cloud.position.x-distance, Cloud.position.y);
-        //LineRenderer.SetAllDirty();
         distancePassed += distance;
         timePassed += deltaTime;
         UpdateCloudPosition();
@@ -310,14 +307,7 @@ public class BreathLineController : MonoBehaviour
                     }
 
                     break;
-                default:
-                    break;
             }
         }
-    }
-
-    void isDropNearCloud()
-    {
-
     }
 }
