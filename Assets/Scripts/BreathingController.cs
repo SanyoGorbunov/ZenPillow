@@ -7,17 +7,18 @@ using Input = InputWrapper.Input;
 
 public class BreathingController : MonoBehaviour
 {
+    public DisplayTimerController displayTimerController;
+
     public BreathingCircleController breathingCircleController;
     public DropletsController dropletsController;
     public InstructionsController instructionsController;
-    public DisplayTimerController displayTimerController;
     public BreathLineController lineController;
-
-    public bool isHorizontal = false;
 
     public float pauseDuration = 6.0f;
 
-    private bool _isInhale, _isOver, _isInstruction;
+    private bool _isInhale, _isOver;
+
+    public bool isHorizontal = false, _isInstruction;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class BreathingController : MonoBehaviour
             StartTimer();
             //StartCoroutine(nameof(Play));
             _isOver = false;
-            instructionsController.SetInstructionsVisibility(false);
+            instructionsController.SetStartTutorialActive(false);
             breathingCircleController.SetCircleVisibility(true);
             Inhale();
         }
@@ -46,7 +47,7 @@ public class BreathingController : MonoBehaviour
     {
         _isOver = false;
         _isInstruction = true;
-        instructionsController.SetInstructionsVisibility(true);
+        instructionsController.SetStartTutorialActive(true);
         breathingCircleController.SetCircleVisibility(false);
         yield return new WaitForSeconds(0.1f);
     }
@@ -86,7 +87,7 @@ public class BreathingController : MonoBehaviour
     {
         breathingCircleController.SetMove(true);
         dropletsController.Create();
-        instructionsController.ShowHold(!isHorizontal);
+        instructionsController.ShowHold();
         StartCoroutine(nameof(Wait));
     }
 
@@ -117,7 +118,7 @@ public class BreathingController : MonoBehaviour
     {
         isHorizontal = (Screen.width > Screen.height);
         breathingCircleController.SetVisibility(!isHorizontal);
-        instructionsController.SetHorizontalMode(isHorizontal);
+        instructionsController.RotateScreen(isHorizontal);
         dropletsController.SetVisibility(!isHorizontal);
 
         if (!_isInstruction)
@@ -128,7 +129,6 @@ public class BreathingController : MonoBehaviour
         {
             lineController.SetVisibility(false);
         }
-        //smallCloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isHorizontal ? 1 : 0);
         
     }
 
@@ -148,7 +148,7 @@ public class BreathingController : MonoBehaviour
         {
             StartTimer();
             _isInstruction = false;
-            instructionsController.SetInstructionsVisibility(false);
+            instructionsController.SetStartTutorialActive(false);
             lineController.Launch();
             if (isHorizontal)
             {

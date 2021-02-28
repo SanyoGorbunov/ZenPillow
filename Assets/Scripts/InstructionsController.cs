@@ -17,73 +17,20 @@ public class InstructionsController : MonoBehaviour
     public float textVerticalYPos = -140.0f;
 
     private bool isHorizontal;
-    private bool isVisible = true;
     private bool isStartTutorialActive;
 
-    public void SetVisibility(bool isVisible)
+    public void RotateScreen(bool toHorizontal)
     {
-        this.isVisible = isVisible;
-
-        if (isVisible)
+        if (isHorizontal != toHorizontal)
         {
-            if (isHorizontal)
-            {
-                bubble.SetActive(false);
-                instructionsHorizontal.SetActive(true);
-                //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                SetTextIsHorizontal(true);
-
-                //exhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                holdIcon.GetComponent<CanvasRenderer>().SetAlpha(0);
-            }
-            else
-            {
-                bubble.SetActive(isStartTutorialActive);
-                instructionsHorizontal.SetActive(false);
-                //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                SetTextIsHorizontal(false);
-
-                //exhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                holdIcon.GetComponent<CanvasRenderer>().SetAlpha(1);
-            }
-        }
-    }
-
-    public void SetHorizontalMode(bool isHorizontal)
-    {
-        if (this.isHorizontal != isHorizontal)
-        {
-            this.isHorizontal = isHorizontal;
-
-            if (isVisible)
-            {
-                if (isHorizontal)
-                {
-                    bubble.SetActive(false);
-                    instructionsHorizontal.SetActive(isStartTutorialActive? true : false);
-                    //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                    SetTextIsHorizontal(true);
-
-                    //exhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                    holdIcon.GetComponent<CanvasRenderer>().SetAlpha(0);
-                }
-                else
-                {
-                    bubble.SetActive(isStartTutorialActive);
-                    instructionsHorizontal.SetActive(false);
-                    //inhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                    SetTextIsHorizontal(false);
-
-                    //exhaleText.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-                    holdIcon.GetComponent<CanvasRenderer>().SetAlpha(1);
-                }
-            }            
+            isHorizontal = toHorizontal;
+            SetStartTutorialActive(isStartTutorialActive);
         }        
     }
 
-    private void SetTextIsHorizontal(bool isHorizontal)
+    private void RotateTextToHorizontal(bool toHorizontal)
     {
-        if (isHorizontal)
+        if (toHorizontal)
         {
             UnityEngine.UI.Text text = inhaleText.GetComponent<UnityEngine.UI.Text>();
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -129,31 +76,25 @@ public class InstructionsController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetStartTutorialActive(bool isActive)
     {
-        isStartTutorialActive = true;
-    }
+        isStartTutorialActive = isActive;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetInstructionsVisibility(bool isVisible)
-    {
-        isStartTutorialActive = isVisible;
-
-        if (isVisible)
+        if (isActive)
         {
             bubble.SetActive(!isHorizontal);
             instructionsHorizontal.SetActive(isHorizontal);
+            RotateTextToHorizontal(isHorizontal);
         }
         else
         {
             bubble.SetActive(false);
             instructionsHorizontal.SetActive(false);
+            RotateTextToHorizontal(isHorizontal);
+            if (holdText.activeSelf)
+            {
+                holdIcon.SetActive(!isHorizontal);
+            }
         }
     }
 
@@ -169,13 +110,10 @@ public class InstructionsController : MonoBehaviour
         StartCoroutine(nameof(Exhale));
     }
 
-    public void ShowHold(bool showHoldIcon)
+    public void ShowHold()
     {
         Reset();
-        if (showHoldIcon)
-        {
-            holdIcon.SetActive(true);
-        }
+        holdIcon.SetActive(!isHorizontal);
         StartCoroutine(nameof(Hold));
     }
 
