@@ -50,11 +50,11 @@ public class QuickLinksController : UIMenuController
          
         if (isMute)
         {
-            soundButton.GetComponent<Image>().sprite = soundOn;
+            soundButton.GetComponent<Image>().sprite = soundOff;
         }
         else
         {
-            soundButton.GetComponent<Image>().sprite = soundOff;
+            soundButton.GetComponent<Image>().sprite = soundOn;
         }
         soundButton.onClick.AddListener(() =>
         {
@@ -62,10 +62,10 @@ public class QuickLinksController : UIMenuController
             var isMute2 = AudioManager.instance.GetMute();
             if (isMute2)
             {
-                soundButton.GetComponent<Image>().sprite = soundOn;
+                soundButton.GetComponent<Image>().sprite = soundOff;
             } else
             {
-                soundButton.GetComponent<Image>().sprite = soundOff;
+                soundButton.GetComponent<Image>().sprite = soundOn;
             }
         });
         AnimatedStart();
