@@ -265,14 +265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a573d69ed9b86d46b1dccbc80569a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayTimerController: {fileID: 7326447936839565583}
   breathingCircleController: {fileID: 519538549}
   dropletsController: {fileID: 1070590303}
   instructionsController: {fileID: 1977219327}
-  displayTimerController: {fileID: 7326447936839565583}
   lineController: {fileID: 1314788880}
-  smallCloud: {fileID: 971571707}
-  isHorizontal: 0
   pauseDuration: 4
+  isHorizontal: 0
+  _isInstruction: 0
 --- !u!4 &419659005
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,6 +1587,8 @@ MonoBehaviour:
   breathOutHoldTime: 4
   pointsPerSecond: 25
   started: 0
+  dropTouchRadius: 1
+  dropRange: 15
 --- !u!1 &1341388190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,11 +2003,6 @@ MonoBehaviour:
   textHorizontalXPos: 0
   textVerticalXPos: 0
   textVerticalYPos: -140
-  inhaleTextVerticalXPos: 20
-  inhaleTextHorizontalXPos: 0
-  inhaleTextVerticalYPos: 90.7
-  exhaleTextVerticalXPos: -20
-  exhaleTextHorizontalXPos: 0
 --- !u!224 &1977219328
 RectTransform:
   m_ObjectHideFlags: 0

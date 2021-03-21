@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 130401003}
   - component: {fileID: 130401006}
   m_Layer: 0
-  m_Name: FavoriteRoom
+  m_Name: FavoritePractice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1596325766}
-        m_MethodName: OpenFavoriteRoom
+        m_MethodName: OpenFavoritePractice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -552,7 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Key: Favorite Room
+  Key: Favorite Practice
+  KeyHorizontal: 
 --- !u!1 &336421781
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Key: Answer Questions
+  KeyHorizontal: 
 --- !u!1001 &618250476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1509,6 +1511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Key: Select Practice
+  KeyHorizontal: 
 --- !u!1 &2134597191
 GameObject:
   m_ObjectHideFlags: 0

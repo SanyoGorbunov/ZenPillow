@@ -34,7 +34,7 @@ public class MainMenuController : MonoBehaviour
         UIMenuController.StaticLoadScene("Questionnaire");
     }
 
-    public void OpenFavoriteRoom()
+    public void OpenFavoritePractice()
     {
         var practice = GameStateManager.Instance.GetFavoritePractice();
         GameStateManager.Instance.SelectPractice(practice);
