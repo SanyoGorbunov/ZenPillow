@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1290,6 +1290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb87fbe1dc0c0646bb24e7ba46449ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectPracticeButton: {fileID: 194795893}
+  AnswerQuestionsButton: {fileID: 1070577476}
+  FavoritePracticeButton: {fileID: 130401001}
 --- !u!4 &1596325767
 Transform:
   m_ObjectHideFlags: 0
