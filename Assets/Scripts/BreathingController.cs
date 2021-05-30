@@ -35,6 +35,7 @@ public class BreathingController : MonoBehaviour
         else
         {
             StartTimer();
+            lineController.Launch();
             //StartCoroutine(nameof(Play));
             _isOver = false;
             instructionsController.SetStartTutorialActive(false);

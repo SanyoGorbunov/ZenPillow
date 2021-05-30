@@ -67,7 +67,8 @@ public class BreathLineController : MonoBehaviour
     }
 
     private int LastNearDrop = 0;
-    private float dropRange = 5.0f;
+    public float dropRange = 15.0f;
+    private float dropHalfRange = 7.5f;
 
     private Drop[] dropsLinePos;
     private Interval[] dropsLineInterval;
@@ -108,7 +109,7 @@ public class BreathLineController : MonoBehaviour
             float XPos = startXPos + (interval * (i + 1));
 
             CreateNewDrop(startId+i, XPos, YPos);
-            dropsLineInterval[startId + i] = new Interval(((interval * (i + 1)) - dropRange) / PhaseLength, ((interval * (i + 1)) + dropRange) / PhaseLength, i);
+            dropsLineInterval[startId + i] = new Interval(((interval * (i + 1)) - dropHalfRange) / PhaseLength, ((interval * (i + 1)) + dropHalfRange) / PhaseLength, i);
         }
     }
 
@@ -122,7 +123,7 @@ public class BreathLineController : MonoBehaviour
         transform.localPosition = new Vector2(XPos, YPos);
 
         dropsLinePos[id] = new Drop(temp_drop, XPos);
-        temp_drop.SetActive(false);
+        temp_drop.SetActive(isVisible && started);
     }
 
     void SpawnPointsAtStart()
@@ -157,7 +158,8 @@ public class BreathLineController : MonoBehaviour
 
     void Start()
     {
-        GetComponent<CanvasRenderer>().SetAlpha(0);
+        dropHalfRange = dropRange / 2;
+        GetComponent<CanvasRenderer>().SetAlpha((isVisible && started )? 1:0);
 
         BoundsDistance = UpperBoundPos - LowerBoundPos;
         speed = pointsPerSecond;
@@ -171,7 +173,7 @@ public class BreathLineController : MonoBehaviour
         SetUpIntervals();
         LineRenderer = GetComponent<UILineRenderer>();
         SpawnPointsAtStart();
-        Cloud.GetComponent<CanvasRenderer>().SetAlpha(0);
+        Cloud.GetComponent<CanvasRenderer>().SetAlpha((isVisible && started) ? 1 : 0);
     }
 
     float timePassed = 0.0f;
@@ -257,11 +259,14 @@ public class BreathLineController : MonoBehaviour
         started = true;
     }
 
+    private bool isVisible = false;
+
     public void SetVisibility(bool isVisible)
     {
         GetComponent<CanvasRenderer>().SetAlpha(isVisible? 1: 0);
         Cloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
         SetDropsVisibility(isVisible);
+        this.isVisible = isVisible;
     }
 
     private void SetDropsVisibility(bool isVisible)
