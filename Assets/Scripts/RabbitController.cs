@@ -50,8 +50,15 @@ public class RabbitController : MonoBehaviour
         canJump = false;
 
         Vector3 currentPos = transform.position;
-
-        StartCoroutine(MoveRabbit(currentPos, nextColorDot.transform.position, 0.7f));
+        if (Vector3.Distance(currentPos, nextColorDot.transform.position) > 4)
+        {
+            StartCoroutine(MoveRabbit(currentPos, nextColorDot.transform.position, 1.4f));
+        }
+        else
+        {
+            StartCoroutine(MoveRabbit(currentPos, nextColorDot.transform.position, 0.7f));
+        }
+        
     }
 
     private void OnTriggerEnter(Collider collider)
