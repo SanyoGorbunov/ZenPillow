@@ -47,4 +47,14 @@ public class DisplayTimerController : MonoBehaviour
             _timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
         }
     }
+
+    public void Pause()
+    {
+        _isActive = false;
+    }
+
+    public void Continue()
+    {
+        _isActive = true;
+    }
 }
