@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 1992718665669069245}
   - component: {fileID: 5929223923555599699}
   m_Layer: 5
-  m_Name: QuickLinksCanvas 1
+  m_Name: QuickLinksCanvasWithPause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,8 +161,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1992718666796885718}
-  - {fileID: 4889949864076255901}
   - {fileID: 7835935146875989408}
+  - {fileID: 4889949864076255901}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -741,7 +741,7 @@ RectTransform:
   m_Children:
   - {fileID: 5952606930879142398}
   m_Father: {fileID: 1992718665669069246}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: 4670574026365542147, guid: bf015d6e39088614fb52fb80435b5dfd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4670574026365542147, guid: bf015d6e39088614fb52fb80435b5dfd,
         type: 3}
@@ -921,15 +921,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf015d6e39088614fb52fb80435b5dfd, type: 3}
---- !u!224 &4889949864076255901 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4670574026365542147, guid: bf015d6e39088614fb52fb80435b5dfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 220009160770796958}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4889949864076255896 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4670574026365542150, guid: bf015d6e39088614fb52fb80435b5dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 220009160770796958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4889949864076255901 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4670574026365542147, guid: bf015d6e39088614fb52fb80435b5dfd,
     type: 3}
   m_PrefabInstance: {fileID: 220009160770796958}
   m_PrefabAsset: {fileID: 0}
