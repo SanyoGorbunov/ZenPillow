@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-
+using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     private bool isMute = false;
@@ -112,21 +112,26 @@ public class AudioManager : MonoBehaviour
         return isMute;
     }
 
+    private const float smoothMuteTime = 0.3f;
 
     public void Mute()
     {
-        foreach (AudioSound s in sounds)
+        /*foreach (AudioSound s in sounds)
         {
             s.source.volume = 0.0f;
-        }
+        }*/
+        StopCoroutine("SmoothAudioChange");
+        StartCoroutine(SmoothAudioChange(lastAlpha, 0.0f, (lastAlpha * smoothMuteTime)));
     }
 
     public void UnMute()
     {
-        foreach (AudioSound s in sounds)
+        StopCoroutine("SmoothAudioChange");
+        StartCoroutine(SmoothAudioChange(lastAlpha, 1.0f, (1.0f- lastAlpha) * smoothMuteTime));
+        /*foreach (AudioSound s in sounds)
         {
             s.source.volume = s.volume;
-        }
+        }*/
     }
     public static void StaticPlay(string name)
     {
@@ -153,5 +158,28 @@ public class AudioManager : MonoBehaviour
     public static void StaticUnpause(string name)
     {
         instance.UnPause(name);
+    }
+
+    private float lastAlpha = 1.0f;
+
+    protected IEnumerator SmoothAudioChange (float startValue, float endValue, float duration)
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+
+            float alpha = startValue + (endValue - startValue) * ratio;
+
+            foreach (AudioSound s in sounds)
+            {
+                s.source.volume = (alpha)*s.volume;
+            }
+            lastAlpha = alpha;
+
+            yield return null;
+        }
     }
 }
