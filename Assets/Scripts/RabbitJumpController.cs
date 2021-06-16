@@ -14,6 +14,8 @@ public class RabbitJumpController : MonoBehaviour
 
     public GameObject tutorial;
 
+    private QuickLinksWithPauseController quickLinksWithPause;
+
     private Material overlayMat = null;
 
     private int CarrotCountLeft = 0;
@@ -23,6 +25,8 @@ public class RabbitJumpController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        quickLinksWithPause = FindObjectOfType<QuickLinksWithPauseController>();
+
         CarrotCountLeft = 5;
 
         dotSpawner.GenerateLevel(CarrotCountLeft);
@@ -146,6 +150,7 @@ public class RabbitJumpController : MonoBehaviour
             _isOver = true;
             StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
         });
+        quickLinksWithPause.DisplayPause();
     }
 
     void GameOver()
