@@ -6,6 +6,7 @@ using System.Collections;
 public class QuickLinksWithPauseController : UIMenuController
 {
     public GameObject pauseOverlay;
+    public GameObject pausePanel;
 
     private const string MainMenuScene = "IntroScene";
     private const string SettingsScene = "SettingsScene";
@@ -17,6 +18,20 @@ public class QuickLinksWithPauseController : UIMenuController
     private Sprite soundOn, soundOff;
 
     DisplayTimerController displayTimerController;
+
+    bool isHorizontal;
+
+    private Vector3 verticalPauseScale = new Vector3(0.8f, 0.8f, 0.8f);
+    private Vector3 horizontalPauseScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+    void SetIsHorizontal(bool isHorizontal)
+    {
+        this.isHorizontal = isHorizontal;
+        if (pausePanel.activeInHierarchy)
+        {
+            pausePanel.transform.localScale = isHorizontal ? horizontalPauseScale : verticalPauseScale;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +113,7 @@ public class QuickLinksWithPauseController : UIMenuController
         settings.SetActive(false);
         displayTimerController.Pause();
         pauseOverlay.SetActive(true);
+        pausePanel.transform.localScale = pausePanel.transform.localScale = isHorizontal ? horizontalPauseScale : verticalPauseScale;
         StartCoroutine(AnimateAlpha(0, 1, 0.3f, null));
         //pauseOverlay.GetComponent<CanvasGroup>().alpha = 0.5f;
     }

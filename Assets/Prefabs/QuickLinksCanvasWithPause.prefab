@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlay: {fileID: 4889949864076255896}
   pauseOverlay: {fileID: 7943536764528482877}
+  pausePanel: {fileID: 4164982437010042593}
 --- !u!1 &1992718666796885719
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +627,7 @@ RectTransform:
   m_GameObject: {fileID: 4164982437010042593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 6837512522143879992}
   - {fileID: 8172769853510757954}
