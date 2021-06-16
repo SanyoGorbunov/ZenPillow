@@ -24,7 +24,7 @@ public class QuickLinksWithPauseController : UIMenuController
     private Vector3 verticalPauseScale = new Vector3(0.8f, 0.8f, 0.8f);
     private Vector3 horizontalPauseScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-    void SetIsHorizontal(bool isHorizontal)
+    public void SetIsHorizontal(bool isHorizontal)
     {
         this.isHorizontal = isHorizontal;
         if (pausePanel.activeInHierarchy)
