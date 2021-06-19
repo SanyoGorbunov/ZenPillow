@@ -21,6 +21,7 @@ public class RabbitJumpController : MonoBehaviour
     private int CarrotCountLeft = 0;
 
     private bool readyToGenerate = false;
+    private bool isHorizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class RabbitJumpController : MonoBehaviour
 
         CarrotCountLeft = 5;
 
+        isHorizontal = Camera.main.aspect >= 1.0f;
         dotSpawner.GenerateLevel(CarrotCountLeft);
 
         var renderer = transitionOverlay.GetComponent<Renderer>();
@@ -161,6 +163,10 @@ public class RabbitJumpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        bool newIsHorizontal = Camera.main.aspect >= 1.0f;
+        if (newIsHorizontal != isHorizontal)
+        {
+            isHorizontal = newIsHorizontal;
+        }
     }
 }

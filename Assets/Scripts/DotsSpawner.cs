@@ -232,6 +232,34 @@ public class DotsSpawner : MonoBehaviour
         RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
     }
 
+    public void Rotate(bool isHorizontal)
+    {
+        float x = (minX + maxX) / 2;
+        float y = (minY + maxY) / 2;
+
+        if (isHorizontal)
+        {
+            foreach (var dot in DotList)
+            {
+                Vector3 temp = dot.gameObject.transform.position;
+                temp.x = dot.gameObject.transform.position.z;
+                temp.z = dot.gameObject.transform.position.x;
+                dot.gameObject.transform.position = temp;
+            }
+
+            var tempX = x;
+            x = y;
+            y = tempX;
+        }
+
+        Camera camera = FindObjectOfType<Camera>();
+
+        if (isHorizontal)
+        {
+            camera.orthographicSize = 3.5f;
+        }
+    }
+
     void removeAllDots()
     {
         //ColorDotController[] array = FindObjectsOfType<ColorDotController>();
