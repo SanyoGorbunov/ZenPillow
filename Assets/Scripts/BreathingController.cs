@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Input = InputWrapper.Input;
-
+using Utils;
 public class BreathingController : MonoBehaviour
 {
     public DisplayTimerController displayTimerController;
@@ -30,7 +30,11 @@ public class BreathingController : MonoBehaviour
 
         if (!isGamePlayed)
         {
-            StartCoroutine(nameof(Instructions));
+            //StartCoroutine(nameof(Instructions));
+            _isOver = false;
+            _isInstruction = true;
+            instructionsController.SetStartTutorialActive(true);
+            breathingCircleController.SetCircleVisibility(false);
         }
         else
         {
@@ -50,12 +54,12 @@ public class BreathingController : MonoBehaviour
         _isInstruction = true;
         instructionsController.SetStartTutorialActive(true);
         breathingCircleController.SetCircleVisibility(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsPaused(0.1f);
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(pauseDuration);
+        yield return new WaitForSecondsPaused(pauseDuration);
         PauseEnd();
     }
 
@@ -132,7 +136,17 @@ public class BreathingController : MonoBehaviour
         }
         
     }
+    private bool isPaused = false;
 
+    private void checkIsPaused()
+    {
+        bool temp = displayTimerController.isPaused();
+        if (temp != isPaused)
+        {
+            isPaused = temp;
+            dropletsController.SetIsPaused(isPaused);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -145,20 +159,21 @@ public class BreathingController : MonoBehaviour
             CheckScreenOrientation();
         }
 
+        checkIsPaused();
+
         if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null && _isInstruction)
         {
             StartTimer();
             _isInstruction = false;
             instructionsController.SetStartTutorialActive(false);
             lineController.Launch();
+            breathingCircleController.SetCircleVisibility(true);
             if (isHorizontal)
             {
                 lineController.SetVisibility(true);
+                breathingCircleController.SetVisibility(false);
             }
-            else
-            {
-                breathingCircleController.SetCircleVisibility(true);
-            }
+
 
             Inhale();
         }

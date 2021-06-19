@@ -101,9 +101,12 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            _innerCircle.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimeBreathingInSecs);
-            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimeBreathingInSecs);
-            currentTime += Time.deltaTime;
+            if (!DisplayTimerController.activeTimer.isPaused())
+            { 
+                _innerCircle.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimeBreathingInSecs);
+                gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimeBreathingInSecs);
+                currentTime += Time.deltaTime;
+            }
             yield return null;
         } while (currentTime <= TimeBreathingInSecs);
 
@@ -124,9 +127,12 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
-            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
-            currentTime += Time.deltaTime;
+            if (!DisplayTimerController.activeTimer.isPaused())
+            {
+                gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
+                gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
+                currentTime += Time.deltaTime;
+            }
             yield return null;
         } while (currentTime <= TimePauseInSecs);
 
@@ -145,9 +151,12 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
-            gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
-            currentTime += Time.deltaTime;
+            if (!DisplayTimerController.activeTimer.isPaused())
+            {
+                gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
+                gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
+                currentTime += Time.deltaTime;
+            }
             yield return null;
         } while (currentTime <= TimePauseInSecs);
 

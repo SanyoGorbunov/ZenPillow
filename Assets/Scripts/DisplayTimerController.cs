@@ -6,13 +6,17 @@ public class DisplayTimerController : MonoBehaviour
 {
     private float _remainingTime;
     private bool _isActive;
+    private bool _isPaused;
     private Action _onElapsed;
 
     private Text _timerText;
 
+    public static DisplayTimerController activeTimer;
+
     // Start is called before the first frame update
     void Start()
     {
+        activeTimer = this;
         _timerText = gameObject.GetComponent<Text>();
         if (!_isActive)
         {
@@ -31,7 +35,7 @@ public class DisplayTimerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isActive)
+        if (_isActive && !_isPaused)
         {
             _remainingTime -= Time.deltaTime;
 
@@ -50,11 +54,16 @@ public class DisplayTimerController : MonoBehaviour
 
     public void Pause()
     {
-        _isActive = false;
+        _isPaused = true;
     }
 
     public void Continue()
     {
-        _isActive = true;
+        _isPaused = false;
+    }
+
+    public bool isPaused()
+    {
+        return _isPaused;
     }
 }

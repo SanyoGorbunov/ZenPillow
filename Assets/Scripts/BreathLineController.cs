@@ -6,6 +6,7 @@ using Input = InputWrapper.Input;
 
 public class BreathLineController : MonoBehaviour
 {
+    public DisplayTimerController displayTimerController;
 
     UILineRenderer LineRenderer;
     public RectTransform Cloud;
@@ -239,7 +240,7 @@ public class BreathLineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!started)
+        if (!started || displayTimerController.isPaused())
         {
             return;
         }

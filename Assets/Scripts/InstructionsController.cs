@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Utils;
 
 public class InstructionsController : MonoBehaviour
 {
@@ -120,21 +121,21 @@ public class InstructionsController : MonoBehaviour
     IEnumerator Inhale()
     {
         inhaleText.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsPaused(2.0f);
         inhaleText.SetActive(false);
     }
 
     IEnumerator Exhale()
     {
         exhaleText.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsPaused(2.0f);
         exhaleText.SetActive(false);
     }
 
     IEnumerator Hold()
     {
         holdText.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSecondsPaused(2.0f);
         holdText.SetActive(false);
     }
 

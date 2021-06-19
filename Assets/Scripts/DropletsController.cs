@@ -6,10 +6,13 @@ public class DropletsController : MonoBehaviour
     public GameObject dropletPrefab;
 
     private GameObject[] droplets;
+    private Vector2[] dropletsVelocityBackup;
 
     private float gravityScale = 1.0f;
 
     private bool isVisible;
+
+    public int DropletsCount = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +22,49 @@ public class DropletsController : MonoBehaviour
 
         gravityScale = height / yRef;
 
-        droplets = new GameObject[5];
+        droplets = new GameObject[DropletsCount];
+        dropletsVelocityBackup = new Vector2[DropletsCount];
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private bool isPaused;
+
+    private Vector2 FreezeVelocity = new Vector2(0, 0);
+
+    public void SetIsPaused(bool isPaused)
+    {
+        this.isPaused = isPaused;
+
+        if (isPaused)
+        {
+            for (int i = 0; i < DropletsCount; i++)
+            {
+                if (droplets[i] != null)
+                {
+                    Rigidbody2D body = droplets[i].GetComponent<Rigidbody2D>();
+                    body.gravityScale = 0;
+                    dropletsVelocityBackup[i] = body.velocity;
+                    body.velocity = FreezeVelocity;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < DropletsCount; i++)
+            {
+                if(droplets[i] != null)
+                { 
+                    Rigidbody2D body = droplets[i].GetComponent<Rigidbody2D>();
+                    body.gravityScale = gravityScale;
+                    body.velocity = dropletsVelocityBackup[i];
+                }
+            }
+        }
         
     }
 
