@@ -167,6 +167,7 @@ public class RabbitJumpController : MonoBehaviour
         if (newIsHorizontal != isHorizontal)
         {
             isHorizontal = newIsHorizontal;
+            dotSpawner.Rotate(isHorizontal);
         }
     }
 }

@@ -103,6 +103,9 @@ public class DotsSpawner : MonoBehaviour
         }
     }
 
+    private float centerX = 0.0f;
+    private float centerY = 0.0f;
+
     void GenerateDots(bool isHorizontal)
     {
         int rowCount = 7;
@@ -216,6 +219,10 @@ public class DotsSpawner : MonoBehaviour
         {
             camera.orthographicSize = 3.5f;
         }
+        else
+        {
+            camera.orthographicSize = 5.0f;
+        }
 
         Vector3 oldPos = camera.gameObject.transform.position;
 
@@ -230,27 +237,27 @@ public class DotsSpawner : MonoBehaviour
         oldPos.y = 0.0f;
 
         RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
+
+        centerX = x;
+        centerY = y;
     }
 
     public void Rotate(bool isHorizontal)
     {
-        float x = (minX + maxX) / 2;
-        float y = (minY + maxY) / 2;
+        float x = centerX;
+        float y = centerY;
 
-        if (isHorizontal)
+        foreach (var dot in DotList)
         {
-            foreach (var dot in DotList)
-            {
-                Vector3 temp = dot.gameObject.transform.position;
-                temp.x = dot.gameObject.transform.position.z;
-                temp.z = dot.gameObject.transform.position.x;
-                dot.gameObject.transform.position = temp;
-            }
-
-            var tempX = x;
-            x = y;
-            y = tempX;
+            Vector3 temp = dot.gameObject.transform.position;
+            temp.x = dot.gameObject.transform.position.z;
+            temp.z = dot.gameObject.transform.position.x;
+            dot.gameObject.transform.position = temp;
         }
+
+        var tempX = x;
+        x = y;
+        y = tempX;
 
         Camera camera = FindObjectOfType<Camera>();
 
@@ -258,6 +265,31 @@ public class DotsSpawner : MonoBehaviour
         {
             camera.orthographicSize = 3.5f;
         }
+        else
+        {
+            camera.orthographicSize = 5.0f;
+        }
+
+        Vector3 oldPos = camera.gameObject.transform.position;
+
+        oldPos.x = x;
+        oldPos.z = y;
+        camera.gameObject.transform.position = oldPos;
+
+        Vector3 oldPosRabbit = RabbitPawn.transform.position;
+        float temp1 = oldPosRabbit.x;
+        oldPosRabbit.x = oldPosRabbit.z;
+        oldPosRabbit.z = temp1;
+
+        RabbitPawn.transform.position = oldPosRabbit;
+
+
+        oldPos.y = 0.0f;
+
+        //RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
+
+        centerX = x;
+        centerY = y;
     }
 
     void removeAllDots()
