@@ -21,6 +21,7 @@ public class CountSheepsController : MonoBehaviour
     private bool readyToGenerate = false;
 
     public int NextNumber = 1;
+    private bool isHorizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,8 @@ public class CountSheepsController : MonoBehaviour
         quickLinksWithPause = FindObjectOfType<QuickLinksWithPauseController>();
 
         SheepCountLeft = 24;
+
+        isHorizontal = Camera.main.aspect >= 1.0f;
 
         sheepsSpawner.GenerateLevel(SheepCountLeft);
 
@@ -178,6 +181,12 @@ public class CountSheepsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool newIsHorizontal = Camera.main.aspect >= 1.0f;
+        if (newIsHorizontal != isHorizontal)
+        {
+            isHorizontal = newIsHorizontal;
+            sheepsSpawner.Rotate(isHorizontal);
+        }
         if (!HintIsActive)
         { 
             timerBeforeHint -= Time.deltaTime;

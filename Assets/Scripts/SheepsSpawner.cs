@@ -15,6 +15,9 @@ public class SheepsSpawner : MonoBehaviour
     private Color[] colors = { new Color(237 / 255.0f, 94 / 255.0f, 121 / 255.0f), new Color(132 / 255.0f, 126 / 255.0f, 160 / 255.0f), new Color(150 / 255.0f, 176 / 255.0f, 186 / 255.0f) };
 
     private List<SheepController> SheepList = new List<SheepController>();
+
+    private float centerX = 0.0f;
+    private float centerY = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -188,6 +191,47 @@ public class SheepsSpawner : MonoBehaviour
         oldPos.x = x;
         oldPos.z = y;
         camera.gameObject.transform.position = oldPos;
+
+        centerX = x;
+        centerY = y;
+    }
+
+    public void Rotate(bool isHorizontal)
+    {
+        float x = centerX;
+        float y = centerY;
+
+        foreach (var dot in SheepList)
+        {
+            Vector3 temp = dot.gameObject.transform.position;
+            temp.x = dot.gameObject.transform.position.z;
+            temp.z = dot.gameObject.transform.position.x;
+            dot.gameObject.transform.position = temp;
+        }
+
+        var tempX = x;
+        x = y;
+        y = tempX;
+
+        Camera camera = FindObjectOfType<Camera>();
+
+        if (isHorizontal)
+        {
+            camera.orthographicSize = 3.5f;
+        }
+        else
+        {
+            camera.orthographicSize = 5.0f;
+        }
+
+        Vector3 oldPos = camera.gameObject.transform.position;
+
+        oldPos.x = x;
+        oldPos.z = y;
+        camera.gameObject.transform.position = oldPos;
+
+        centerX = x;
+        centerY = y;
     }
 
     void removeAllSheeps()
