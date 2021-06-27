@@ -203,10 +203,13 @@ public class SheepsSpawner : MonoBehaviour
 
         foreach (var dot in SheepList)
         {
-            Vector3 temp = dot.gameObject.transform.position;
-            temp.x = dot.gameObject.transform.position.z;
-            temp.z = dot.gameObject.transform.position.x;
-            dot.gameObject.transform.position = temp;
+            if(dot!=null)
+            { 
+                Vector3 temp = dot.gameObject.transform.position;
+                temp.x = dot.gameObject.transform.position.z;
+                temp.z = dot.gameObject.transform.position.x;
+                dot.gameObject.transform.position = temp;
+            }
         }
 
         var tempX = x;
