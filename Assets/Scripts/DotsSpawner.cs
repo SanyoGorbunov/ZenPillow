@@ -242,6 +242,15 @@ public class DotsSpawner : MonoBehaviour
         centerY = y;
     }
 
+    private Vector3 RotateVector(Vector3 vector)
+    {
+        Vector3 newVector = vector;
+        float temp = newVector.x;
+        newVector.x = newVector.z;
+        newVector.z = temp;
+        return newVector;
+    }
+
     public void Rotate(bool isHorizontal)
     {
         float x = centerX;
@@ -276,17 +285,8 @@ public class DotsSpawner : MonoBehaviour
         oldPos.z = y;
         camera.gameObject.transform.position = oldPos;
 
-        Vector3 oldPosRabbit = RabbitPawn.transform.position;
-        float temp1 = oldPosRabbit.x;
-        oldPosRabbit.x = oldPosRabbit.z;
-        oldPosRabbit.z = temp1;
-
-        RabbitPawn.transform.position = oldPosRabbit;
-
-
-        oldPos.y = 0.0f;
-
-        //RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
+        RabbitPawn.transform.position = RotateVector(RabbitPawn.transform.position);
+        RabbitPawn.transform.forward = RotateVector(RabbitPawn.transform.forward);
 
         centerX = x;
         centerY = y;
@@ -294,8 +294,6 @@ public class DotsSpawner : MonoBehaviour
 
     void removeAllDots()
     {
-        //ColorDotController[] array = FindObjectsOfType<ColorDotController>();
-
         foreach (ColorDotController controller in DotList)
         {
             controller.Destroy();
