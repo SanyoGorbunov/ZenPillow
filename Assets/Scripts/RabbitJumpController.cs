@@ -14,17 +14,23 @@ public class RabbitJumpController : MonoBehaviour
 
     public GameObject tutorial;
 
+    private QuickLinksWithPauseController quickLinksWithPause;
+
     private Material overlayMat = null;
 
     private int CarrotCountLeft = 0;
 
     private bool readyToGenerate = false;
+    private bool isHorizontal;
 
     // Start is called before the first frame update
     void Start()
     {
+        quickLinksWithPause = FindObjectOfType<QuickLinksWithPauseController>();
+
         CarrotCountLeft = 5;
 
+        isHorizontal = Camera.main.aspect >= 1.0f;
         dotSpawner.GenerateLevel(CarrotCountLeft);
 
         var renderer = transitionOverlay.GetComponent<Renderer>();
@@ -146,6 +152,7 @@ public class RabbitJumpController : MonoBehaviour
             _isOver = true;
             StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
         });
+        quickLinksWithPause.DisplayPause();
     }
 
     void GameOver()
@@ -156,6 +163,11 @@ public class RabbitJumpController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        bool newIsHorizontal = Camera.main.aspect >= 1.0f;
+        if (newIsHorizontal != isHorizontal)
+        {
+            isHorizontal = newIsHorizontal;
+            dotSpawner.Rotate(isHorizontal);
+        }
     }
 }

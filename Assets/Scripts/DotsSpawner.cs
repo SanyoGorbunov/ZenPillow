@@ -103,6 +103,9 @@ public class DotsSpawner : MonoBehaviour
         }
     }
 
+    private float centerX = 0.0f;
+    private float centerY = 0.0f;
+
     void GenerateDots(bool isHorizontal)
     {
         int rowCount = 7;
@@ -216,6 +219,10 @@ public class DotsSpawner : MonoBehaviour
         {
             camera.orthographicSize = 3.5f;
         }
+        else
+        {
+            camera.orthographicSize = 5.0f;
+        }
 
         Vector3 oldPos = camera.gameObject.transform.position;
 
@@ -230,12 +237,63 @@ public class DotsSpawner : MonoBehaviour
         oldPos.y = 0.0f;
 
         RabbitPawn.transform.forward = oldPos - RabbitPawn.transform.position;
+
+        centerX = x;
+        centerY = y;
+    }
+
+    private Vector3 RotateVector(Vector3 vector)
+    {
+        Vector3 newVector = vector;
+        float temp = newVector.x;
+        newVector.x = newVector.z;
+        newVector.z = temp;
+        return newVector;
+    }
+
+    public void Rotate(bool isHorizontal)
+    {
+        float x = centerX;
+        float y = centerY;
+
+        foreach (var dot in DotList)
+        {
+            Vector3 temp = dot.gameObject.transform.position;
+            temp.x = dot.gameObject.transform.position.z;
+            temp.z = dot.gameObject.transform.position.x;
+            dot.gameObject.transform.position = temp;
+        }
+
+        var tempX = x;
+        x = y;
+        y = tempX;
+
+        Camera camera = FindObjectOfType<Camera>();
+
+        if (isHorizontal)
+        {
+            camera.orthographicSize = 3.5f;
+        }
+        else
+        {
+            camera.orthographicSize = 5.0f;
+        }
+
+        Vector3 oldPos = camera.gameObject.transform.position;
+
+        oldPos.x = x;
+        oldPos.z = y;
+        camera.gameObject.transform.position = oldPos;
+
+        RabbitPawn.transform.position = RotateVector(RabbitPawn.transform.position);
+        RabbitPawn.transform.forward = RotateVector(RabbitPawn.transform.forward);
+
+        centerX = x;
+        centerY = y;
     }
 
     void removeAllDots()
     {
-        //ColorDotController[] array = FindObjectsOfType<ColorDotController>();
-
         foreach (ColorDotController controller in DotList)
         {
             controller.Destroy();
