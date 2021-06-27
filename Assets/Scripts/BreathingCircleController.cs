@@ -101,7 +101,7 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            if (!DisplayTimerController.activeTimer.isPaused())
+            if (!DisplayTimerController.isPausedStatic())
             { 
                 _innerCircle.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimeBreathingInSecs);
                 gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimeBreathingInSecs);
@@ -127,7 +127,7 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            if (!DisplayTimerController.activeTimer.isPaused())
+            if (!DisplayTimerController.isPausedStatic())
             {
                 gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
                 gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);
@@ -151,7 +151,7 @@ public class BreathingCircleController : MonoBehaviour
 
         do
         {
-            if (!DisplayTimerController.activeTimer.isPaused())
+            if (!DisplayTimerController.isPausedStatic())
             {
                 gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimePauseInSecs);
                 gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimePauseInSecs);

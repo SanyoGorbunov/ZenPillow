@@ -30,6 +30,7 @@ public class DisplayTimerController : MonoBehaviour
         _onElapsed = onElapsed;
         _isActive = true;
         gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
+        FindObjectOfType<QuickLinksWithPauseController>().DisplayPause();
     }
 
     // Update is called once per frame
@@ -65,5 +66,12 @@ public class DisplayTimerController : MonoBehaviour
     public bool isPaused()
     {
         return _isPaused;
+    }
+
+    public static bool isPausedStatic()
+    {
+        if (DisplayTimerController.activeTimer == null) return false;
+
+        return DisplayTimerController.activeTimer.isPaused();
     }
 }

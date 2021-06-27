@@ -9,7 +9,7 @@ namespace Utils
 		{
 			get
 			{
-                if (DisplayTimerController.activeTimer.isPaused())
+                if (DisplayTimerController.activeTimer == null || DisplayTimerController.activeTimer.isPaused())
                 {
                     return true;
                 }

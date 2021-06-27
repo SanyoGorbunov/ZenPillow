@@ -14,8 +14,6 @@ public class CountSheepsController : MonoBehaviour
 
     private Material overlayMat = null;
 
-    private QuickLinksWithPauseController quickLinksWithPause;
-
     private int SheepCountLeft = 0;
 
     private bool readyToGenerate = false;
@@ -26,8 +24,6 @@ public class CountSheepsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        quickLinksWithPause = FindObjectOfType<QuickLinksWithPauseController>();
-
         SheepCountLeft = 24;
 
         isHorizontal = Camera.main.aspect >= 1.0f;
@@ -160,8 +156,6 @@ public class CountSheepsController : MonoBehaviour
             _isOver = true;
             StartCoroutine(AnimateAlphaForEndLevel(0, 1, 0.5f));
         });
-
-        quickLinksWithPause.DisplayPause();
     }
 
     void GameOver()
