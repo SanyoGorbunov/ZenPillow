@@ -6,6 +6,9 @@ public class QuickLinksController : UIMenuController
 {
     private const string MainMenuScene = "IntroScene";
     private const string SettingsScene = "SettingsScene";
+    private const string SelectPracticeScene = "SelectPracticeScene";
+    private const string RateScene = "RateScene";
+    private const string QuestionnaireScene = "Questionnaire";
 
     private GameObject back;
     private GameObject settings;
@@ -16,9 +19,10 @@ public class QuickLinksController : UIMenuController
     // Start is called before the first frame update
     void Start()
     {
+        var SceneName = SceneManager.GetActiveScene().name;
         CurrentMenu = this;
         back = GameObject.FindGameObjectWithTag("Back");
-        if (SceneManager.GetActiveScene().name == MainMenuScene)
+        if (SceneName == MainMenuScene)
         {
             back.SetActive(false);
         } else
@@ -27,7 +31,7 @@ public class QuickLinksController : UIMenuController
         }
 
         settings = GameObject.FindGameObjectWithTag("Settings");
-        if (SceneManager.GetActiveScene().name == SettingsScene)
+        if (SceneName == SettingsScene || SceneName == SelectPracticeScene || SceneName == RateScene || SceneName == QuestionnaireScene)
         {
             settings.SetActive(false);
         }
@@ -40,6 +44,15 @@ public class QuickLinksController : UIMenuController
         var soundButton = sound.GetComponent<Button>();
         soundOn = Resources.Load<Sprite>("Icons/sound_on");
         soundOff = Resources.Load<Sprite>("Icons/sound_off");
+
+        if (SceneManager.GetActiveScene().name == MainMenuScene || SceneName == SelectPracticeScene || SceneName == RateScene || SceneName == QuestionnaireScene)
+        {
+            sound.SetActive(false);
+        }
+        else
+        {
+            sound.SetActive(true);
+        }
 
         var isMute = true;
 
