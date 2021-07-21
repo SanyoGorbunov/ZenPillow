@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestionController : MonoBehaviour
 {
@@ -15,5 +16,11 @@ public class QuestionController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ChangeFontSize(int size)
+    {
+        var text = GetComponentInChildren<Text>();
+        text.fontSize = size;
     }
 }
