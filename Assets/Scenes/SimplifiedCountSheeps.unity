@@ -1226,6 +1226,7 @@ MonoBehaviour:
   tutorial: {fileID: 1695545866}
   _displayTimerController: {fileID: 992820653}
   NextNumber: 1
+  IsSimplified: 1
   timerBeforeHint: 5
   HintIsActive: 0
 --- !u!1 &1930578199

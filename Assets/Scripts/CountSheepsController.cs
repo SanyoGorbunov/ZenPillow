@@ -17,18 +17,23 @@ public class CountSheepsController : MonoBehaviour
     private int SheepCountLeft = 0;
 
     private bool readyToGenerate = false;
-
     public int NextNumber = 1;
+
+    public bool IsSimplified = false;
     private bool isHorizontal;
+
+    private int MaxSheepCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        SheepCountLeft = 24;
+        MaxSheepCount = IsSimplified ? 7 : 24;
+
+        SheepCountLeft = MaxSheepCount;
 
         isHorizontal = Camera.main.aspect >= 1.0f;
 
-        sheepsSpawner.GenerateLevel(SheepCountLeft);
+        sheepsSpawner.GenerateLevel(IsSimplified);
 
         var renderer = transitionOverlay.GetComponent<Renderer>();
 
@@ -86,7 +91,7 @@ public class CountSheepsController : MonoBehaviour
             }
         }
 
-        sheepsSpawner.GenerateLevel(SheepCountLeft);
+        sheepsSpawner.GenerateLevel(IsSimplified);
         StartCoroutine(AnimateAlpha(1, 0, 0.2f));
     }
 
@@ -124,7 +129,7 @@ public class CountSheepsController : MonoBehaviour
         else
         {
             readyToGenerate = false;
-            sheepsSpawner.GenerateLevel(SheepCountLeft);
+            sheepsSpawner.GenerateLevel(IsSimplified);
             StartCoroutine(AnimateAlpha(1, 0, 0.2f));
         }
     }
@@ -137,7 +142,7 @@ public class CountSheepsController : MonoBehaviour
         resetHintTimer();
         if (SheepCountLeft == 0)
         {
-            SheepCountLeft = 24;
+            SheepCountLeft = MaxSheepCount;
             NextNumber = 1;
             readyToGenerate = false;
             StartCoroutine(AnimateAlphaForGeneration(0, 1, 0.2f));
@@ -179,9 +184,9 @@ public class CountSheepsController : MonoBehaviour
         if (newIsHorizontal != isHorizontal)
         {
             isHorizontal = newIsHorizontal;
-            sheepsSpawner.Rotate(isHorizontal);
+            sheepsSpawner.Rotate(IsSimplified, isHorizontal);
         }
-        if (!HintIsActive)
+        if (!HintIsActive && !IsSimplified)
         { 
             timerBeforeHint -= Time.deltaTime;
             if (timerBeforeHint <= 0.0f)
