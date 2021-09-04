@@ -61,6 +61,11 @@ public class SheepController : MonoBehaviour
         StartCoroutine(AnimateSizeAndRot(transform.localScale, transform.localScale * 1.1f, 0.4f));
     }
 
+    public void Enlarge()
+    {
+        StartCoroutine(EnlargeSize(transform.localScale, transform.localScale * 1.5f, 2.5f));
+    }
+
     bool isDestroyed = false;
 
     public void Destroy()
@@ -100,4 +105,20 @@ public class SheepController : MonoBehaviour
         StartCoroutine(AnimateSizeAndRot(endValue, startValue, duration));
     }
 
+    private IEnumerator EnlargeSize(Vector3 startValue, Vector3 endValue, float duration)
+    {
+        float elapsedTime = 0;
+        float ratio = elapsedTime / duration;
+        while (ratio < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            ratio = elapsedTime / duration;
+
+            Vector3 alpha = startValue + (endValue - startValue) * ratio;
+
+            transform.localScale = alpha;
+
+            yield return null;
+        }
+    }
 }
