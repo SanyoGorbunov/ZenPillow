@@ -8,21 +8,17 @@ public class DotsSpawner : MonoBehaviour
     public GameObject RabbitPawn;
     public GameObject CarrotPrefab;
 
-    //private int selectedColor;
+    private Color selected = new Color(254 / 255.0f, 227 / 255.0f, 184 / 255.0f);
 
-    private Color selected = new Color(248.0f / 255.0f, 243 / 255.0f, 192 / 255.0f);
-
-    private Color[] colors = { new Color(237 / 255.0f, 94 / 255.0f, 121 / 255.0f), new Color(132 / 255.0f, 126 / 255.0f, 160 / 255.0f), new Color(150 / 255.0f, 176 / 255.0f, 186 / 255.0f) };
+    private Color[] colors = {
+        new Color(235 / 255.0f, 200 / 255.0f, 213 / 255.0f), // red
+        new Color(166 / 255.0f, 218 / 255.0f, 232 / 255.0f), // blue
+        new Color(188 / 255.0f, 227 / 255.0f, 227 / 255.0f) // green
+    };
 
     private List<ColorDotController> DotList = new List<ColorDotController>();
     // Start is called before the first frame update
-    void Start()
-    {
-        //GenerateDots();
-        //GenerateColor();
-
-        //GenerateCarrots(5);
-    }
+    void Start() { }
 
     public void GenerateLevel(int carrotCount)
     {
@@ -38,8 +34,6 @@ public class DotsSpawner : MonoBehaviour
 
     void GenerateCarrots(int count)
     {
-        float offset = 0.1f;
-
         List<int> temp = new List<int>();
 
         for (int i = 0; i < DotList.Count; i++)
@@ -55,25 +49,15 @@ public class DotsSpawner : MonoBehaviour
 
             temp.Remove(temp[id]);
 
-            //GameObject obj = Instantiate(CarrotPrefab);
             DotList[number].showCarrot();
-
-
-            var renderer = DotList[number].gameObject.GetComponent<Renderer>();
-            //Random.Range(0, 3);
-            renderer.material.SetColor("_Color", selected);
-
-            //tempPos.y += offset;
-            //obj.transform.position = tempPos;
+            DotList[number].setColor(selected);
         }
 
         int idLast = Random.Range(0, temp.Count);
 
         int numberLast = temp[idLast];
 
-        var rendererLast = DotList[numberLast].gameObject.GetComponent<Renderer>();
-        //Random.Range(0, 3);
-        rendererLast.material.SetColor("_Color", selected);
+        DotList[numberLast].setColor(selected);
 
         PlaceRabbit(DotList[numberLast].gameObject.transform.position);
     }
@@ -85,21 +69,12 @@ public class DotsSpawner : MonoBehaviour
 
     void GenerateColor()
     {
-        //List<Color> availableColors = new List<Color>(colors);
-        
-        //int selectedColor = Random.Range(0, colors.Length);
-
-        //availableColors.Remove(colors[selectedColor]);
-
         foreach(ColorDotController controller in DotList)
         {
-            var renderer = controller.gameObject.GetComponent<Renderer>();
-            //Random.Range(0, 3);
             int id = Random.Range(0, colors.Length);
-
             Color temp = colors[id];
 
-            renderer.material.SetColor("_Color", temp);
+            controller.setColor(temp);
         }
     }
 
