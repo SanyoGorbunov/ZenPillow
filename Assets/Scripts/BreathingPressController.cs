@@ -174,8 +174,7 @@ public class BreathingPressController : MonoBehaviour
                 StartTimer();
                 _isInstruction = false;
                 instructionsPressController.SetStartTutorialActive(false);
-                StartCoroutine(MoveCloudToCenter());
-                //Inhale();
+                //StartCoroutine(MoveCloudToCenter());
                 return;
             }
         }
@@ -188,6 +187,7 @@ public class BreathingPressController : MonoBehaviour
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = true;
+                    instructionsPressController.ShowInhale();
                 }
             }
             else
@@ -197,6 +197,7 @@ public class BreathingPressController : MonoBehaviour
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = false;
+                    instructionsPressController.ShowExhale();
                 }
             }
 

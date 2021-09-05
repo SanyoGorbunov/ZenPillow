@@ -81,7 +81,8 @@ public class InstructionsPressController : MonoBehaviour
 
     public void SetStartTutorialActive(bool isActive)
     {
-		
+        exhaleText.SetActive(false);
+        inhaleText.SetActive(false);
         isStartTutorialActive = isActive;
 
         if (isActive)
@@ -98,7 +99,9 @@ public class InstructionsPressController : MonoBehaviour
 
     public void ShowInhale()
     {
-		/*
+        exhaleText.SetActive(false);
+        inhaleText.SetActive(true);
+        /*
         Reset();
         StartCoroutine(nameof(Inhale));
 		*/
@@ -106,7 +109,9 @@ public class InstructionsPressController : MonoBehaviour
 
     public void ShowExhale()
     {
-		/*
+        exhaleText.SetActive(true);
+        inhaleText.SetActive(false);
+        /*
         Reset();
         StartCoroutine(nameof(Exhale));*/
     }

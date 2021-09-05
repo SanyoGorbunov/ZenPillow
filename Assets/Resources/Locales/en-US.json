@@ -31,5 +31,7 @@
 	"Menu": "Menu",
 	"Continue": "Continue",
 	"Sound": "Sound",
-	"BreathingPressHint": "Breathing Press Hint"
+	"BreathingPressHint": "Hold your finger on the screen when your inhale, put off your finger when you exhale",
+	"BreathingPressExhale": "Exhale",
+	"BreathingPressInhale": "Inhale"
 }
