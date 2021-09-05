@@ -224,12 +224,14 @@ MonoBehaviour:
   displayTimerController: {fileID: 7326447936839565583}
   instructionsPressController: {fileID: 1977219327}
   Cloud: {fileID: 2127632865}
+  UICenter: {fileID: 43536111}
   pauseDuration: 4
   isHorizontal: 0
   _isInstruction: 0
   minCloudScale: 0.3
   maxCloudScale: 1
   estimatedBreathTime: 4
+  CloudMoveToCenterTime: 0.2
 --- !u!1 &465236173
 GameObject:
   m_ObjectHideFlags: 0

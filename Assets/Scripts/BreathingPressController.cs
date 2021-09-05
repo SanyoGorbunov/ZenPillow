@@ -12,6 +12,7 @@ public class BreathingPressController : MonoBehaviour
     public InstructionsPressController instructionsPressController;
 
     public GameObject Cloud;
+    public GameObject UICenter;
 
     public float pauseDuration = 6.0f;
 
@@ -55,6 +56,29 @@ public class BreathingPressController : MonoBehaviour
         yield return new WaitForSecondsPaused(0.1f);
     }
 
+    public float CloudMoveToCenterTime = 0.2f;
+
+    IEnumerator MoveCloudToCenter()
+    {
+        //Vector3 originalScale = transform.localScale;
+        //Vector3 destinationScale = previousScale;
+
+        Vector3 originalPosition = Cloud.transform.localPosition;
+        Vector3 destinationPosition = UICenter.transform.localPosition;
+
+        float currentTime = 0.0f;
+
+        do
+        {
+            if (!DisplayTimerController.isPausedStatic())
+            {
+                Cloud.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / CloudMoveToCenterTime);
+                currentTime += Time.deltaTime;
+            }
+            yield return null;
+        } while (currentTime <= CloudMoveToCenterTime);
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSecondsPaused(pauseDuration);
@@ -64,7 +88,7 @@ public class BreathingPressController : MonoBehaviour
     void StartTimer()
     {
         var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInSecs();
-        displayTimerController.Activate(gameLength, () => { _isOver = true; });
+        displayTimerController.Activate(gameLength, () => { GameOver(); });
     }
 
     void Inhale()
@@ -150,7 +174,7 @@ public class BreathingPressController : MonoBehaviour
                 StartTimer();
                 _isInstruction = false;
                 instructionsPressController.SetStartTutorialActive(false);
-
+                StartCoroutine(MoveCloudToCenter());
                 //Inhale();
                 return;
             }
@@ -190,6 +214,8 @@ public class BreathingPressController : MonoBehaviour
         float nextSize = isExpanding ? maxCloudScale : minCloudScale;
 
         float temp_scale = (alpha * (nextSize - LastCloudScale) + LastCloudScale);
+
+        temp_scale = Mathf.Clamp(temp_scale, minCloudScale, maxCloudScale);
 
         Cloud.transform.localScale = new Vector3(temp_scale, temp_scale, temp_scale);
     }
