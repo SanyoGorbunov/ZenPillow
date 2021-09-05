@@ -282,8 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff13bb672a242354f9719b0d44a35635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Key: 'Follow the hints: inhale - pause - exhale - pause. Collect all the droplets
-    on your way'
+  Key: BreathingPressHint
   KeyHorizontal: 
 --- !u!114 &465236176
 MonoBehaviour:
