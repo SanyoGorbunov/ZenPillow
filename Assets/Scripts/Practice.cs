@@ -2,5 +2,6 @@
 {
     Breathing,
     Collecting,
-    Counting
+    Counting,
+    BreathingPress
 }

@@ -39,6 +39,9 @@ public class TimerPlayController : MonoBehaviour
             case Practice.Counting:
                 UIMenuController.StaticLoadScene("CountSheeps");
                 break;
+            case Practice.BreathingPress:
+                UIMenuController.StaticLoadScene("BreathingPressScene");
+                break;
         }
     }
 }
