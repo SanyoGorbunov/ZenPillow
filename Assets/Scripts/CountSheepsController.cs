@@ -17,18 +17,23 @@ public class CountSheepsController : MonoBehaviour
     private int SheepCountLeft = 0;
 
     private bool readyToGenerate = false;
-
     public int NextNumber = 1;
+
+    public bool IsSimplified = false;
     private bool isHorizontal;
+
+    private int MaxSheepCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        SheepCountLeft = 24;
+        MaxSheepCount = IsSimplified ? 7 : 24;
+
+        SheepCountLeft = MaxSheepCount;
 
         isHorizontal = Camera.main.aspect >= 1.0f;
 
-        sheepsSpawner.GenerateLevel(SheepCountLeft);
+        sheepsSpawner.GenerateLevel(IsSimplified);
 
         var renderer = transitionOverlay.GetComponent<Renderer>();
 
@@ -47,6 +52,8 @@ public class CountSheepsController : MonoBehaviour
         StartCoroutine(AnimateAlpha(1.0f, 0.0f, 0.5f));
 
         StartTimer();
+
+        ShouldEnlarge = IsSimplified;
     }
 
     private IEnumerator AnimateAlpha(float startValue, float endValue, float duration)
@@ -86,7 +93,7 @@ public class CountSheepsController : MonoBehaviour
             }
         }
 
-        sheepsSpawner.GenerateLevel(SheepCountLeft);
+        sheepsSpawner.GenerateLevel(IsSimplified);
         StartCoroutine(AnimateAlpha(1, 0, 0.2f));
     }
 
@@ -124,7 +131,7 @@ public class CountSheepsController : MonoBehaviour
         else
         {
             readyToGenerate = false;
-            sheepsSpawner.GenerateLevel(SheepCountLeft);
+            sheepsSpawner.GenerateLevel(IsSimplified);
             StartCoroutine(AnimateAlpha(1, 0, 0.2f));
         }
     }
@@ -134,14 +141,22 @@ public class CountSheepsController : MonoBehaviour
     {
         SheepCountLeft--;
         NextNumber++;
-        resetHintTimer();
+
+        if (IsSimplified)
+        {
+            ShouldEnlarge = true;
+        }
+        else
+        {
+            resetHintTimer();
+        }
+
         if (SheepCountLeft == 0)
         {
-            SheepCountLeft = 24;
+            SheepCountLeft = MaxSheepCount;
             NextNumber = 1;
             readyToGenerate = false;
             StartCoroutine(AnimateAlphaForGeneration(0, 1, 0.2f));
-            //StartCoroutine(TransitLevel());
         }
     }
 
@@ -165,6 +180,7 @@ public class CountSheepsController : MonoBehaviour
 
     public float timerBeforeHint = 5.0f;
     public bool HintIsActive = false;
+    public bool ShouldEnlarge;
 
     public void resetHintTimer()
     {
@@ -179,9 +195,9 @@ public class CountSheepsController : MonoBehaviour
         if (newIsHorizontal != isHorizontal)
         {
             isHorizontal = newIsHorizontal;
-            sheepsSpawner.Rotate(isHorizontal);
+            sheepsSpawner.Rotate(IsSimplified, isHorizontal);
         }
-        if (!HintIsActive)
+        if (!HintIsActive && !IsSimplified)
         { 
             timerBeforeHint -= Time.deltaTime;
             if (timerBeforeHint <= 0.0f)
@@ -189,6 +205,12 @@ public class CountSheepsController : MonoBehaviour
                 sheepsSpawner.getSheepByNumber(NextNumber).ActivateHint();
                 HintIsActive = true;
             }
+        }
+
+        if (ShouldEnlarge)
+        {
+            sheepsSpawner.getSheepByNumber(NextNumber).Enlarge();
+            ShouldEnlarge = false;
         }
     }
 }

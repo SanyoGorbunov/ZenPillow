@@ -61,14 +61,15 @@ public class GameStateManager
     {
         var data = SaveSystem.Load();
 
-        int[] counts = new int[3];
-        int[] sums = new int[3];
+        int practiceLength = Enum.GetValues(typeof(Practice)).Length;
+        int[] counts = new int[practiceLength];
+        int[] sums = new int[practiceLength];
         foreach (var record in data.records)
         {
             counts[record.practice]++;
             sums[record.practice] += record.rate;
         }
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < practiceLength; i++)
         {
             if (counts[i] != 0)
             {
@@ -76,7 +77,7 @@ public class GameStateManager
             }
         }
         int argMax = 0;
-        for (int i = 1; i < 3; i++)
+        for (int i = 1; i < practiceLength; i++)
         {
             if (sums[i] > sums[argMax])
             {

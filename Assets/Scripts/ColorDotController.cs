@@ -7,12 +7,14 @@ public class ColorDotController : MonoBehaviour
 {
 
     public bool hasCarrot = false;
+    public Renderer topRenderer;
+    public Color sideColor = new Color(195 / 255.0f, 195 / 255.0f, 195 / 255.0f);
     private GameObject carrot = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //transform.GetComponent<Renderer>().material.SetColor("_Color", sideColor);
     }
 
     void Awake()
@@ -38,6 +40,12 @@ public class ColorDotController : MonoBehaviour
 
         carrot.transform.localScale = new Vector3(0.2f/ scale, 0.2f / scale, 0.2f / scale);
     }
+
+    public void setColor(Color color)
+    {
+        topRenderer.material.SetColor("_Color", color);
+    }
+
     public void OnClick()
     {
         RabbitController rabbit = FindObjectOfType<RabbitController>();
