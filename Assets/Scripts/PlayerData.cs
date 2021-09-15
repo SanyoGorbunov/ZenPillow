@@ -6,6 +6,7 @@ public class PlayerData
     public PlayerRecord[] records;
     public string sound;
     public string locale;
+    public bool useSoftColors;
 }
 
 [System.Serializable]

@@ -18,7 +18,20 @@ public class DotsSpawner : MonoBehaviour
 
     private List<ColorDotController> DotList = new List<ColorDotController>();
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        var useSoftColors = SaveSystem.Load().useSoftColors;
+        if (!useSoftColors)
+        {
+            selected = new Color(248.0f / 255.0f, 243 / 255.0f, 192 / 255.0f);
+            colors = new[]
+            {
+                new Color(237 / 255.0f, 94 / 255.0f, 121 / 255.0f),
+                new Color(132 / 255.0f, 126 / 255.0f, 160 / 255.0f),
+                new Color(150 / 255.0f, 176 / 255.0f, 186 / 255.0f)
+            };
+        }
+    }
 
     public void GenerateLevel(int carrotCount)
     {

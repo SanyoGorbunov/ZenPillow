@@ -67,6 +67,21 @@ public static class SaveSystem
         stream.Close();
     }
 
+    public static void SaveSoftColors(bool useSoftColors)
+    {
+        string path = Application.persistentDataPath + saveFolder + saveFormat;
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        CreateIfNotExist(Application.persistentDataPath + saveFolder);
+
+        var playerData = Load();
+        playerData.useSoftColors = useSoftColors;
+
+        FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+        formatter.Serialize(stream, playerData);
+        stream.Close();
+    }
+
     public static PlayerData Load()
     {
         string path = Application.persistentDataPath + saveFolder + saveFormat;
