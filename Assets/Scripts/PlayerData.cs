@@ -6,7 +6,8 @@ public class PlayerData
     public PlayerRecord[] records;
     public string sound;
     public string locale;
-    public bool useSoftColors;
+    public bool useSoftColors = true;
+    public bool showMoreSheep;
 }
 
 [System.Serializable]

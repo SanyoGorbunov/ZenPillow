@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SettingsController : MonoBehaviour
 {
     public Toggle useSoftColorsToggle;
+    public Toggle showMoreSheepToggle;
     private bool isInitialized;
 
     // Start is called before the first frame update
@@ -17,7 +18,9 @@ public class SettingsController : MonoBehaviour
     {
         if (!isInitialized)
         {
-            useSoftColorsToggle.isOn = SaveSystem.Load().useSoftColors;
+            var playerData = SaveSystem.Load();
+            useSoftColorsToggle.isOn = playerData.useSoftColors;
+            showMoreSheepToggle.isOn = playerData.showMoreSheep;
             isInitialized = true;
         }
     }
@@ -25,6 +28,11 @@ public class SettingsController : MonoBehaviour
     public void ChangeUseSoftColors(bool useSoftColors)
     {
         SaveSystem.SaveSoftColors(useSoftColors);
+    }
+
+    public void ChangeMoreSheep(bool showMoreSheep)
+    {
+        SaveSystem.SaveMoreSheep(showMoreSheep);
     }
 
     public void RemoveHistory()
@@ -35,6 +43,6 @@ public class SettingsController : MonoBehaviour
         Mgl.I18n.SetLocale(locale);
         SaveSystem.SaveLocale(locale);
 
-        useSoftColorsToggle.isOn = false;
+        isInitialized = false;
     }
 }

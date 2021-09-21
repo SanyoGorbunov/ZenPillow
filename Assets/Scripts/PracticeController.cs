@@ -17,6 +17,14 @@ public class PracticeController : MonoBehaviour
     {
         Practice PracticeEnum = (Practice)practice;
 
+        switch (PracticeEnum)
+        {
+            case Practice.Counting:
+            case Practice.SimplifiedCounting:
+                PracticeEnum = SaveSystem.Load().showMoreSheep ? Practice.Counting : Practice.SimplifiedCounting;
+                break;
+        }
+
         GameStateManager.Instance.SelectPractice(PracticeEnum);
         UIMenuController.StaticLoadScene("RateScene");
     }
