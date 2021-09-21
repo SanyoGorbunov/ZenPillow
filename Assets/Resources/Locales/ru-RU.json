@@ -31,6 +31,9 @@
 	"Menu": "Меню",
 	"Continue": "Продолжить",
 	"Sound": "Звук",
+	"BreathingPressHint": "Держи палец на экране, когда вдыхаешь. Подними палец, когда выдыхаешь",
+	"BreathingPressExhale": "Выдох",
+	"BreathingPressInhale": "Вдох",
 	"UseSoftColors": "Мягкие цвета",
 	"ShowMoreSheep": "Показывать больше овечек"
 }

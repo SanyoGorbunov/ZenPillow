@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SimplifiedCountSheeps.unity
     guid: d74efc10e7cc6894a8181f8e5b9eb6eb
+  - enabled: 1
+    path: Assets/Scenes/BreathingPressScene.unity
+    guid: aaa30e37c9b4b024ba89678d0a2af8b2
   m_configObjects: {}

@@ -31,6 +31,9 @@
 	"Menu": "Меню",
 	"Continue": "Продовжити",
 	"Sound": "Звук",
+	"BreathingPressHint": "Тримай палець на екрані, коли вдихаєш. Підніми палець, коли видихаєш",
+	"BreathingPressExhale": "Видих",
+	"BreathingPressInhale": "Вдих",
 	"UseSoftColors": "М'які кольори",
 	"ShowMoreSheep": "Показати більше вівечок"
 }

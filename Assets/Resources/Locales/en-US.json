@@ -31,6 +31,9 @@
 	"Menu": "Menu",
 	"Continue": "Continue",
 	"Sound": "Sound",
+	"BreathingPressHint": "Hold your finger on the screen when your inhale, put off your finger when you exhale",
+	"BreathingPressExhale": "Exhale",
+	"BreathingPressInhale": "Inhale",
 	"UseSoftColors": "Use soft colors",
 	"ShowMoreSheep": "Show more sheep"
 }

@@ -3,5 +3,6 @@
     Breathing,
     Collecting,
     Counting,
-    SimplifiedCounting
+    SimplifiedCounting,
+    BreathingPress
 }
