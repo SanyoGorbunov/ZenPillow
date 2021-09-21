@@ -111,13 +111,15 @@ public class SheepController : MonoBehaviour
         float ratio = elapsedTime / duration;
         while (ratio < 1f)
         {
-            elapsedTime += Time.deltaTime;
-            ratio = elapsedTime / duration;
+            if (!DisplayTimerController.isPausedStatic())
+            {
+                elapsedTime += Time.deltaTime;
+                ratio = elapsedTime / duration;
 
-            Vector3 alpha = startValue + (endValue - startValue) * ratio;
+                Vector3 alpha = startValue + (endValue - startValue) * ratio;
 
-            transform.localScale = alpha;
-
+                transform.localScale = alpha;
+            }
             yield return null;
         }
     }
