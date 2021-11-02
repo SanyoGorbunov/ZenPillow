@@ -130,7 +130,10 @@ public class BreathingPressController : MonoBehaviour
 
     void GameOver()
     {
-        UIMenuController.StaticLoadScene("RateScene");
+        //UIMenuController.StaticLoadScene("RateScene");
+        BreathParams params1 = new BreathParams(MaxInhaleTime, MaxExhaleTime, 0.0f, 0.0f);
+        GameStateManager.Instance.setActiveBreathParams(params1);
+        UIMenuController.StaticLoadScene("BreathingScene");
     }
 
     void CheckScreenOrientation()
@@ -151,6 +154,9 @@ public class BreathingPressController : MonoBehaviour
     }
 
     bool isExpanding = false;
+
+    private float MaxInhaleTime = 0.0f;
+    private float MaxExhaleTime = 0.0f;
 
     // Update is called once per frame
     void Update()
@@ -184,6 +190,7 @@ public class BreathingPressController : MonoBehaviour
             {
                 if(!isExpanding)
                 {
+                    MaxExhaleTime = LastScaleChangeTimer > MaxExhaleTime ? LastScaleChangeTimer : MaxExhaleTime;
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = true;
@@ -194,6 +201,7 @@ public class BreathingPressController : MonoBehaviour
             {
                 if (isExpanding)
                 {
+                    MaxInhaleTime = LastScaleChangeTimer > MaxInhaleTime ? LastScaleChangeTimer : MaxInhaleTime;
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = false;

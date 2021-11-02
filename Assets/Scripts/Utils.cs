@@ -26,4 +26,28 @@ namespace Utils
 			this.seconds = seconds;
 		}
 	}
+
+    public class BreathParams
+    {
+        public float breathInTime;
+        public float breathOutTime;
+        public float breathInHoldTime;
+        public float breathOutHoldTime;
+
+        public BreathParams()
+        {
+            breathInTime = 4.0f;
+            breathOutTime = 4.0f;
+            breathInHoldTime = 4.0f;
+            breathOutHoldTime = 4.0f;
+        }
+
+        public BreathParams(float inTime, float outTime, float inHoldTime, float outHoldTime)
+        {
+            breathInTime = inTime;
+            breathOutTime = outTime;
+            breathInHoldTime = inHoldTime;
+            breathOutHoldTime = outHoldTime;
+        }
+    }
 }

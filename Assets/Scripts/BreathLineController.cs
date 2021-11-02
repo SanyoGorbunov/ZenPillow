@@ -155,10 +155,20 @@ public class BreathLineController : MonoBehaviour
         LineRenderer.Points = pointlist.ToArray();
     }
 
-    
+    Utils.BreathParams params1 = null;
 
     void Start()
     {
+        params1 = GameStateManager.Instance.getActiveBreathParams();
+
+        if (params1 != null)
+        {
+            this.breathInTime = params1.breathInTime;
+            this.breathOutTime = params1.breathOutTime;
+            this.breathInHoldTime = params1.breathInHoldTime;
+            this.breathOutHoldTime = params1.breathOutHoldTime;
+        }
+
         dropHalfRange = dropRange / 2;
         GetComponent<CanvasRenderer>().SetAlpha((isVisible && started )? 1:0);
 
