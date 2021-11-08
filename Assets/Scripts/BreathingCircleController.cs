@@ -19,12 +19,29 @@ public class BreathingCircleController : MonoBehaviour
     private Vector2 touchStartPos;
     private float touchStartXPos;
 
+    private float breathInTime = 4.0f;
+    private float breathOutTime = 4.0f;
+    private float breathInHoldTime = 4.0f;
+    private float breathOutHoldTime = 4.0f;
 
     private int width;
     private int height;
     // Start is called before the first frame update
     void Start()
     {
+        Utils.BreathParams params1 = GameStateManager.Instance.getActiveBreathParams();
+
+        if (params1 != null)
+        {
+            this.breathInTime = params1.breathInTime;
+            this.breathOutTime = params1.breathOutTime;
+            this.breathInHoldTime = params1.breathInHoldTime;
+            this.breathOutHoldTime = params1.breathOutHoldTime;
+        }
+
+        breathInTime = breathInTime >= 2.0f ? breathInTime : 2.0f;
+        breathOutTime = breathOutTime >= 2.0f ? breathOutTime : 2.0f;
+
         width = Screen.width;
         height = Screen.height;
     }
@@ -91,6 +108,8 @@ public class BreathingCircleController : MonoBehaviour
 
     IEnumerator ScaleOnMovement(bool isUpscaling, Action callback)
     {
+        float ScaleTime = isUpscaling ? breathInTime : breathOutTime;
+
         Vector3 originalScale = isUpscaling ? new Vector3(0.0f, 0.0f, 1.0f) : new Vector3(1.0f, 1.0f, 1.0f);
         Vector3 destinationScale = !isUpscaling ? new Vector3(0.0f, 0.0f, 1.0f) : new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -103,12 +122,12 @@ public class BreathingCircleController : MonoBehaviour
         {
             if (!DisplayTimerController.isPausedStatic())
             { 
-                _innerCircle.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / TimeBreathingInSecs);
-                gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / TimeBreathingInSecs);
+                _innerCircle.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / ScaleTime);
+                gameObject.transform.localPosition = Vector3.Lerp(originalPosition, destinationPosition, currentTime / ScaleTime);
                 currentTime += Time.deltaTime;
             }
             yield return null;
-        } while (currentTime <= TimeBreathingInSecs);
+        } while (currentTime <= ScaleTime);
 
         callback.Invoke();
     }

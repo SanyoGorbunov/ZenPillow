@@ -73,14 +73,14 @@ public class BreathingController : MonoBehaviour
     {
         _isInhale = true;
         instructionsController.ShowInhale();
-        breathingCircleController.Scale(true, PauseStart);
+        breathingCircleController.Scale(true, Exhale);
     }
 
     void Exhale()
     {
         _isInhale = false;
         instructionsController.ShowExhale();
-        breathingCircleController.Scale(false, PauseStart);
+        breathingCircleController.Scale(false, Inhale);
     }
 
     void PauseStart()

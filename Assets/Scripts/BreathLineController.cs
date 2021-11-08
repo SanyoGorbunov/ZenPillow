@@ -12,6 +12,8 @@ public class BreathLineController : MonoBehaviour
     public RectTransform Cloud;
     public GameObject drop;
 
+    public bool useDrops = false;
+
     public float UpperBoundPos = 100.0f;
     public float LowerBoundPos = -100.0f;
 
@@ -142,14 +144,20 @@ public class BreathLineController : MonoBehaviour
             pointlist.Add(new Vector2(newPointX, UpperBoundPos));
             newPointX += holdingBreathInWidth;
 
-            CreateDropsLine(dropsCountPerPhase, 2 * dropsCountPerPhase * i, newPointX - holdingBreathInWidth, newPointX, UpperBoundPos);
+            if (useDrops)
+            {
+                CreateDropsLine(dropsCountPerPhase, 2 * dropsCountPerPhase * i, newPointX - holdingBreathInWidth, newPointX, UpperBoundPos);
+            }
 
             pointlist.Add(new Vector2(newPointX, UpperBoundPos));
             newPointX += BreathingOutWidth;
             pointlist.Add(new Vector2(newPointX, LowerBoundPos));
             newPointX += holdingBreathOutWidth;
 
-            CreateDropsLine(dropsCountPerPhase, 2 * dropsCountPerPhase * i + dropsCountPerPhase, newPointX - holdingBreathOutWidth, newPointX, LowerBoundPos);
+            if (useDrops)
+            {
+                CreateDropsLine(dropsCountPerPhase, 2 * dropsCountPerPhase * i + dropsCountPerPhase, newPointX - holdingBreathOutWidth, newPointX, LowerBoundPos);
+            }
         }
 
         LineRenderer.Points = pointlist.ToArray();
@@ -169,6 +177,9 @@ public class BreathLineController : MonoBehaviour
             this.breathOutHoldTime = params1.breathOutHoldTime;
         }
 
+        breathInTime = breathInTime >= 2.0f ? breathInTime : 2.0f;
+        breathOutTime = breathOutTime >= 2.0f ? breathOutTime : 2.0f;
+
         dropHalfRange = dropRange / 2;
         GetComponent<CanvasRenderer>().SetAlpha((isVisible && started )? 1:0);
 
@@ -183,6 +194,7 @@ public class BreathLineController : MonoBehaviour
         RoundTime = breathInTime + breathOutTime + breathInHoldTime + breathOutHoldTime;
         SetUpIntervals();
         LineRenderer = GetComponent<UILineRenderer>();
+        
         SpawnPointsAtStart();
         Cloud.GetComponent<CanvasRenderer>().SetAlpha((isVisible && started) ? 1 : 0);
     }
@@ -213,14 +225,13 @@ public class BreathLineController : MonoBehaviour
         float[] BoundPoses = new float[] { LowerBoundPos, UpperBoundPos, UpperBoundPos, LowerBoundPos  };
 
         float[] BoundsDistances = new float[] { BoundsDistance, 0, -BoundsDistance, 0 };
-
+        
         for (int i = 3; i > -1; i--)
         {
             if (temp > BreathingIntervalsLowerBound[i])
             {
-
                 float h = BoundPoses[i];
-                if (BoundsDistances[i] == 0)
+                if (useDrops && BoundsDistances[i] == 0)
                 {
                     PhaseAlpha = (temp - BreathingIntervalsLowerBound[i]) / BreathingIntervals[i];
 
@@ -276,7 +287,10 @@ public class BreathLineController : MonoBehaviour
     {
         GetComponent<CanvasRenderer>().SetAlpha(isVisible? 1: 0);
         Cloud.gameObject.GetComponent<CanvasRenderer>().SetAlpha(isVisible ? 1 : 0);
-        SetDropsVisibility(isVisible);
+        if (useDrops)
+        {
+            SetDropsVisibility(isVisible);
+        }
         this.isVisible = isVisible;
     }
 
