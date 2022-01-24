@@ -176,15 +176,13 @@ public class BreathingPressController : MonoBehaviour
         checkIsPaused();
 
         if (_isInstruction)
-
         {
             if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null)
             {
                 StartTimer();
                 _isInstruction = false;
                 instructionsPressController.SetStartTutorialActive(false);
-                //StartCoroutine(MoveCloudToCenter());
-                return;
+                instructionsPressController.ShowInhale();
             }
         }
         else 
