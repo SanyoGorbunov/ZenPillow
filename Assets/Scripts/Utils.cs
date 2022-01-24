@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Utils
 {
@@ -27,6 +29,12 @@ namespace Utils
 		}
 	}
 
+    public struct InhaleExhalePair
+    {
+        public float InhaleDuration { get; set; }
+        public float ExhaleDuration { get; set; }
+    }
+
     public class BreathParams
     {
         public float breathInTime;
@@ -34,20 +42,17 @@ namespace Utils
         public float breathInHoldTime;
         public float breathOutHoldTime;
 
-        public BreathParams()
+        public BreathParams(IEnumerable<InhaleExhalePair> inhaleExhaleParams)
         {
-            breathInTime = 4.0f;
-            breathOutTime = 4.0f;
-            breathInHoldTime = 4.0f;
-            breathOutHoldTime = 4.0f;
-        }
+            // calculates last values of inhaling and exhaling above the average
+            float breathInAverage = inhaleExhaleParams.Average(p => p.InhaleDuration),
+                breathOutAverage = inhaleExhaleParams.Average(p => p.ExhaleDuration);
 
-        public BreathParams(float inTime, float outTime, float inHoldTime, float outHoldTime)
-        {
-            breathInTime = inTime;
-            breathOutTime = outTime;
-            breathInHoldTime = inHoldTime;
-            breathOutHoldTime = outHoldTime;
+            breathInTime = inhaleExhaleParams.Last(p => p.InhaleDuration >= breathInAverage).InhaleDuration;
+            breathOutTime = inhaleExhaleParams.Last(p => p.ExhaleDuration >= breathOutAverage).ExhaleDuration;
+
+            breathInHoldTime = breathInTime / 2;
+            breathOutHoldTime = breathOutTime / 2;
         }
     }
 }

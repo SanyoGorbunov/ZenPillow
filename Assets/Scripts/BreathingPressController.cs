@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -28,9 +29,13 @@ public class BreathingPressController : MonoBehaviour
 
     private const float MeasurementDuration = 30f;
 
+    private List<InhaleExhalePair> inhaleExhaleParams;
+
     // Start is called before the first frame update
     void Start()
     {
+        inhaleExhaleParams = new List<InhaleExhalePair>();
+
         CheckScreenOrientation();
         instructionsPressController.Reset();
         Cloud.transform.localScale = new Vector3(StartCloudScale, StartCloudScale, StartCloudScale);
@@ -134,8 +139,7 @@ public class BreathingPressController : MonoBehaviour
     void GameOver()
     {
         //UIMenuController.StaticLoadScene("RateScene");
-        BreathParams params1 = new BreathParams(MaxInhaleTime, MaxExhaleTime, 0.0f, 0.0f);
-        GameStateManager.Instance.setActiveBreathParams(params1);
+        GameStateManager.Instance.setActiveBreathParams(new BreathParams(inhaleExhaleParams));
         UIMenuController.StaticLoadScene("BreathingScene");
     }
 
@@ -160,6 +164,7 @@ public class BreathingPressController : MonoBehaviour
 
     private float MaxInhaleTime = 0.0f;
     private float MaxExhaleTime = 0.0f;
+    private InhaleExhalePair currentInhaleExhalePair;
 
     // Update is called once per frame
     void Update()
@@ -192,6 +197,8 @@ public class BreathingPressController : MonoBehaviour
                 if(!isExpanding)
                 {
                     MaxExhaleTime = LastScaleChangeTimer > MaxExhaleTime ? LastScaleChangeTimer : MaxExhaleTime;
+                    currentInhaleExhalePair.ExhaleDuration = LastScaleChangeTimer;
+                    inhaleExhaleParams.Add(currentInhaleExhalePair);
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = true;
@@ -203,6 +210,7 @@ public class BreathingPressController : MonoBehaviour
                 if (isExpanding)
                 {
                     MaxInhaleTime = LastScaleChangeTimer > MaxInhaleTime ? LastScaleChangeTimer : MaxInhaleTime;
+                    currentInhaleExhalePair = new InhaleExhalePair { InhaleDuration = LastScaleChangeTimer };
                     LastScaleChangeTimer = 0.0f;
                     LastCloudScale = Cloud.transform.localScale.x;
                     isExpanding = false;
