@@ -81,8 +81,12 @@ public class InstructionsPressController : MonoBehaviour
 
     public void SetStartTutorialActive(bool isActive)
     {
-        exhaleText.SetActive(false);
-        inhaleText.SetActive(false);
+        if (isActive)
+        {
+            exhaleText.SetActive(false);
+            inhaleText.SetActive(false);
+        }
+
         isStartTutorialActive = isActive;
 
         bubble.SetActive(isActive);
