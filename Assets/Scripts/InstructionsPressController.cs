@@ -85,16 +85,8 @@ public class InstructionsPressController : MonoBehaviour
         inhaleText.SetActive(false);
         isStartTutorialActive = isActive;
 
-        if (isActive)
-        {
-            bubble.SetActive(!isHorizontal);
-            RotateTextToHorizontal(isHorizontal);
-        }
-        else
-        {
-            bubble.SetActive(false);
-            RotateTextToHorizontal(isHorizontal);
-        }
+        bubble.SetActive(isActive);
+        RotateTextToHorizontal(isHorizontal);
     }
 
     public void ShowInhale()
