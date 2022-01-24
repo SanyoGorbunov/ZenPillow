@@ -25,6 +25,8 @@ public class BreathingPressController : MonoBehaviour
 
     public float estimatedBreathTime = 4.0f;
 
+    private const float MeasurementDuration = 30f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,8 +89,7 @@ public class BreathingPressController : MonoBehaviour
 
     void StartTimer()
     {
-        var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInSecs();
-        displayTimerController.Activate(gameLength, () => { GameOver(); });
+        displayTimerController.Activate(MeasurementDuration, () => { GameOver(); });
     }
 
     void Inhale()
