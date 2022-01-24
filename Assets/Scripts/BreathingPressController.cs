@@ -20,6 +20,7 @@ public class BreathingPressController : MonoBehaviour
 
     public bool isHorizontal = false, _isInstruction;
 
+    public const float StartCloudScale = 0.6f;
     public float minCloudScale = 0.3f;
     public float maxCloudScale = 1.0f;
 
@@ -32,6 +33,7 @@ public class BreathingPressController : MonoBehaviour
     {
         CheckScreenOrientation();
         instructionsPressController.Reset();
+        Cloud.transform.localScale = new Vector3(StartCloudScale, StartCloudScale, StartCloudScale);
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
 
@@ -154,7 +156,7 @@ public class BreathingPressController : MonoBehaviour
         }
     }
 
-    bool isExpanding = false;
+    bool isExpanding = true;
 
     private float MaxInhaleTime = 0.0f;
     private float MaxExhaleTime = 0.0f;
@@ -214,7 +216,7 @@ public class BreathingPressController : MonoBehaviour
         }
     }
 
-    private float LastCloudScale = 1.0f;
+    private float LastCloudScale = StartCloudScale;
     private float LastScaleChangeTimer = 0.0f;
 
     private void UpdateCloudSize()
@@ -223,10 +225,10 @@ public class BreathingPressController : MonoBehaviour
         float alpha = LastScaleChangeTimer / estimatedBreathTime;
         float nextSize = isExpanding ? maxCloudScale : minCloudScale;
 
-        float temp_scale = (alpha * (nextSize - LastCloudScale) + LastCloudScale);
+        float tempScale = alpha * (nextSize - LastCloudScale) + LastCloudScale;
 
-        temp_scale = Mathf.Clamp(temp_scale, minCloudScale, maxCloudScale);
+        tempScale = Mathf.Clamp(tempScale, minCloudScale, maxCloudScale);
 
-        Cloud.transform.localScale = new Vector3(temp_scale, temp_scale, temp_scale);
+        Cloud.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
     }
 }
