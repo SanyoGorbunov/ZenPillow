@@ -29,7 +29,7 @@ public class BreathingCircleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Utils.BreathParams params1 = GameStateManager.Instance.getActiveBreathParams();
+        Utils.BreathingParams params1 = GameStateManager.Instance.getActiveBreathParams();
 
         if (params1 != null)
         {

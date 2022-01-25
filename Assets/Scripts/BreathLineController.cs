@@ -163,7 +163,7 @@ public class BreathLineController : MonoBehaviour
         LineRenderer.Points = pointlist.ToArray();
     }
 
-    Utils.BreathParams params1 = null;
+    Utils.BreathingParams params1 = null;
 
     void Start()
     {

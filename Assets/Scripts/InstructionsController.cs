@@ -114,7 +114,7 @@ public class InstructionsController : MonoBehaviour
     public void ShowHold()
     {
         Reset();
-        holdIcon.SetActive(!isHorizontal);
+        //holdIcon.SetActive(!isHorizontal);
         StartCoroutine(nameof(Hold));
     }
 

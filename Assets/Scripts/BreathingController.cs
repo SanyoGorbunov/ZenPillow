@@ -16,7 +16,9 @@ public class BreathingController : MonoBehaviour
 
     public float pauseDuration = 6.0f;
 
-    private bool _isInhale, _isOver;
+    private bool _isOver;
+    private BreathingState _breathingState;
+    private BreathingParams _breathingParams;
 
     public bool isHorizontal = false, _isInstruction;
 
@@ -27,6 +29,7 @@ public class BreathingController : MonoBehaviour
         instructionsController.Reset();
 
         var isGamePlayed = GameStateManager.Instance.HasPlayedSelectedGame();
+        _breathingParams = GameStateManager.Instance.getActiveBreathParams();
 
         if (!isGamePlayed)
         {
@@ -63,24 +66,52 @@ public class BreathingController : MonoBehaviour
         PauseEnd();
     }
 
+    IEnumerator Hold(float holdDuration, Action callback)
+    {
+        yield return new WaitForSeconds(holdDuration);
+        callback.Invoke();
+    }
+
     void StartTimer()
     {
         var gameLength = GameStateManager.Instance.GetAdjustedTimeLengthInSecs();
         displayTimerController.Activate(gameLength, () => { _isOver = true; });
     }
 
+    private enum BreathingState
+    {
+        Inhale,
+        InhaleHold,
+        Exhale,
+        ExhaleHold
+    }
+
     void Inhale()
     {
-        _isInhale = true;
+        _breathingState = BreathingState.Inhale;
         instructionsController.ShowInhale();
-        breathingCircleController.Scale(true, Exhale);
+        breathingCircleController.Scale(true, InhaleHold);
+    }
+
+    void InhaleHold()
+    {
+        _breathingState = BreathingState.InhaleHold;
+        instructionsController.ShowHold();
+        StartCoroutine(Hold(_breathingParams.breathInHoldTime, Exhale));
     }
 
     void Exhale()
     {
-        _isInhale = false;
+        _breathingState = BreathingState.Exhale;
         instructionsController.ShowExhale();
-        breathingCircleController.Scale(false, Inhale);
+        breathingCircleController.Scale(false, ExhaleHold);
+    }
+
+    void ExhaleHold()
+    {
+        _breathingState = BreathingState.ExhaleHold;
+        instructionsController.ShowHold();
+        StartCoroutine(Hold(_breathingParams.breathOutHoldTime, Inhale));
     }
 
     void PauseStart()
@@ -102,11 +133,11 @@ public class BreathingController : MonoBehaviour
         dropletsController.DestroyDroplets();
         instructionsController.Reset();
         Action action = Inhale;
-        if (_isInhale)
+        if (_breathingState == BreathingState.Inhale)
         {
             action = Exhale;
         }
-        if (!_isInhale && _isOver)
+        if (_breathingState == BreathingState.Exhale && _isOver)
         {
             GameOver();
             return;

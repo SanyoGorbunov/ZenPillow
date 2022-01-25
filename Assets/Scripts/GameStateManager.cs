@@ -124,15 +124,15 @@ public class GameStateManager
         return Practice.Counting;
     }
 
-    private Utils.BreathParams _breathParams = null;
+    private Utils.BreathingParams breathingParams = null;
 
-    public Utils.BreathParams getActiveBreathParams()
+    public Utils.BreathingParams getActiveBreathParams()
     {
-        return _breathParams;
+        return breathingParams;
     }
 
-    public void setActiveBreathParams(Utils.BreathParams value)
+    public void setActiveBreathParams(Utils.BreathingParams value)
     {
-        this._breathParams = value;
+        this.breathingParams = value;
     }
 }

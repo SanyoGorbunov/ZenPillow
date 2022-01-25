@@ -35,14 +35,14 @@ namespace Utils
         public float ExhaleDuration { get; set; }
     }
 
-    public class BreathParams
+    public class BreathingParams
     {
         public float breathInTime;
         public float breathOutTime;
         public float breathInHoldTime;
         public float breathOutHoldTime;
 
-        public BreathParams(IEnumerable<InhaleExhalePair> inhaleExhaleParams)
+        public BreathingParams(IEnumerable<InhaleExhalePair> inhaleExhaleParams)
         {
             // calculates last values of inhaling and exhaling above the average
             float breathInAverage = inhaleExhaleParams.Average(p => p.InhaleDuration),

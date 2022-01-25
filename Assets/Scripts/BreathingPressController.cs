@@ -139,7 +139,7 @@ public class BreathingPressController : MonoBehaviour
     void GameOver()
     {
         //UIMenuController.StaticLoadScene("RateScene");
-        GameStateManager.Instance.setActiveBreathParams(new BreathParams(inhaleExhaleParams));
+        GameStateManager.Instance.setActiveBreathParams(new BreathingParams(inhaleExhaleParams));
         UIMenuController.StaticLoadScene("BreathingScene");
     }
 
