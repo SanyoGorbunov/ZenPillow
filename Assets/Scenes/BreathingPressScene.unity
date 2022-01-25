@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -323,7 +323,7 @@ MonoBehaviour:
   _isInstruction: 0
   minCloudScale: 0.3
   maxCloudScale: 1
-  estimatedBreathTime: 4
+  estimatedBreathTime: 8
   CloudMoveToCenterTime: 0.2
 --- !u!1 &465236173
 GameObject:
