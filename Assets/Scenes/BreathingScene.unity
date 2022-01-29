@@ -2194,6 +2194,31 @@ PrefabInstance:
       propertyPath: useDrops
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579216, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579216, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579216, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579216, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579216, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: lineThickness
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5455155211987579218, guid: bda2e5f49ec2e344fad758af2a6ba12e,
         type: 3}
       propertyPath: m_Name
