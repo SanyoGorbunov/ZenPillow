@@ -2174,6 +2174,26 @@ PrefabInstance:
       propertyPath: displayTimerController
       value: 
       objectReference: {fileID: 7326447936839565583}
+    - target: {fileID: 5455155211987579214, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: pointsPerSecond
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579214, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: UpperBoundPos
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579214, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: LowerBoundPos
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455155211987579214, guid: bda2e5f49ec2e344fad758af2a6ba12e,
+        type: 3}
+      propertyPath: useDrops
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5455155211987579218, guid: bda2e5f49ec2e344fad758af2a6ba12e,
         type: 3}
       propertyPath: m_Name

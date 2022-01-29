@@ -14,8 +14,8 @@ public class BreathLineController : MonoBehaviour
 
     public bool useDrops = false;
 
-    public float UpperBoundPos = 100.0f;
-    public float LowerBoundPos = -100.0f;
+    public float UpperBoundPos = 80.0f;
+    public float LowerBoundPos = -80.0f;
 
     private float BoundsDistance = 200.0f;
 
@@ -30,7 +30,7 @@ public class BreathLineController : MonoBehaviour
 
     private float RoundTime = 0.0f;
 
-    public float pointsPerSecond = 25.0f;
+    public float pointsPerSecond = 20.0f;
 
     private float[] BreathingIntervals = { 4.0f, 4.0f, 4.0f, 4.0f };
     private float[] BreathingIntervalsLowerBound = { 0.0f, 4.0f, 8.0f, 12.0f };
